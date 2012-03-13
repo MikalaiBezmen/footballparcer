@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.htmlcleaner.HtmlCleaner;
@@ -16,13 +15,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class ParcerSampleActivity extends Activity {
-	String text;
+	String date;
+	String firstTeam;
+	String secondTeam;
+	String result;
+	String result2;
+	String text = "";
+
+	List<Match> matches = new ArrayList<Match>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,7 @@ public class ParcerSampleActivity extends Activity {
 		public void onClick(View v) {
 
 			// Показываем диалог ожидания
-
+			text = "";
 			pd = ProgressDialog.show(ParcerSampleActivity.this, "Working...",
 					"request to server", true, false);
 
@@ -71,14 +75,44 @@ public class ParcerSampleActivity extends Activity {
 		protected List<String> doInBackground(String... arg) {
 
 			HtmlCleaner cleaner = new HtmlCleaner();
-			TagNode rootNode = cleaner.clean("http://www.stackoverflow.com");
-			TagNode[] match = rootNode.getElementsByName("a", true);
-			if (match == null)
-				text = "empty match";
-			else
-			{
-				 for (int i = 0; match != null && i < match.length; i++)
-				 text += match[i].getText().toString();
+
+			TagNode rootNode;
+			try {
+				rootNode = cleaner.clean(new URL("http://www.football.ua"));
+				TagNode[] match = rootNode.getElementsByName("div", true);
+				if (match == null)
+					text = "empty match";
+				else {
+					for (int i = 0; match != null && i < match.length; i++)
+						if ("ogame autblock".equals(match[i]
+								.getAttributeByName("class"))) {
+							TagNode subdiv[] = match[i].getElementsByName(
+									"div", true);
+							for (int j = 0; subdiv != null && j < subdiv.length; j++) {
+								if ("mathcdt".equals(subdiv[j]
+										.getAttributeByName("class")))
+									date = subdiv[j].getText().toString();
+								if ("omatch omatchleft".equals(subdiv[j]
+										.getAttributeByName("class")))
+									firstTeam = subdiv[j].getText().toString();
+								if ("matchright".equals(subdiv[j]
+										.getAttributeByName("class")))
+									secondTeam = subdiv[j].getText().toString();
+								if ("matchc".equals(subdiv[j]
+										.getAttributeByName("class")))
+									result2 = subdiv[j].getText().toString()
+											.trim();
+							}
+							matches.add(new Match(date, firstTeam, secondTeam,
+									result2));
+						}
+				}
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 			return null;
@@ -89,10 +123,37 @@ public class ParcerSampleActivity extends Activity {
 		protected void onPostExecute(List<String> output) {
 
 			// Убираем диалог загрузки
-
+			Toast toast;
 			pd.dismiss();
-			Toast toast = Toast.makeText(getBaseContext(), text, 5000);
-			toast.show();
+
+			// for (int i =0; i < mat.size(); i ++)
+			// {
+			// text += mat.get(i).getText().toString();
+			// }\
+
+			for (int i = 0; i < matches.size(); i++) {
+				String bg = matches.get(i).date.trim() + " | " + matches.get(i).firstTeam.trim() + " -"
+						+ matches.get(i).result.charAt(0) + "  "
+						+ matches.get(i).result.charAt(matches.get(i).result.length() - 1) + " - "
+						+ matches.get(i).secondTeam.trim();
+
+				toast = Toast.makeText(getBaseContext(), bg, 20000);
+				toast.show();
+			}
+			//
+
+			// Toast toast = Toast.makeText(getBaseContext(), date.trim(),
+			// 20000);
+			// toast.show();
+			//
+			//
+			// toast = Toast.makeText(getBaseContext(), firstTeam.trim(),
+			// 20000);
+			// toast.show();
+			//
+			// toast = Toast.makeText(getBaseContext(), secondTeam.trim(),
+			// 20000);
+			// toast.show();
 
 		}
 
