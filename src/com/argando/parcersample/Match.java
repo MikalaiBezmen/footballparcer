@@ -2,38 +2,43 @@ package com.argando.parcersample;
 
 /**
  * @author argando
- *
+ * 
  */
 public class Match
 {
-	private String		mDate;
-	private String		mFirstTeam;
-	private String		mSecondTeam;
-	private String		mResult;
-	private String		mLegue;			// Maybe league contains match
-	private boolean		mOnlineStatus;		// if false than match is off or not started
+	private String	mDate;
+	private String	mFirstTeam;
+	private String	mSecondTeam;
+	private String	mScore1;
+	private String	mScore2;
+	private String	mLeague;			// Maybe league contains match
+	private boolean	mOnlineStatus;		// if false than match is off or not started
 
-	private int	matchValidation;
+	private int		matchValidation;
 
-	public Match(String date, String firstTeam, String secondTeam, String result, boolean onlineStatus)
+	public Match(String data)
+	{
+		mDate = data;
+	}
+
+	public Match(String date, String firstTeam, String secondTeam, String score1, String score2, boolean onlineStatus)
 	{
 		this.mDate = date;
 		this.mFirstTeam = firstTeam;
 		this.mSecondTeam = secondTeam;
-		this.mResult = result;
+		this.mScore1 = score1;
+		this.mScore2 = score2;
 		this.mOnlineStatus = onlineStatus;
 		isMatchValid();
 	}
 
-	public Match(String date, String firstTeam, String secondTeam, String result, String legue, boolean onlineStatus)
+	public Match(String date, String firstTeam, String secondTeam, String score1, String score2, String league, boolean onlineStatus)
 	{
-		this(date, firstTeam, secondTeam, result, onlineStatus);
-		this.mLegue = legue;
+		this(date, firstTeam, secondTeam, score1, score2, onlineStatus);
+		this.mLeague = league;
 	}
-	
-	
-	
-	//===Validation region===//
+
+	// ===Validation region===//
 	public boolean isMatchValid()
 	{
 		if (!isDateValid() || !isFirstTeamValid() || !isSecondTeamValid() || !isResultValid() || !isLegueValid())
@@ -74,9 +79,8 @@ public class Match
 	{
 		return true;
 	}
-	
-	
-	//===Getters region===//
+
+	// ===Getters region===//
 	public String getDate()
 	{
 		return this.mDate;
@@ -94,12 +98,22 @@ public class Match
 
 	public String getResult()
 	{
-		return this.mResult;
+		return this.mScore1 + mScore2;
+	}
+
+	public String getScore1()
+	{
+		return this.mScore1;
+	}
+
+	public String getScore2()
+	{
+		return this.mScore2;
 	}
 
 	public String getLegue()
 	{
-		return this.mLegue;
+		return this.mLeague;
 	}
 
 	public boolean isOnlineStatus()

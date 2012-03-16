@@ -3,9 +3,18 @@ package com.argando.parcersample;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.htmlcleaner.TagNode;
+
 public class League
 {
 	private List<Match>	mMatches	= new ArrayList<Match>();
+	private final String mName;
+	private TagNode mLegueHtmlCode;
+	
+	public League(String name)
+	{
+		mName = name;
+	} 
 
 	public boolean addMatch(Match match)
 	{
@@ -47,9 +56,33 @@ public class League
 	{
 		mMatches.clear();
 	}
-	
+
 	public int getSize()
 	{
 		return mMatches.size();
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName()
+	{
+		return mName;
+	}
+
+	/**
+	 * @return the legueHtmlCode
+	 */
+	public TagNode getLegueHtmlCode()
+	{
+		return mLegueHtmlCode;
+	}
+
+	/**
+	 * @param legueHtmlCode the legueHtmlCode to set
+	 */
+	public void setLegueHtmlCode(TagNode legueHtmlCode)
+	{
+		this.mLegueHtmlCode = legueHtmlCode;
 	}
 }

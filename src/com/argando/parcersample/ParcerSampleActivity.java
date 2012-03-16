@@ -18,18 +18,20 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class ParcerSampleActivity extends Activity {
-	String date;
-	String firstTeam;
-	String secondTeam;
-	String result;
-	String result2;
-	String text = "";
+public class ParcerSampleActivity extends Activity
+{
+	String		date;
+	String		firstTeam;
+	String		secondTeam;
+	String		result;
+	String		result2;
+	String		text	= "";
 
-	List<Match> matches = new ArrayList<Match>();
+	List<Match>	matches	= new ArrayList<Match>();
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)
+	{
 
 		super.onCreate(savedInstanceState);
 
@@ -47,115 +49,95 @@ public class ParcerSampleActivity extends Activity {
 
 	// Диалог ожидания
 
-	private ProgressDialog pd;
+	private ProgressDialog	pd;
 
 	// Слушатель OnClickListener для нашей кнопки
 
-	private OnClickListener myListener = new OnClickListener() {
+	private OnClickListener	myListener	= new OnClickListener()
+										{
 
-		public void onClick(View v) {
+											public void onClick(View v)
+											{
 
-			// Показываем диалог ожидания
-			text = "";
-			pd = ProgressDialog.show(ParcerSampleActivity.this, "Working...",
-					"request to server", true, false);
+												// Показываем диалог ожидания
+												text = "";
+												pd = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server", true, false);
 
-			// Запускаем парсинг
+												// Запускаем парсинг
 
-			new ParseSite().execute("http://www.football.ua");
+												new ParseSite().execute("http://www.football.ua");
 
-		}
+											}
 
-	};
+										};
 
-	private class ParseSite extends AsyncTask<String, Void, List<String>> {
+	private class ParseSite extends AsyncTask<String, Void, List<String>>
+	{
 
 		// Фоновая операция
 
-		protected List<String> doInBackground(String... arg) {
+		protected List<String> doInBackground(String... arg)
+		{
 
-			HtmlCleaner cleaner = new HtmlCleaner();
-
-			TagNode rootNode;
-			try {
-				rootNode = cleaner.clean(new URL("http://www.football.ua"));
-				TagNode[] match = rootNode.getElementsByName("div", true);
-				if (match == null)
-					text = "empty match";
-				else {
-					for (int i = 0; match != null && i < match.length; i++)
-						if ("ogame autblock".equals(match[i]
-								.getAttributeByName("class"))) {
-							TagNode subdiv[] = match[i].getElementsByName(
-									"div", true);
-							for (int j = 0; subdiv != null && j < subdiv.length; j++) {
-								if ("mathcdt".equals(subdiv[j]
-										.getAttributeByName("class")))
-									date = subdiv[j].getText().toString();
-								if ("omatch omatchleft".equals(subdiv[j]
-										.getAttributeByName("class")))
-									firstTeam = subdiv[j].getText().toString();
-								if ("matchright".equals(subdiv[j]
-										.getAttributeByName("class")))
-									secondTeam = subdiv[j].getText().toString();
-								if ("matchc".equals(subdiv[j]
-										.getAttributeByName("class")))
-									result2 = subdiv[j].getText().toString()
-											.trim();
-							}
-							matches.add(new Match(date, firstTeam, secondTeam,
-									result2));
-						}
-				}
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			DataParcer dataParcer = new DataParcer();
+			dataParcer.parceScoreboard();
 			return null;
 		}
 
+		// HtmlCleaner cleaner = new HtmlCleaner();
+		//
+		// TagNode rootNode;
+		// try {
+		// rootNode = cleaner.clean(new URL("http://www.football.ua"));
+		// TagNode[] match = rootNode.getElementsByName("div", true);
+		// if (match == null)
+		// text = "empty match";
+		// else {
+		// for (int i = 0; match != null && i < match.length; i++)
+		// if ("ogame autblock".equals(match[i]
+		// .getAttributeByName("class"))) {
+		// TagNode subdiv[] = match[i].getElementsByName(
+		// "div", true);
+		// for (int j = 0; subdiv != null && j < subdiv.length; j++) {
+		// if ("mathcdt".equals(subdiv[j]
+		// .getAttributeByName("class")))
+		// date = subdiv[j].getText().toString();
+		// if ("omatch omatchleft".equals(subdiv[j]
+		// .getAttributeByName("class")))
+		// firstTeam = subdiv[j].getText().toString();
+		// if ("matchright".equals(subdiv[j]
+		// .getAttributeByName("class")))
+		// secondTeam = subdiv[j].getText().toString();
+		// if ("matchc".equals(subdiv[j]
+		// .getAttributeByName("class")))
+		// result2 = subdiv[j].getText().toString()
+		// .trim();
+		// }
+		// matches.add(new Match(date, firstTeam, secondTeam,
+		// result2));
+		// }
+		// }
+		// } catch (MalformedURLException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		//
+		// return null;
+		// }
+
 		// Событие по окончанию парсинга
 
-		protected void onPostExecute(List<String> output) {
+		protected void onPostExecute(List<String> output)
+		{
 
 			// Убираем диалог загрузки
 			Toast toast;
 			pd.dismiss();
-
-			// for (int i =0; i < mat.size(); i ++)
-			// {
-			// text += mat.get(i).getText().toString();
-			// }\
-
-			for (int i = 0; i < matches.size(); i++) {
-				String bg = matches.get(i).date.trim() + " | " + matches.get(i).firstTeam.trim() + " -"
-						+ matches.get(i).result.charAt(0) + "  "
-						+ matches.get(i).result.charAt(matches.get(i).result.length() - 1) + " - "
-						+ matches.get(i).secondTeam.trim();
-
-				toast = Toast.makeText(getBaseContext(), bg, 20000);
-				toast.show();
-			}
-			//
-
-			// Toast toast = Toast.makeText(getBaseContext(), date.trim(),
-			// 20000);
-			// toast.show();
-			//
-			//
-			// toast = Toast.makeText(getBaseContext(), firstTeam.trim(),
-			// 20000);
-			// toast.show();
-			//
-			// toast = Toast.makeText(getBaseContext(), secondTeam.trim(),
-			// 20000);
-			// toast.show();
-
+			toast = Toast.makeText(getBaseContext(), "AAA", 20000);
+			toast.show();
 		}
-
 	}
 }
