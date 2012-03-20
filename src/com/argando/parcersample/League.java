@@ -38,9 +38,9 @@ public class League
 	{
 		if (i >= 0 && i < mMatches.size())
 		{
-			return null;
+			return mMatches.get(i);
 		}
-		return mMatches.get(i);
+		return null;
 	}
 
 	public boolean isMatchInLegue(Match match)

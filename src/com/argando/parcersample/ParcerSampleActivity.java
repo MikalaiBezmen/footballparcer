@@ -1,33 +1,29 @@
 package com.argando.parcersample;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.TagNode;
-
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class ParcerSampleActivity extends Activity
+public class ParcerSampleActivity extends FragmentActivity
 {
-	String		date;
-	String		firstTeam;
-	String		secondTeam;
-	String		result;
-	String		result2;
-	String		text	= "";
+	String			date;
+	String			firstTeam;
+	String			secondTeam;
+	String			result;
+	String			result2;
+	String			text	= "";
 
-	List<Match>	matches	= new ArrayList<Match>();
+	List<League>	leagues	= new ArrayList<League>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -78,9 +74,9 @@ public class ParcerSampleActivity extends Activity
 
 		protected List<String> doInBackground(String... arg)
 		{
-
 			DataParcer dataParcer = new DataParcer();
-			dataParcer.parceScoreboard();
+			leagues = dataParcer.parceScoreboard();
+			LeaguesHandler.listLeauges = leagues;
 			return null;
 		}
 
@@ -132,8 +128,13 @@ public class ParcerSampleActivity extends Activity
 
 		protected void onPostExecute(List<String> output)
 		{
-
 			// Убираем диалог загрузки
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+			SampleCategorizeListViewActivity fragment = new SampleCategorizeListViewActivity();
+			fragmentTransaction.add(R.id.container, fragment);
+			fragmentTransaction.commit();
+
 			Toast toast;
 			pd.dismiss();
 			toast = Toast.makeText(getBaseContext(), "AAA", 20000);
