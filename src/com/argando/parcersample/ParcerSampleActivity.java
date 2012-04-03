@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -54,18 +57,36 @@ public class ParcerSampleActivity extends FragmentActivity
 
 											public void onClick(View v)
 											{
+												if (isOnline())
+												{
+													// Показываем диалог ожидания
+													text = "";
+													pd = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server", true,
+															false);
 
-												// Показываем диалог ожидания
-												text = "";
-												pd = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server", true, false);
+													// Запускаем парсинг
 
-												// Запускаем парсинг
-
-												new ParseSite().execute("http://www.football.ua");
-
+													new ParseSite().execute("http://www.football.ua");
+												}
+												else
+												{
+													Toast toast = Toast.makeText(getBaseContext(), "There is no internet connection", 20000);
+													toast.show();
+												}
 											}
 
 										};
+
+	public boolean isOnline()
+	{
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting())
+		{
+			return true;
+		}
+		return false;
+	}
 
 	private class ParseSite extends AsyncTask<String, Void, List<String>>
 	{
