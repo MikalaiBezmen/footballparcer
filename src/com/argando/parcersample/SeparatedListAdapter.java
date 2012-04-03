@@ -103,7 +103,7 @@ public class SeparatedListAdapter extends BaseAdapter
 
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		if (convertView != null) return convertView;
+//		if (convertView != null) return convertView;
 		int sectionnum = 0;
 		for (Object section : this.sections.keySet())
 		{
