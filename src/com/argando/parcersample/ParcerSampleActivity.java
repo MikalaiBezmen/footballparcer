@@ -27,6 +27,8 @@ public class ParcerSampleActivity extends FragmentActivity
 	String			text	= "";
 
 	List<League>	leagues	= new ArrayList<League>();
+	
+	Toast internetConnectionToast;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -43,6 +45,8 @@ public class ParcerSampleActivity extends FragmentActivity
 		// Регистрируем onClick слушателя
 
 		button.setOnClickListener(myListener);
+		
+		internetConnectionToast = Toast.makeText(getBaseContext(), "There is no internet connection", 20000);
 
 	}
 
@@ -70,8 +74,7 @@ public class ParcerSampleActivity extends FragmentActivity
 												}
 												else
 												{
-													Toast toast = Toast.makeText(getBaseContext(), "There is no internet connection", 20000);
-													toast.show();
+													internetConnectionToast.show();
 												}
 											}
 
@@ -156,10 +159,9 @@ public class ParcerSampleActivity extends FragmentActivity
 			fragmentTransaction.add(R.id.container, fragment);
 			fragmentTransaction.commit();
 
-			Toast toast;
 			pd.dismiss();
-			toast = Toast.makeText(getBaseContext(), "AAA", 20000);
-			toast.show();
+//			toast = Toast.makeText(getBaseContext(), "AAA", 20000);
+//			toast.show();
 		}
 	}
 }
