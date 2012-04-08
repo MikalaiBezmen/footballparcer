@@ -14,7 +14,7 @@ public class Match
 	private String	mLeague;			// Maybe league contains match
 	private boolean	mOnlineStatus;		// if false than match is off or not started
 	private int id;
-	private String linkForOnline = "";
+	public String linkForOnline = "";
 
 	private int		matchValidation;
 

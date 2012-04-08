@@ -9,6 +9,8 @@ import java.util.List;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 public class DataParcer
@@ -180,5 +182,11 @@ public class DataParcer
 			}
 		}
 		return leagues;
+	}
+	
+	
+	public void getDataForMatch(int id)
+	{
+		TagNode[] scoreTable = mRootElement.getElementsByAttValue(HtmlHelper.CLASS, "wblock", true, false);
 	}
 }

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -64,8 +65,8 @@ public class ParcerSampleActivity extends FragmentActivity
 												{
 													// Показываем диалог ожидания
 													text = "";
-													progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server", true,
-															false);
+													progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server",
+															true, false);
 													// Запускаем парсинг
 													new ParseSite().execute("http://www.football.ua");
 												}
@@ -98,18 +99,33 @@ public class ParcerSampleActivity extends FragmentActivity
 			LeaguesHandler.listLeauges = leagues;
 			return null;
 		}
+
 		// Событие по окончанию парсинга
 		protected void onPostExecute(List<String> output)
 		{
 			// Убираем диалог загрузки
 			progresDialog.dismiss();
-			
+
 			FragmentManager fragmentManager = getSupportFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			SampleCategorizeListViewActivity fragment = new SampleCategorizeListViewActivity();
 			fragmentTransaction.add(R.id.container, fragment);
+			fragmentTransaction.addToBackStack(null);
 			fragmentTransaction.commit();
 
 		}
 	}
+
+//	@Override
+//	public void onBackPressed()
+//	{
+//		Log.d("CDA", "onBackPressed Called");
+//		FragmentManager fragmentManager = getSupportFragmentManager();
+//		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//		fragmentManager.
+//
+//		startActivity(setIntent);
+//
+//		return;
+//	}
 }

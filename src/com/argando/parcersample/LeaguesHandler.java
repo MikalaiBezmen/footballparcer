@@ -20,4 +20,6 @@ public class LeaguesHandler
 		}
 		return null;
 	}
+	
+	public static String match ;
 }
