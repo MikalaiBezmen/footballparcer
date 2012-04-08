@@ -7,9 +7,13 @@ import java.util.Map;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 
@@ -38,6 +42,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 
 		SeparatedListAdapter adapter = new SeparatedListAdapter(this.getActivity());
 
+		int counterForMatchId = 0; 
 		for (int i = 0; i < leagues.size(); i++)
 		{
 			List<Map<String, ?>> listItems = new LinkedList<Map<String, ?>>();
@@ -51,15 +56,27 @@ public class SampleCategorizeListViewActivity extends Fragment
 				{
 					is = "1";
 				}
+				counterForMatchId ++;
 				listItems.add(createItem(team, time, is));
+				leagues.get(i).getMatch(j).setId(counterForMatchId);
+				Log.w("id",leagues.get(i).getMatch(j).getFirstTeam() + "  " + leagues.get(i).getMatch(j).getSecondTeam() + " id = " + leagues.get(i).getMatch(j).getId());
 			}
 			adapter.addSection(leagues.get(i).getName(), new SimpleAdapter(this.getActivity(), listItems, R.layout.list_complex, new String[] {
 					ITEM_TITLE, ITEM_CAPTION }, new int[] { R.id.list_complex_title, R.id.list_complex_caption }));
+			counterForMatchId ++;
 		}
 
 		// create our list and custom adapter
 		list = new ListView(this.getActivity());
 		list.setAdapter(adapter);
+		list.setOnItemClickListener(new OnItemClickListener()
+		{
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+			{
+				// TODO Auto-generated method stub
+				Toast.makeText(getActivity().getApplicationContext(), LeaguesHandler.getMatchById((int)arg3).toString() , 20000).show();
+			}
+		});
 	}
 
 	@Override

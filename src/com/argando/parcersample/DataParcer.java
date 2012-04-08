@@ -115,30 +115,39 @@ public class DataParcer
 				String score1 = "";
 				String score2 = "";
 				boolean isonline = false;
-				TagNode[] dateData = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLODATE, true, false);
-				if (dateData[0] != null)
+				TagNode[] dataDate = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLODATE, true, false);
+				if (dataDate[0] != null)
 				{
-					date = dateData[0].getText().toString().trim();
+					date = dataDate[0].getText().toString().trim();
 				}
 
-				TagNode[] dateTeam1 = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOTEAM1, true, false);
-				if (dateTeam1[0] != null)
+				TagNode[] dataTeam1 = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOTEAM1, true, false);
+				if (dataTeam1[0] != null)
 				{
-					team1 = dateTeam1[0].getText().toString().trim();
+					team1 = dataTeam1[0].getText().toString().trim();
 				}
 
-				TagNode[] dateTeam2 = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOTEAM2, true, false);
-				if (dateTeam2[0] != null)
+				TagNode[] dataTeam2 = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOTEAM2, true, false);
+				if (dataTeam2[0] != null)
 				{
-					team2 = dateTeam2[0].getText().toString().trim();
+					team2 = dataTeam2[0].getText().toString().trim();
 				}
 
 				TagNode[] scoreData = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOC, true, false);
+				
+				String scoreLink = " пусто";
 				if (scoreData[0] != null)
 				{
-
 					// Need refactoring
-					TagNode[] score = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOGSCORE, true, false);
+					TagNode score[] = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOGSCORE, true, false);
+					
+					for (TagNode aTag : scoreData[0].getElementsByName("a", true))
+					{
+						scoreLink = " нашли а";
+					    String link = aTag.getAttributeByName ("href");
+					    if (link != null && link.length () > 0) scoreLink = link;
+					}
+					
 					isonline = false;
 					if (score.length < 1)
 					{
@@ -159,10 +168,9 @@ public class DataParcer
 						score2 = score[1].getText().toString().trim();
 					}
 				}
-
 				if (!date.isEmpty() && !team1.isEmpty() && !team2.isEmpty() && !score1.isEmpty() && !score2.isEmpty())
 				{
-					newMatch = new Match(date, team1, team2, score1, score2, newLeague.getName(), isonline);
+					newMatch = new Match(date, team1, team2, score1, score2, newLeague.getName(), isonline, scoreLink );
 					if (newLeague != null)
 					{
 						newLeague.addMatch(newMatch);

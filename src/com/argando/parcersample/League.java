@@ -42,6 +42,11 @@ public class League
 		}
 		return null;
 	}
+	
+	public List<Match> getMatches()
+	{
+		return mMatches;
+	}
 
 	public boolean isMatchInLegue(Match match)
 	{

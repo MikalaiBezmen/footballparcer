@@ -13,6 +13,8 @@ public class Match
 	private String	mScore2;
 	private String	mLeague;			// Maybe league contains match
 	private boolean	mOnlineStatus;		// if false than match is off or not started
+	private int id;
+	private String linkForOnline = "";
 
 	private int		matchValidation;
 
@@ -21,7 +23,7 @@ public class Match
 		mDate = data;
 	}
 
-	public Match(String date, String firstTeam, String secondTeam, String score1, String score2, boolean onlineStatus)
+	public Match(String date, String firstTeam, String secondTeam, String score1, String score2, boolean onlineStatus, String linkForOnline)
 	{
 		this.mDate = date;
 		this.mFirstTeam = firstTeam;
@@ -29,13 +31,24 @@ public class Match
 		this.mScore1 = score1;
 		this.mScore2 = score2;
 		this.mOnlineStatus = onlineStatus;
+		this.linkForOnline = linkForOnline;
 		isMatchValid();
 	}
 
-	public Match(String date, String firstTeam, String secondTeam, String score1, String score2, String league, boolean onlineStatus)
+	public Match(String date, String firstTeam, String secondTeam, String score1, String score2, String league, boolean onlineStatus, String linkForOnline)
 	{
-		this(date, firstTeam, secondTeam, score1, score2, onlineStatus);
+		this(date, firstTeam, secondTeam, score1, score2, onlineStatus, linkForOnline);
 		this.mLeague = league;
+	}
+	
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	
+	public int getId()
+	{
+		return id;
 	}
 
 	// ===Validation region===//
@@ -124,5 +137,10 @@ public class Match
 	public int getMatchValidation()
 	{
 		return this.matchValidation;
+	}
+	
+	public String toString()
+	{
+		return getFirstTeam() + " " + getSecondTeam() + " " + linkForOnline; 
 	}
 }
