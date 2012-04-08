@@ -12,11 +12,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#fff09982" />
+        android:textColor="#9ff09982" />
 
     <TextView
         android:id="@+id/list_complex_caption"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-</LinearLayout>
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#9ff09982" />
+
+</LinearLayout>

@@ -96,7 +96,14 @@ public class DataParcer
 		{
 			if (leaguesData[i].getAttributeByName(HtmlHelper.CLASS).equals(HtmlHelper.BLINE))
 			{
-				newLeague = new League(leaguesData[i].getElementsByName(HtmlHelper.A, true)[0].getText().toString().trim());
+				if (leaguesData[i].getElementsByName(HtmlHelper.A, false).length == 0)
+				{
+					newLeague = new League(leaguesData[i].getElementsByName(HtmlHelper.H1, true)[0].getText().toString().trim());
+				}
+				else
+				{
+					newLeague = new League(leaguesData[i].getElementsByName(HtmlHelper.A, true)[0].getText().toString().trim());
+				}
 				leagues.add(newLeague);
 				Log.w(LOG, "add legue " + newLeague.getName());
 			}
@@ -129,8 +136,8 @@ public class DataParcer
 				TagNode[] scoreData = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOC, true, false);
 				if (scoreData[0] != null)
 				{
-					
-					//Need refactoring
+
+					// Need refactoring
 					TagNode[] score = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOGSCORE, true, false);
 					isonline = false;
 					if (score.length < 1)
@@ -141,10 +148,11 @@ public class DataParcer
 					if (score.length < 1)
 					{
 						score = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOGRAYSCORE, true, false);
-						isonline =false;
+						isonline = false;
 					}
-					
-					if (score.length < 1) Log.w(LOG, "can't find score for match" + team1 + " - " + team2 + "league = " + newLeague.getName());
+
+					if (score.length < 1)
+						Log.w(LOG, "can't find score for match" + team1 + " - " + team2 + "league = " + newLeague.getName());
 					if (score[0] != null && score[1] != null)
 					{
 						score1 = score[0].getText().toString().trim();
