@@ -2,6 +2,7 @@ package com.argando.parcersample;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class ScoreFragment extends Fragment
 				mContentView.addView(zoom, ZOOM_PARAMS);
 				zoom.setVisibility(View.GONE);
 //				URL url = new URL(LeaguesHandler.match);
+				Log.w("sss", LeaguesHandler.match);
 				myWebView.loadUrl(LeaguesHandler.match);
 //				myWebView.loadData(summary, "text/html", null);
 //			}

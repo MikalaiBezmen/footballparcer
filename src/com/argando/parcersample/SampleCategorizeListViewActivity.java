@@ -54,9 +54,12 @@ public class SampleCategorizeListViewActivity extends Fragment
 						+ leagues.get(i).getMatch(j).getScore2() + " | " + leagues.get(i).getMatch(j).getSecondTeam();
 				String time = leagues.get(i).getMatch(j).getDate();
 				String is = "0";
-				if (leagues.get(i).getMatch(j).isOnlineStatus())
+				if (leagues.get(i).getMatch(j).isOnlineStatus() == 1)
 				{
 					is = "1";
+				} else if (leagues.get(i).getMatch(j).isOnlineStatus() == 2)
+				{
+					is = "2";
 				}
 				counterForMatchId++;
 				listItems.add(createItem(team, time, is));
@@ -80,7 +83,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 				getActivity().findViewById(R.id.container).setVisibility(View.GONE);
 				getActivity().findViewById(R.id.containerForMach).setVisibility(View.VISIBLE);
 				// TODO Auto-generated method stub
-				Toast.makeText(getActivity().getApplicationContext(), LeaguesHandler.getMatchById((int) arg3).toString(), 20000).show();
+//				Toast.makeText(getActivity().getApplicationContext(), LeaguesHandler.getMatchById((int) arg3).toString(), 20000).show();
 
 				ScoreFragment fragment = new ScoreFragment();
 
@@ -95,6 +98,8 @@ public class SampleCategorizeListViewActivity extends Fragment
 				fragmentTransaction.addToBackStack(null);
 
 				fragmentTransaction.commit();
+				
+//				((ParcerSampleActivity)getActivity()).contentView.invalidate();
 			}
 		});
 	}

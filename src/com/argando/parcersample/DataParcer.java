@@ -116,7 +116,7 @@ public class DataParcer
 				String team2 = "";
 				String score1 = "";
 				String score2 = "";
-				boolean isonline = false;
+				int isonline = 0;
 				TagNode[] dataDate = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLODATE, true, false);
 				if (dataDate[0] != null)
 				{
@@ -150,16 +150,16 @@ public class DataParcer
 					    if (link != null && link.length () > 0) scoreLink = link;
 					}
 					
-					isonline = false;
+					isonline = 2;
 					if (score.length < 1)
 					{
 						score = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLORSCORE, true, false);
-						isonline = true;
+						isonline = 1;
 					}
 					if (score.length < 1)
 					{
 						score = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOGRAYSCORE, true, false);
-						isonline = false;
+						isonline = 0;
 					}
 
 					if (score.length < 1)

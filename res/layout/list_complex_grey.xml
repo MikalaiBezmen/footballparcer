@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:gravity="center"
-        android:textColor="#9000ff00" />
+        android:textColor="#FFDDDDDD" />
 
     <TextView
         android:id="@+id/list_complex_caption"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-       android:textColor="#AAFFFFFF" />
+        android:textColor="#AAFFFFFF" />
 
 </LinearLayout>

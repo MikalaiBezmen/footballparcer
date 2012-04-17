@@ -12,10 +12,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class ParcerSampleActivity extends FragmentActivity
@@ -30,6 +31,8 @@ public class ParcerSampleActivity extends FragmentActivity
 	List<League>	leagues	= new ArrayList<League>();
 
 	Toast			internetConnectionToast;
+	
+	public View contentView ;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -38,7 +41,6 @@ public class ParcerSampleActivity extends FragmentActivity
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.main);
-
 		// Находим кнопку
 
 		Button button = (Button) findViewById(R.id.parse);
@@ -48,7 +50,13 @@ public class ParcerSampleActivity extends FragmentActivity
 		button.setOnClickListener(myListener);
 
 		internetConnectionToast = Toast.makeText(getBaseContext(), "There is no internet connection", 20000);
+		
+		
+		
+		ViewGroup view = (ViewGroup)getWindow().getDecorView();
 
+		contentView = (LinearLayout)view.getChildAt(0);
+//		startParce();
 	}
 
 	// Диалог ожидания
@@ -63,12 +71,13 @@ public class ParcerSampleActivity extends FragmentActivity
 											{
 												if (isOnline())
 												{
-													// Показываем диалог ожидания
-													text = "";
-													progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server",
-															true, false);
-													// Запускаем парсинг
-													new ParseSite().execute("http://www.football.ua");
+													startParce();
+//													// Показываем диалог ожидания
+//													text = "";
+//													progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server",
+//															true, false);
+//													// Запускаем парсинг
+//													new ParseSite().execute("http://www.football.ua");
 												}
 												else
 												{
@@ -87,6 +96,15 @@ public class ParcerSampleActivity extends FragmentActivity
 			return true;
 		}
 		return false;
+	}
+	
+	public void startParce()
+	{
+		text = "";
+		progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server",
+				true, false);
+		// Запускаем парсинг
+		new ParseSite().execute("http://www.football.ua");
 	}
 
 	private class ParseSite extends AsyncTask<String, Void, List<String>>

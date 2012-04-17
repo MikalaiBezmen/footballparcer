@@ -113,6 +113,10 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 		{
 			if (mData.get(position).get("IS") == "0")
 			{
+				resource = R.layout.list_complex_grey;
+			}
+			else if (mData.get(position).get("IS") == "2")
+			{
 				resource = R.layout.list_complex_red;
 			}
 			v = mInflater.inflate(resource, parent, false);
