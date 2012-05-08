@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
@@ -23,15 +22,24 @@ public class SampleCategorizeListViewActivity extends Fragment
 
 	public final static String	ITEM_TITLE		= "title";
 	public final static String	ITEM_CAPTION	= "caption";
+	public final static String	ITEM_LINK	= "link";
 	ListView					list;
 	private Fragment me;
+	
+	private OnlineWebViewListener mOnlineWebViewListener;
 
-	public Map<String, ?> createItem(String title, String caption, String is)
+	interface OnlineWebViewListener
+	{
+		void onCreate(String link);
+	}
+	
+	public Map<String, ?> createItem(String title, String caption, String is, String link)
 	{
 		Map<String, String> item = new HashMap<String, String>();
 		item.put(ITEM_TITLE, title);
 		item.put(ITEM_CAPTION, caption);
 		item.put("IS", is);
+		item.put(ITEM_LINK, link);
 		return item;
 	}
 
@@ -40,6 +48,37 @@ public class SampleCategorizeListViewActivity extends Fragment
 	{
 		super.onCreate(savedInstanceState);
 		me = this;
+		
+		mOnlineWebViewListener = new OnlineWebViewListener()
+		{
+			
+			public void onCreate(String link)
+			{
+				LeaguesHandler.match = link;
+//				getActivity().findViewById(R.id.container).setVisibility(View.GONE);
+//				getActivity().findViewById(R.id.containerForMach).setVisibility(View.VISIBLE);
+				// TODO Auto-generated method stub
+//				Toast.makeText(getActivity().getApplicationContext(), LeaguesHandler.getMatchById((int) arg3).toString(), 20000).show();
+
+				ScoreFragment fragment = new ScoreFragment();
+
+				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+				fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left,
+						android.R.anim.slide_out_right);
+				fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//				fragmentTransaction.remove(me);
+				fragmentTransaction.add(R.id.containerForMach, fragment);
+//				fragmentTransaction.replace(R.id.container, fragment);
+				fragmentTransaction.addToBackStack(null);
+
+				fragmentTransaction.commit();
+				
+//				((ParcerSampleActivity)getActivity()).contentView.invalidate();
+				
+			}
+		};
+		
 		List<League> leagues = LeaguesHandler.listLeauges;
 
 		SeparatedListAdapter adapter = new SeparatedListAdapter(this.getActivity());
@@ -62,46 +101,21 @@ public class SampleCategorizeListViewActivity extends Fragment
 					is = "2";
 				}
 				counterForMatchId++;
-				listItems.add(createItem(team, time, is));
+				listItems.add(createItem(team, time, is, leagues.get(i).getMatch(j).linkForOnline));
 				leagues.get(i).getMatch(j).setId(counterForMatchId);
 				Log.w("id", leagues.get(i).getMatch(j).getFirstTeam() + "  " + leagues.get(i).getMatch(j).getSecondTeam() + " id = "
 						+ leagues.get(i).getMatch(j).getId());
 			}
-			adapter.addSection(leagues.get(i).getName(), new SimpleAdapter(this.getActivity(), listItems, R.layout.list_complex, new String[] {
-					ITEM_TITLE, ITEM_CAPTION }, new int[] { R.id.list_complex_title, R.id.list_complex_caption }));
+			adapter.addSection(leagues.get(i).getName(), new SimpleAdapter(mOnlineWebViewListener, this.getActivity(), listItems, R.layout.list_complex, new String[] {
+					ITEM_TITLE, ITEM_CAPTION, ITEM_LINK }, new int[] { R.id.list_complex_title, R.id.list_complex_caption, R.id.web_view }));
 			counterForMatchId++;
 		}
 
 		// create our list and custom adapter
 		list = new ListView(this.getActivity());
 		list.setAdapter(adapter);
-		list.setOnItemClickListener(new OnItemClickListener()
-		{
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
-			{
-				LeaguesHandler.match = LeaguesHandler.getMatchById((int) arg3).linkForOnline;
-				getActivity().findViewById(R.id.container).setVisibility(View.GONE);
-				getActivity().findViewById(R.id.containerForMach).setVisibility(View.VISIBLE);
-				// TODO Auto-generated method stub
-//				Toast.makeText(getActivity().getApplicationContext(), LeaguesHandler.getMatchById((int) arg3).toString(), 20000).show();
+		list.setItemsCanFocus(true);
 
-				ScoreFragment fragment = new ScoreFragment();
-
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-				fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left,
-						android.R.anim.slide_out_right);
-				fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-//				fragmentTransaction.remove(me);
-				fragmentTransaction.add(R.id.containerForMach, fragment);
-//				fragmentTransaction.replace(R.id.container, fragment);
-				fragmentTransaction.addToBackStack(null);
-
-				fragmentTransaction.commit();
-				
-//				((ParcerSampleActivity)getActivity()).contentView.invalidate();
-			}
-		});
 	}
 	
 	@Override
@@ -121,5 +135,12 @@ public class SampleCategorizeListViewActivity extends Fragment
 
 		return list;
 	}
-
+	
+	@Override
+	public void onDestroyView()
+	{
+		super.onDestroy();
+//		getActivity().findViewById(R.id.containerForMach).setVisibility(View.GONE);
+//		getActivity().findViewById(R.id.container).setVisibility(View.VISIBLE);
+	}
 }

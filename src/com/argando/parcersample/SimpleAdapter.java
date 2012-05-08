@@ -1,21 +1,27 @@
 package com.argando.parcersample;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.argando.parcersample.SampleCategorizeListViewActivity.OnlineWebViewListener;
+
+import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.view.View;
-import android.view.ViewGroup;
+import android.net.Uri;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.Checkable;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.net.Uri;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * An easy adapter to map static data to views defined in an XML file. You can specify the data backing the list as an ArrayList of Maps. Each entry
@@ -48,6 +54,8 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	private SimpleFilter					mFilter;
 	private ArrayList<Map<String, ?>>		mUnfilteredData;
 
+	OnlineWebViewListener					mOnlineWebViewListener;
+
 	/**
 	 * Constructor
 	 * 
@@ -65,8 +73,10 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	 *            The views that should display column in the "from" parameter. These should all be TextViews. The first N views in this list are
 	 *            given the values of the first N columns in the from parameter.
 	 */
-	public SimpleAdapter(Context context, List<? extends Map<String, ?>> data, int resource, String[] from, int[] to)
+	public SimpleAdapter(OnlineWebViewListener onlineWebViewListener, Context context, List<? extends Map<String, ?>> data, int resource,
+			String[] from, int[] to)
 	{
+		mOnlineWebViewListener = onlineWebViewListener;
 		mData = data;
 		mResource = mDropDownResource = resource;
 		mFrom = from;
@@ -182,10 +192,10 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 			if (v != null)
 			{
 				final Object data = dataSet.get(from[i]);
-				String text = data == null ? "" : data.toString();
+				final String text = data == null ? "" : data.toString();
 				if (text == null)
 				{
-					text = "";
+//					text = "";
 				}
 
 				boolean bound = false;
@@ -206,6 +216,17 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 						{
 							throw new IllegalStateException(v.getClass().getName() + " should be bound to a Boolean, not a " + data.getClass());
 						}
+					}
+					else if (v instanceof Button)
+					{
+						((Button) v).setOnClickListener(new OnClickListener()
+						{
+
+							public void onClick(View v)
+							{
+								mOnlineWebViewListener.onCreate(text);
+							}
+						});
 					}
 					else if (v instanceof TextView)
 					{

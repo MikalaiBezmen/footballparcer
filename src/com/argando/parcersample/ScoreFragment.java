@@ -7,6 +7,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebSettings.LayoutAlgorithm;
+import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 
@@ -21,32 +24,24 @@ public class ScoreFragment extends Fragment
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
-		myWebView = new WebView(getActivity().getApplicationContext());
+
+		myWebView = new WebView(this.getActivity());
+		myWebView.setWebViewClient(new CustomWebViewClient());
 
 		final FrameLayout mContentView = (FrameLayout) getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
-		
-//		Button button = (Button) this.getView().findViewById(R.id.start);
-
-		// Регистрируем onClick слушателя
-
-//		button.setOnClickListener(new OnClickListener()
-//		{
-			
-//			public void onClick(View v)
-//			{
-				final View zoom = myWebView.getZoomControls();
-				mContentView.addView(zoom, ZOOM_PARAMS);
-				zoom.setVisibility(View.GONE);
-//				URL url = new URL(LeaguesHandler.match);
-				Log.w("sss", LeaguesHandler.match);
-				myWebView.loadUrl(LeaguesHandler.match);
-//				myWebView.loadData(summary, "text/html", null);
-//			}
-//		});
-		
+		// WebSettings settings = myWebView.getSettings();
+		// settings.setDefaultTextEncodingName("utf-8");
+		// myWebView.getSettings().setJavaScriptEnabled(true);
+		// myWebView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+		// myWebView.getSettings().setBuiltInZoomControls(true);
+		// myWebView.setInitialScale(4);
+		// myWebView.getSettings().setDefaultZoom(ZoomDensity.FAR);
+		final View zoom = myWebView.getZoomControls();
+		mContentView.addView(zoom, ZOOM_PARAMS);
+		zoom.setVisibility(View.GONE);
+		myWebView.loadUrl(LeaguesHandler.match);
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
@@ -62,22 +57,27 @@ public class ScoreFragment extends Fragment
 			return null;
 		}
 
-		//return inflater.inflate(R.layout.mach_online, container, false);
+		// return inflater.inflate(R.layout.mach_online, container, false);
 		return myWebView;
 	}
-	
-	
-	 @Override
-	    public void onActivityCreated(Bundle savedInstanceState) {
-	        super.onActivityCreated(savedInstanceState);
-	        
-	    }
+
 	@Override
-	 public void onDestroyView ()
-	 {
-		 super.onDestroy();
-		 getActivity().findViewById(R.id.containerForMach).setVisibility(View.GONE);
-		 getActivity().findViewById(R.id.container).setVisibility(View.VISIBLE);
-	 }
+	public void onActivityCreated(Bundle savedInstanceState)
+	{
+		super.onActivityCreated(savedInstanceState);
+		if (getActivity().findViewById(R.id.container) != null)
+		{
+			getActivity().findViewById(R.id.container).setVisibility(View.GONE);
+			getActivity().findViewById(R.id.containerForMach).setVisibility(View.VISIBLE);
+		}
+	}
+
+	@Override
+	public void onDestroyView()
+	{
+		super.onDestroy();
+		getActivity().findViewById(R.id.containerForMach).setVisibility(View.GONE);
+		getActivity().findViewById(R.id.container).setVisibility(View.VISIBLE);
+	}
 
 }
