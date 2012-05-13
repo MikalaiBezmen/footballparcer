@@ -80,6 +80,9 @@ public class SampleCategorizeListViewActivity extends Fragment
 		};
 		
 		List<League> leagues = LeaguesHandler.listLeauges;
+		
+		if (leagues == null)
+			onDestroy();
 
 		SeparatedListAdapter adapter = new SeparatedListAdapter(this.getActivity());
 
