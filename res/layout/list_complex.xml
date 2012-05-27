@@ -7,32 +7,58 @@
     android:paddingLeft="15dip"
     android:paddingTop="10dip" >
 
- <TextView
-        android:id="@+id/list_complex_title"
+    <RelativeLayout
+        android:id="@+id/list_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/list_complex_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/list_complex_caption"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#9000ff00" />
+
+        <TextView
+            android:id="@+id/list_complex_caption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#AAFFFFFF" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/list_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/list_complex_caption"
-        android:gravity="center"
-        android:paddingRight="100px"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#9000ff00" />
+        android:layout_below="@+id/list_info"
+        android:layout_marginTop="10px" >
 
-    <TextView
-        android:id="@+id/list_complex_caption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#AAFFFFFF" />
-    
-    <Button
-        android:id="@+id/web_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="@string/web_view_button"
-        android:focusable="false" >
-    </Button>
+        <Button
+            android:id="@+id/web_view"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/football"
+            android:focusable="false"
+            android:text="@string/web_view_button" >
+        </Button>
+
+        <ImageButton
+            android:id="@+id/sop_cast"
+            android:layout_width="50px"
+            android:layout_height="50px"
+            android:layout_toRightOf="@+id/web_view"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+            android:src="@drawable/video"
+            android:text="@string/sopcast_link"
+            android:visibility="gone" >
+        </ImageButton>
+    </RelativeLayout>
 
 </RelativeLayout>

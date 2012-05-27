@@ -15,43 +15,32 @@ import android.util.Log;
 
 public class DataParcer
 {
-	private static final String	LOG		= "DataParcer";
+	private static final String	LOG						= "DataParcer";
 
-	private static final String	mSite	= "http://www.football.ua/scoreboard/";
+	private static final String	mSiteFootballTable		= "http://www.football.ua/scoreboard/";
+	private static final String	mSiteFootballSopcast	= "http://www.livefootball.ws/";
 	private static URL			mSiteUrl;
 	private HtmlCleaner			mHtmlHelper;
 	private TagNode				mRootElement;
-	static
+
+	private void setUrl(String url)
 	{
 		try
 		{
-			mSiteUrl = new URL(mSite);
+			mSiteUrl = new URL(url);
 		}
 		catch (MalformedURLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Log.w(LOG, "there is a problem with mSiteULR = " + mSite);
+			Log.w(LOG, "there is a problem with mSiteULR = " + mSiteFootballTable);
 		}
 	}
 
 	public DataParcer()
 	{
 		mHtmlHelper = new HtmlCleaner();
-	}
-
-	public DataParcer(URL mPage)
-	{
-		this();
-		try
-		{
-			mSiteUrl = new URL(mSite);
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-			Log.w(LOG, "there is a problem with mPageULR = " + mPage);
-		}
+		setUrl(mSiteFootballTable);
 	}
 
 	public List<League> parceScoreboard()
@@ -60,7 +49,64 @@ public class DataParcer
 		TagNode scoreTable = getScoreTable();
 		TagNode[] leaguesData = getLeagueData(scoreTable);
 		List<League> legues = getLeagues(leaguesData);
+		initLiveFootballMainPage(legues);
 		return legues;
+	}
+
+	private void initLiveFootballMainPage(List<League> legues)
+	{
+		setUrl(mSiteFootballSopcast);
+		getRootElement();
+		TagNode[] mainSop = mRootElement.getElementsByAttValue(HtmlHelper.ID, HtmlHelper.MAIN_SOP, true, false);
+		TagNode[] sopElement = mainSop[0].getElementsByAttValue(HtmlHelper.CLASS, "base custom", true, false);
+		for (int i = 0; i < legues.size(); i++)
+		{
+			for (int j = 0; j < legues.get(i).getSize(); j++)
+			{
+				if (legues.get(i).getMatch(j).isOnlineStatus() == 1)
+				{
+					String team1 = legues.get(i).getMatch(j).getFirstTeam();
+					String team2 = legues.get(i).getMatch(j).getSecondTeam();
+					legues.get(i).getMatch(j).linkToSopcast = findMatchesForSopcast(team1, team2, sopElement);
+				}
+			}
+		}
+	}
+
+	private String findMatchesForSopcast(String team1, String team2, TagNode[] sopElement)
+	{
+		TagNode[] element;
+		for (int i = 0; i < sopElement.length; i++)
+		{
+			element = sopElement[i].getElementsByName(HtmlHelper.DIV, false);
+			String name = element[0].getText().toString().trim();
+			if (name.contains(team1) || name.contains(team2))
+			{
+				TagNode[] linkElement = sopElement[i].getElementsByAttValue(HtmlHelper.CLASS, "argr_custom more", true, false);
+
+				for (TagNode aTag : sopElement[i].getElementsByName("a", true))
+				{
+					String link = aTag.getAttributeByName("href");
+					if (link != null && link.length() > 0)
+						return openSopcastLink(link);
+				}
+			}
+		}
+		return "-";
+	}
+
+	private String openSopcastLink(String link)
+	{
+		setUrl(link);
+		getRootElement();
+
+		for (TagNode aTag : mRootElement.getElementsByName("a", true))
+		{
+			String sopLink = aTag.getAttributeByName("href");
+			if (sopLink != null && sopLink.length() > 0 && sopLink.contains("sop://broker.sopcast.com:"))
+				return sopLink;
+		}
+		return "-";
 	}
 
 	private boolean getRootElement()
@@ -136,20 +182,21 @@ public class DataParcer
 				}
 
 				TagNode[] scoreData = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOC, true, false);
-				
+
 				String scoreLink = " пусто";
 				if (scoreData[0] != null)
 				{
 					// Need refactoring
 					TagNode score[] = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOGSCORE, true, false);
-					
+
 					for (TagNode aTag : scoreData[0].getElementsByName("a", true))
 					{
 						scoreLink = " нашли а";
-					    String link = aTag.getAttributeByName ("href");
-					    if (link != null && link.length () > 0) scoreLink = link;
+						String link = aTag.getAttributeByName("href");
+						if (link != null && link.length() > 0)
+							scoreLink = link;
 					}
-					
+
 					isonline = 2;
 					if (score.length < 1)
 					{
@@ -172,7 +219,7 @@ public class DataParcer
 				}
 				if (!date.isEmpty() && !team1.isEmpty() && !team2.isEmpty() && !score1.isEmpty() && !score2.isEmpty())
 				{
-					newMatch = new Match(date, team1, team2, score1, score2, newLeague.getName(), isonline, scoreLink );
+					newMatch = new Match(date, team1, team2, score1, score2, newLeague.getName(), isonline, scoreLink);
 					if (newLeague != null)
 					{
 						newLeague.addMatch(newMatch);
@@ -183,8 +230,7 @@ public class DataParcer
 		}
 		return leagues;
 	}
-	
-	
+
 	public void getDataForMatch(int id)
 	{
 		TagNode[] scoreTable = mRootElement.getElementsByAttValue(HtmlHelper.CLASS, "wblock", true, false);

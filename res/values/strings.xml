@@ -6,4 +6,6 @@
 
     
     <string name="web_view_button">web</string>
+    
+     <string name="sopcast_link">sopcast link</string>
 </resources>

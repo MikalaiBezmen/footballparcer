@@ -14,6 +14,7 @@ public class Match
 	private String	mLeague;			// Maybe league contains match
 	private int	mOnlineStatus = 0;		// 0 - wait, 1 - online , 2 - end
 	private int id;
+	public String linkToSopcast;
 	public String linkForOnline = "";
 
 	private int		matchValidation;

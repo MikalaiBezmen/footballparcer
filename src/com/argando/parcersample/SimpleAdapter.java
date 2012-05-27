@@ -8,7 +8,10 @@ import com.argando.parcersample.SampleCategorizeListViewActivity.OnlineWebViewLi
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.sax.StartElementListener;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -20,6 +23,7 @@ import android.widget.Button;
 import android.widget.Checkable;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -121,14 +125,6 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 		View v;
 		if (convertView == null)
 		{
-			if (mData.get(position).get("IS") == "0")
-			{
-				resource = R.layout.list_complex_grey;
-			}
-			else if (mData.get(position).get("IS") == "2")
-			{
-				resource = R.layout.list_complex_red;
-			}
 			v = mInflater.inflate(resource, parent, false);
 
 			final int[] to = mTo;
@@ -139,7 +135,6 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 			{
 				holder[i] = v.findViewById(to[i]);
 			}
-
 			v.setTag(holder);
 		}
 		else
@@ -195,7 +190,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 				final String text = data == null ? "" : data.toString();
 				if (text == null)
 				{
-//					text = "";
+					// text = "";
 				}
 
 				boolean bound = false;
@@ -217,6 +212,24 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 							throw new IllegalStateException(v.getClass().getName() + " should be bound to a Boolean, not a " + data.getClass());
 						}
 					}
+					else if (v instanceof ImageButton)
+					{
+						if (mData.get(position).get("sopcast_link") != null)
+						{
+							v.setVisibility(View.VISIBLE);
+							v.setOnClickListener(new OnClickListener()
+							{
+								public void onClick(View v)
+								{
+									mOnlineWebViewListener.startSopcast(text);
+								}
+							});
+						}
+						else
+						{
+							v.setVisibility(View.GONE);
+						}
+					}
 					else if (v instanceof Button)
 					{
 						((Button) v).setOnClickListener(new OnClickListener()
@@ -232,7 +245,19 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 					{
 						// Note: keep the instanceof TextView check at the bottom of these
 						// ifs since a lot of views are TextViews (e.g. CheckBoxes).
-						setViewText((TextView) v, text);
+
+						if (mData.get(position).get("IS") == "0")
+						{
+							setViewTextGrey((TextView) v, text);
+						}
+						else if (mData.get(position).get("IS") == "2")
+						{
+							setViewTextRed((TextView) v, text);
+						}
+						else
+						{
+							setViewText((TextView) v, text);
+						}
 					}
 					else if (v instanceof ImageView)
 					{
@@ -337,6 +362,24 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	public void setViewText(TextView v, String text)
 	{
 		v.setText(text);
+	}
+	
+	public void setViewTextRed(TextView v, String text)
+	{
+//		if (v.getId() == R.id.list_header_title)
+		{
+			v.setTextColor(Color.RED);
+		}
+		setViewText(v, text);
+	}
+	
+	public void setViewTextGrey(TextView v, String text)
+	{
+//		if (v.getId() == R.id.list_header_title)
+		{
+			v.setTextColor(Color.GRAY);
+		}
+		setViewText(v, text);
 	}
 
 	public Filter getFilter()

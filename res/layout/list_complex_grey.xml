@@ -7,7 +7,7 @@
     android:paddingLeft="15dip"
     android:paddingTop="10dip" >
 
- <TextView
+    <TextView
         android:id="@+id/list_complex_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#FFDDDDDD" />
 
-   <TextView
+    <TextView
         android:id="@+id/list_complex_caption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,13 +25,14 @@
         android:layout_centerVertical="true"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#AAFFFFFF" />
-   
-       <Button
+
+    <Button
         android:id="@+id/web_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="@string/web_view_button"
-        android:focusable="false" >
+        android:focusable="false"
+        android:text="@string/web_view_button" >
     </Button>
+
 </RelativeLayout>
