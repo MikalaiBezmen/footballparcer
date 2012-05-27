@@ -59,7 +59,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 	    launch_intent.addCategory("android.intent.category.LAUNCHER");
 	    launch_intent.setComponent(new ComponentName(packageName, name));
 	    launch_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	    launch_intent.setDataAndType(Uri.parse("url"), "application/sop");
+	    launch_intent.setDataAndType(Uri.parse(url), "application/sop");
 	    getActivity().startActivity(launch_intent);
 	}
 
@@ -163,6 +163,8 @@ public class SampleCategorizeListViewActivity extends Fragment
 
 		// create our list and custom adapter
 		list = new ListView(this.getActivity());
+		list.setDivider(getResources().getDrawable(R.drawable.list_items_divider));
+		list.setDividerHeight(10);
 		list.setAdapter(adapter);
 		list.setItemsCanFocus(true);
 

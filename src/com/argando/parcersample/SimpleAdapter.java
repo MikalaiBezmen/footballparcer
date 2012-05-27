@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.sax.StartElementListener;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -214,8 +215,10 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 					}
 					else if (v instanceof ImageButton)
 					{
-						if (mData.get(position).get("sopcast_link") != null)
+						Object check = mData.get(position).get("sopcast_link");
+						if (check != null && !check.toString().isEmpty() )
 						{
+							Log.w("AA", "check.toString()=" + check.toString() + "text = "  + text );
 							v.setVisibility(View.VISIBLE);
 							v.setOnClickListener(new OnClickListener()
 							{

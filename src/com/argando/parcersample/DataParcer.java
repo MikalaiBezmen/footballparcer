@@ -92,7 +92,7 @@ public class DataParcer
 				}
 			}
 		}
-		return "-";
+		return "";
 	}
 
 	private String openSopcastLink(String link)
@@ -106,7 +106,7 @@ public class DataParcer
 			if (sopLink != null && sopLink.length() > 0 && sopLink.contains("sop://broker.sopcast.com:"))
 				return sopLink;
 		}
-		return "-";
+		return "";
 	}
 
 	private boolean getRootElement()
