@@ -1,5 +1,11 @@
 package com.argando.parcersample;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,10 +14,11 @@ import java.util.Map;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,10 +26,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class SampleCategorizeListViewActivity extends Fragment
 {
@@ -33,6 +38,8 @@ public class SampleCategorizeListViewActivity extends Fragment
 	public final static String		SOPCAST_LINK	= "sopcast_link";
 	ListView						list;
 	private Fragment				me;
+
+	private Toast					toast;
 
 	private OnlineWebViewListener	mOnlineWebViewListener;
 
@@ -54,35 +61,121 @@ public class SampleCategorizeListViewActivity extends Fragment
 		return item;
 	}
 
-	private void  launchComponent(String packageName, String name, String url){
-	    Intent launch_intent = new Intent("android.intent.action.MAIN");
-	    launch_intent.addCategory("android.intent.category.LAUNCHER");
-	    launch_intent.setComponent(new ComponentName(packageName, name));
-	    launch_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	    launch_intent.setDataAndType(Uri.parse(url), "application/sop");
-	    getActivity().startActivity(launch_intent);
+	private void launchComponent(String packageName, String name, String url)
+	{
+		Intent launch_intent = new Intent("android.intent.action.MAIN");
+		launch_intent.addCategory("android.intent.category.LAUNCHER");
+		launch_intent.setComponent(new ComponentName(packageName, name));
+		launch_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		launch_intent.setDataAndType(Uri.parse(url), "application/sop");
+		getActivity().startActivity(launch_intent);
 	}
 
-	public void startApplication(String application_name, String url){
-	    try{
-	        Intent intent = new Intent("android.intent.action.MAIN");
-	        intent.addCategory("android.intent.category.LAUNCHER");
+	public void InstallApplication()
+	{
+		String ApkName = "SopCast.apk";
+		String PackageName = "com.argando.sopcast";
+		Uri packageURI = Uri.parse(PackageName.toString());
+		Intent intent = new Intent(android.content.Intent.ACTION_VIEW, packageURI);
+		intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + "/download/" + ApkName.toString())),
+				"application/vnd.android.package-archive");
 
-	        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-	        List<ResolveInfo> resolveinfo_list = getActivity().getPackageManager().queryIntentActivities(intent, 0);
-
-	        for(ResolveInfo info:resolveinfo_list){
-	            if(info.activityInfo.packageName.contains(application_name)){
-	                launchComponent(info.activityInfo.packageName, info.activityInfo.name, url);
-	                break;
-	            }
-	        }
-	    }
-	    catch (ActivityNotFoundException e) {
-	        Toast.makeText(getActivity().getApplicationContext(), "There was a problem loading the application: "+application_name,Toast.LENGTH_SHORT).show();
-	    }
+		startActivity(intent);
 	}
-	
+
+	private class Downloader extends AsyncTask<String, Void, List<String>>
+	{
+		protected List<String> doInBackground(String... arg)
+		{
+			try
+			{
+
+				String urlpath = "http://www.ex.ua/get/786058334082/25994713";
+				String ApkName = "SopCast.apk";
+
+				URL url = new URL(urlpath.toString());
+				// Your given URL.
+				HttpURLConnection c = (HttpURLConnection) url.openConnection();
+				c.setRequestMethod("GET");
+				c.setDoOutput(true);
+				c.connect();
+				// Connection Complete here.!
+				// Toast.makeText(getApplicationContext(),
+				// "HttpURLConnection complete.", Toast.LENGTH_SHORT).show();
+				String PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/download/";
+				File file = new File(PATH); // PATH = /mnt/sdcard/download/
+				if (!file.exists())
+				{
+					file.mkdirs();
+				}
+				File outputFile = new File(file, ApkName.toString());
+				FileOutputStream fos = new FileOutputStream(outputFile);
+				// Toast.makeText(getApplicationContext(), "SD Card Path: " +
+				// outputFile.toString(), Toast.LENGTH_SHORT).show();
+				InputStream is = c.getInputStream();
+
+				// Get from Server and Catch In Input Stream Object.
+				byte[] buffer = new byte[1024];
+				int len1 = 0;
+				while ((len1 = is.read(buffer)) != -1)
+				{
+					fos.write(buffer, 0, len1); // Write In FileOutputStream.
+				}
+				fos.close();
+				is.close();
+				// till here, it works fine - .apk is download to my sdcard in
+				// download file.
+				// So plz Check in DDMS tab and Select your Emualtor.
+				// Toast.makeText(getApplicationContext(),
+				// "Download Complete on SD Card.!", Toast.LENGTH_SHORT).show();
+				// download the APK to sdcard then fire the Intent.
+			}
+			catch (IOException e)
+			{
+			}
+			return null;
+		}
+
+		protected void onPostExecute(List<String> output)
+		{
+			toast.show();
+			InstallApplication();
+		}
+	}
+
+	public void startApplication(String application_name, String url)
+	{
+		try
+		{
+			Intent intent = new Intent("android.intent.action.MAIN");
+			intent.addCategory("android.intent.category.LAUNCHER");
+
+			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			List<ResolveInfo> resolveinfo_list = getActivity().getPackageManager().queryIntentActivities(intent, 0);
+
+			boolean find = false;
+			for (ResolveInfo info : resolveinfo_list)
+			{
+				if (info.activityInfo.packageName.contains(application_name))
+				{
+					launchComponent(info.activityInfo.packageName, info.activityInfo.name, url);
+					find = true;
+					break;
+				}
+			}
+			if (!find)
+			{
+				Toast.makeText(getActivity().getApplicationContext(), "Starting downloading sopcast player to /download/", Toast.LENGTH_SHORT).show();
+				new Downloader().execute("");
+			}
+		}
+		catch (ActivityNotFoundException e)
+		{
+			Toast.makeText(getActivity().getApplicationContext(), "There was a problem loading the application: " + application_name,
+					Toast.LENGTH_SHORT).show();
+		}
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -99,7 +192,6 @@ public class SampleCategorizeListViewActivity extends Fragment
 				// getActivity().findViewById(R.id.containerForMach).setVisibility(View.VISIBLE);
 				// TODO Auto-generated method stub
 				// Toast.makeText(getActivity().getApplicationContext(), LeaguesHandler.getMatchById((int) arg3).toString(), 20000).show();
-
 				ScoreFragment fragment = new ScoreFragment();
 
 				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -123,7 +215,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 				startApplication("sop", url);
 			}
 		};
-		
+
 		List<League> leagues = LeaguesHandler.listLeauges;
 
 		if (leagues == null)
@@ -168,6 +260,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 		list.setAdapter(adapter);
 		list.setItemsCanFocus(true);
 
+		toast = Toast.makeText(getActivity().getApplicationContext(), "file downloaded", Toast.LENGTH_LONG);
 	}
 
 	@Override
