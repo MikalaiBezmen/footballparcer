@@ -80,7 +80,7 @@ public class DataParcer
 		{
 			element = sopElement[i].getElementsByName(HtmlHelper.DIV, false);
 			String name = element[0].getText().toString().trim();
-			if (name.contains(team1) || name.contains(team2))
+			if (name.contains(team1) && name.contains(team2))
 			{
 				TagNode[] linkElement = sopElement[i].getElementsByAttValue(HtmlHelper.CLASS, "argr_custom more", true, false);
 
