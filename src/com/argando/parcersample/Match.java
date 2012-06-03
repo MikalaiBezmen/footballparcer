@@ -16,7 +16,7 @@ public class Match
 	private String	mLeague;			// Maybe league contains match
 	private int	mOnlineStatus = 0;		// 0 - wait, 1 - online , 2 - end
 	private int id;
-	public String linkToSopcast;
+	public String linkToSopcast = "";
 	public String linkForOnline = "";
 
 	private int		matchValidation;
@@ -69,11 +69,7 @@ public class Match
 	private boolean isDateValid()
 	{
 		// ADD regexp for checking valid data input
-		if (mDate.isEmpty())
-		{
-			return false;
-		}
-		return true;
+		return !mDate.isEmpty();
 	}
 
 	private boolean isFirstTeamValid()

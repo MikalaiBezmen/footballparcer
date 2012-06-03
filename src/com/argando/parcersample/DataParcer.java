@@ -1,18 +1,15 @@
 package com.argando.parcersample;
 
+import android.util.Log;
+import org.htmlcleaner.HtmlCleaner;
+import org.htmlcleaner.TagNode;
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.htmlcleaner.HtmlCleaner;
-import org.htmlcleaner.TagNode;
-
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import org.jetbrains.annotations.NotNull;
 
 public class DataParcer
 {
@@ -50,26 +47,26 @@ public class DataParcer
 		getRootElement();
 		TagNode scoreTable = getScoreTable();
 		TagNode[] leaguesData = getLeagueData(scoreTable);
-		List<League> legues = getLeagues(leaguesData);
-		initLiveFootballMainPage(legues);
-		return legues;
+		List<League> leagues = getLeagues(leaguesData);
+		initLiveFootballMainPage(leagues);
+		return leagues;
 	}
 
-	private void initLiveFootballMainPage(@NotNull List<League> legues)
+	private void initLiveFootballMainPage(@NotNull List<League> leagues)
 	{
 		setUrl(mSiteFootballSopcast);
 		getRootElement();
-		TagNode[] mainSop = mRootElement.getElementsByAttValue(HtmlHelper.ID, HtmlHelper.MAIN_SOP, true, false);
-		TagNode[] sopElement = mainSop[0].getElementsByAttValue(HtmlHelper.CLASS, "base custom", true, false);
-		for (int i = 0; i < legues.size(); i++)
+		TagNode[] mainSop = mRootElement.getElementsByAttValue(DataNameHelper.ID, DataNameHelper.MAIN_SOP, true, false);
+		TagNode[] sopElement = mainSop[0].getElementsByAttValue(DataNameHelper.CLASS, "base custom", true, false);
+		for (int i = 0; i < leagues.size(); i++)
 		{
-			for (int j = 0; j < legues.get(i).getSize(); j++)
+			for (int j = 0; j < leagues.get(i).getSize(); j++)
 			{
-				if (legues.get(i).getMatch(j).isOnlineStatus() == 1)
+				if (leagues.get(i).getMatch(j).isOnlineStatus() == 1)
 				{
-					String team1 = legues.get(i).getMatch(j).getFirstTeam();
-					String team2 = legues.get(i).getMatch(j).getSecondTeam();
-					legues.get(i).getMatch(j).linkToSopcast = findMatchesForSopcast(team1, team2, sopElement);
+					String team1 = leagues.get(i).getMatch(j).getFirstTeam();
+					String team2 = leagues.get(i).getMatch(j).getSecondTeam();
+					leagues.get(i).getMatch(j).linkToSopcast = findMatchesForSopcast(team1, team2, sopElement);
 				}
 			}
 		}
@@ -80,12 +77,10 @@ public class DataParcer
 		TagNode[] element;
 		for (int i = 0; i < sopElement.length; i++)
 		{
-			element = sopElement[i].getElementsByName(HtmlHelper.DIV, false);
+			element = sopElement[i].getElementsByName(DataNameHelper.DIV, false);
 			String name = element[0].getText().toString().trim();
 			if (name.contains(team1) && name.contains(team2))
 			{
-				TagNode[] linkElement = sopElement[i].getElementsByAttValue(HtmlHelper.CLASS, "argr_custom more", true, false);
-
 				for (TagNode aTag : sopElement[i].getElementsByName("a", true))
 				{
 					String link = aTag.getAttributeByName("href");
@@ -126,14 +121,13 @@ public class DataParcer
 
 	private TagNode getScoreTable()
 	{
-		TagNode[] scoreTable = mRootElement.getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.BCC, true, false);
+		TagNode[] scoreTable = mRootElement.getElementsByAttValue(DataNameHelper.CLASS, DataNameHelper.BCC, true, false);
 		return scoreTable[0];
 	}
 
 	private TagNode[] getLeagueData(@NotNull TagNode scoreTable)
 	{
-		TagNode[] rootElementForLeague = scoreTable.getElementsByName(HtmlHelper.DIV, false);
-		return rootElementForLeague;
+		return scoreTable.getElementsByName(DataNameHelper.DIV, false);
 	}
 
 	@NotNull
@@ -143,72 +137,69 @@ public class DataParcer
 		League newLeague = null;
 		Match newMatch;
 
-		for (int i = 0; i < leaguesData.length; i++)
+		for (TagNode aLeaguesData : leaguesData)
 		{
-			if (leaguesData[i].getAttributeByName(HtmlHelper.CLASS).equals(HtmlHelper.BLINE))
+			if (aLeaguesData.getAttributeByName(DataNameHelper.CLASS).equals(DataNameHelper.BLINE))
 			{
-				if (leaguesData[i].getElementsByName(HtmlHelper.A, false).length == 0)
+				if (aLeaguesData.getElementsByName(DataNameHelper.A, false).length == 0)
 				{
-					newLeague = new League(leaguesData[i].getElementsByName(HtmlHelper.H1, true)[0].getText().toString().trim());
-				}
-				else
+					newLeague = new League(aLeaguesData.getElementsByName(DataNameHelper.H1, true)[0].getText().toString().trim());
+				} else
 				{
-					newLeague = new League(leaguesData[i].getElementsByName(HtmlHelper.A, true)[0].getText().toString().trim());
+					newLeague = new League(aLeaguesData.getElementsByName(DataNameHelper.A, true)[0].getText().toString().trim());
 				}
 				leagues.add(newLeague);
 				Log.w(LOG, "add legue " + newLeague.getName());
-			}
-			else if (leaguesData[i].getAttributeByName(HtmlHelper.CLASS).equals(HtmlHelper.TABLOLINE1))
+			} else if (aLeaguesData.getAttributeByName(DataNameHelper.CLASS).equals(DataNameHelper.TABLOLINE1))
 			{
 				String date = "";
 				String team1 = "";
 				String team2 = "";
 				String score1 = "";
 				String score2 = "";
-				int isonline = 0;
-				TagNode[] dataDate = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLODATE, true, false);
+				int isOnline = 0;
+				TagNode[] dataDate = aLeaguesData.getElementsByAttValue(DataNameHelper.CLASS, DataNameHelper.TABLODATE, true, false);
 				if (dataDate[0] != null)
 				{
 					date = dataDate[0].getText().toString().trim();
 				}
 
-				TagNode[] dataTeam1 = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOTEAM1, true, false);
+				TagNode[] dataTeam1 = aLeaguesData.getElementsByAttValue(DataNameHelper.CLASS, DataNameHelper.TABLOTEAM1, true, false);
 				if (dataTeam1[0] != null)
 				{
 					team1 = dataTeam1[0].getText().toString().trim();
 				}
 
-				TagNode[] dataTeam2 = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOTEAM2, true, false);
+				TagNode[] dataTeam2 = aLeaguesData.getElementsByAttValue(DataNameHelper.CLASS, DataNameHelper.TABLOTEAM2, true, false);
 				if (dataTeam2[0] != null)
 				{
 					team2 = dataTeam2[0].getText().toString().trim();
 				}
 
-				TagNode[] scoreData = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOC, true, false);
+				TagNode[] scoreData = aLeaguesData.getElementsByAttValue(DataNameHelper.CLASS, DataNameHelper.TABLOC, true, false);
 
 				String scoreLink = "no link";
 				if (scoreData[0] != null)
 				{
 					// Need refactoring
-					TagNode score[] = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOGSCORE, true, false);
+					TagNode score[] = aLeaguesData.getElementsByAttValue(DataNameHelper.CLASS, DataNameHelper.TABLOGSCORE, true, false);
 
 					for (TagNode aTag : scoreData[0].getElementsByName("a", true))
 					{
 						String link = aTag.getAttributeByName("href");
-						if (link != null && link.length() > 0)
-							scoreLink = link;
+						if (link != null && link.length() > 0) scoreLink = link;
 					}
 
-					isonline = 2;
+					isOnline = 2;
 					if (score.length < 1)
 					{
-						score = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLORSCORE, true, false);
-						isonline = 1;
+						score = aLeaguesData.getElementsByAttValue(DataNameHelper.CLASS, DataNameHelper.TABLORSCORE, true, false);
+						isOnline = 1;
 					}
 					if (score.length < 1)
 					{
-						score = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOGRAYSCORE, true, false);
-						isonline = 0;
+						score = aLeaguesData.getElementsByAttValue(DataNameHelper.CLASS, DataNameHelper.TABLOGRAYSCORE, true, false);
+						isOnline = 0;
 					}
 
 					if (score.length < 1)
@@ -221,12 +212,9 @@ public class DataParcer
 				}
 				if (!date.isEmpty() && !team1.isEmpty() && !team2.isEmpty() && !score1.isEmpty() && !score2.isEmpty())
 				{
-					newMatch = new Match(date, team1, team2, score1, score2, newLeague.getName(), isonline, scoreLink);
-					if (newLeague != null)
-					{
-						newLeague.addMatch(newMatch);
-						Log.w(LOG, "match added" + team1 + " - " + team2 + "league = " + newLeague.getName() + isonline);
-					}
+					newMatch = new Match(date, team1, team2, score1, score2, newLeague.getName(), isOnline, scoreLink);
+					newLeague.addMatch(newMatch);
+					Log.w(LOG, "match added" + team1 + " - " + team2 + "league = " + newLeague.getName() + isOnline);
 				}
 			}
 		}
@@ -235,6 +223,6 @@ public class DataParcer
 
 	public void getDataForMatch(int id)
 	{
-		TagNode[] scoreTable = mRootElement.getElementsByAttValue(HtmlHelper.CLASS, "wblock", true, false);
+		TagNode[] scoreTable = mRootElement.getElementsByAttValue(DataNameHelper.CLASS, "wblock", true, false);
 	}
 }

@@ -8,8 +8,8 @@
         android:id="@+id/parse"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Получить данные" 
-        android:visibility="gone">
+        android:text="refresh data"
+        android:visibility="visible">
     </Button>
 
     <LinearLayout

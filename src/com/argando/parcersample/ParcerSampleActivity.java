@@ -1,15 +1,12 @@
 package com.argando.parcersample;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,18 +14,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParcerSampleActivity extends FragmentActivity
 {
-	String			date;
-	String			firstTeam;
-	String			secondTeam;
-	String			result;
-	String			result2;
 	@NotNull
 	String			text	= "";
 
@@ -39,30 +33,31 @@ public class ParcerSampleActivity extends FragmentActivity
 
 	public View		contentView;
 
+	private Activity mActivity;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-
 		super.onCreate(savedInstanceState);
-
+		mActivity = this;
 		setContentView(R.layout.main);
-
 		Button button = (Button) findViewById(R.id.parse);
-
 		button.setOnClickListener(myListener);
-
 		internetConnectionToast = Toast.makeText(getBaseContext(), "There is no internet connection", 20000);
-
 		ViewGroup view = (ViewGroup) getWindow().getDecorView();
-
-		contentView = (LinearLayout) view.getChildAt(0);
-
+		contentView = view.getChildAt(0);
 		FragmentManager fragmentManager = getSupportFragmentManager();
-
 		if (null == fragmentManager.findFragmentByTag(SampleCategorizeListViewActivity.class.getSimpleName()))
 		{
 			startParce();
 		}
+	}
+
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+//		startParce();
 	}
 
 	private ProgressDialog	progresDialog;
@@ -75,15 +70,12 @@ public class ParcerSampleActivity extends FragmentActivity
 												if (isOnline())
 												{
 													startParce();
-													// text = "";
-													// progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...",
-													// "request to server",
-													// true, false);
-													// new ParseSite().execute("http://www.football.ua");
 												}
 												else
 												{
+													LeaguesHandler.listLeauges = Cache.INSTANCE.readFromFile(mActivity.getCacheDir());
 													internetConnectionToast.show();
+													showResultsList();
 												}
 											}
 
@@ -93,11 +85,7 @@ public class ParcerSampleActivity extends FragmentActivity
 	{
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		if (netInfo != null && netInfo.isConnectedOrConnecting())
-		{
-			return true;
-		}
-		return false;
+		return netInfo != null && netInfo.isConnectedOrConnecting() ? true : false;
 	}
 
 	public void startParce()
@@ -111,6 +99,8 @@ public class ParcerSampleActivity extends FragmentActivity
 		else
 		{
 			internetConnectionToast.show();
+			LeaguesHandler.listLeauges = Cache.INSTANCE.readFromFile(mActivity.getCacheDir());
+			showResultsList();
 		}
 	}
 
@@ -122,21 +112,23 @@ public class ParcerSampleActivity extends FragmentActivity
 			DataParcer dataParcer = new DataParcer();
 			leagues = dataParcer.parceScoreboard();
 			LeaguesHandler.listLeauges = leagues;
+			Cache.INSTANCE.cacheResults(leagues, mActivity.getCacheDir());
 			return null;
 		}
 
 		protected void onPostExecute(List<String> output)
 		{
 			progresDialog.dismiss();
-
-			FragmentManager fragmentManager = getSupportFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-			SampleCategorizeListViewActivity fragment = new SampleCategorizeListViewActivity();
-			// fragmentTransaction.add(R.id.container, fragment);
-			fragmentTransaction.add(R.id.container, fragment, SampleCategorizeListViewActivity.class.getSimpleName());
-			// fragmentTransaction.addToBackStack(null);
-			fragmentTransaction.commit();
-
+			showResultsList();
 		}
+	}
+
+	private void showResultsList()
+	{
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		SampleCategorizeListViewActivity fragment = new SampleCategorizeListViewActivity();
+		fragmentTransaction.add(R.id.container, fragment, SampleCategorizeListViewActivity.class.getSimpleName());
+		fragmentTransaction.commit();
 	}
 }

@@ -11,9 +11,9 @@ public class LeaguesHandler
 	@Nullable
 	public static Match getMatchById(int id)
 	{
-		for (League leauge : listLeauges)
+		for (League league : listLeauges)
 		{
-			for (Match match : leauge.getMatches())
+			for (Match match : league.getMatches())
 			{
 				if (match.getId() == id)
 				{
