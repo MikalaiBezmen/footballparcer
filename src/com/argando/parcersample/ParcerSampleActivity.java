@@ -19,6 +19,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ParcerSampleActivity extends FragmentActivity
 {
@@ -27,8 +29,10 @@ public class ParcerSampleActivity extends FragmentActivity
 	String			secondTeam;
 	String			result;
 	String			result2;
+	@NotNull
 	String			text	= "";
 
+	@NotNull
 	List<League>	leagues	= new ArrayList<League>();
 
 	Toast			internetConnectionToast;
@@ -42,11 +46,8 @@ public class ParcerSampleActivity extends FragmentActivity
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.main);
-		// Находим кнопку
 
 		Button button = (Button) findViewById(R.id.parse);
-
-		// Регистрируем onClick слушателя
 
 		button.setOnClickListener(myListener);
 
@@ -64,12 +65,9 @@ public class ParcerSampleActivity extends FragmentActivity
 		}
 	}
 
-	// Диалог ожидания
-
 	private ProgressDialog	progresDialog;
 
-	// Слушатель OnClickListener для нашей кнопки
-
+	@NotNull
 	private OnClickListener	myListener	= new OnClickListener()
 										{
 											public void onClick(View v)
@@ -77,12 +75,10 @@ public class ParcerSampleActivity extends FragmentActivity
 												if (isOnline())
 												{
 													startParce();
-													// // Показываем диалог ожидания
 													// text = "";
 													// progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...",
 													// "request to server",
 													// true, false);
-													// // Запускаем парсинг
 													// new ParseSite().execute("http://www.football.ua");
 												}
 												else
@@ -110,7 +106,6 @@ public class ParcerSampleActivity extends FragmentActivity
 		{
 			text = "";
 			progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server", true, false);
-			// Запускаем парсинг
 			new ParseSite().execute("http://www.football.ua");
 		}
 		else
@@ -121,7 +116,7 @@ public class ParcerSampleActivity extends FragmentActivity
 
 	private class ParseSite extends AsyncTask<String, Void, List<String>>
 	{
-		// Фоновая операция
+		@Nullable
 		protected List<String> doInBackground(String... arg)
 		{
 			DataParcer dataParcer = new DataParcer();
@@ -130,10 +125,8 @@ public class ParcerSampleActivity extends FragmentActivity
 			return null;
 		}
 
-		// Событие по окончанию парсинга
 		protected void onPostExecute(List<String> output)
 		{
-			// Убираем диалог загрузки
 			progresDialog.dismiss();
 
 			FragmentManager fragmentManager = getSupportFragmentManager();

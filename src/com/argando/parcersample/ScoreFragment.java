@@ -12,6 +12,7 @@ import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import org.jetbrains.annotations.Nullable;
 
 public class ScoreFragment extends Fragment
 {
@@ -42,8 +43,9 @@ public class ScoreFragment extends Fragment
 		myWebView.loadUrl(LeaguesHandler.match);
 	}
 
+	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
 	{
 		if (container == null)
 		{

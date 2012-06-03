@@ -1,5 +1,7 @@
 package com.argando.parcersample;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @author argando
  * 
@@ -110,6 +112,7 @@ public class Match
 		return this.mSecondTeam;
 	}
 
+	@NotNull
 	public String getResult()
 	{
 		return this.mScore1 + mScore2;
@@ -140,6 +143,7 @@ public class Match
 		return this.matchValidation;
 	}
 	
+	@NotNull
 	public String toString()
 	{
 		return getFirstTeam() + " " + getSecondTeam() + " " + linkForOnline; 

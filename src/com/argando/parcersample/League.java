@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.htmlcleaner.TagNode;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 // test
 
 public class League
 {
+	@NotNull
 	private List<Match>	mMatches	= new ArrayList<Match>();
 	private final String mName;
 	private TagNode mLegueHtmlCode;
@@ -18,7 +21,7 @@ public class League
 		mName = name;
 	} 
 
-	public boolean addMatch(Match match)
+	public boolean addMatch(@Nullable Match match)
 	{
 		if (match == null || !match.isMatchValid())
 		{
@@ -27,7 +30,7 @@ public class League
 		return mMatches.add(match);
 	}
 
-	public boolean deleteMatch(Match match)
+	public boolean deleteMatch(@Nullable Match match)
 	{
 		if (match == null)
 		{
@@ -36,6 +39,7 @@ public class League
 		return mMatches.remove(match);
 	}
 
+	@Nullable
 	public Match getMatch(int i)
 	{
 		if (i >= 0 && i < mMatches.size())
@@ -45,12 +49,13 @@ public class League
 		return null;
 	}
 	
+	@NotNull
 	public List<Match> getMatches()
 	{
 		return mMatches;
 	}
 
-	public boolean isMatchInLegue(Match match)
+	public boolean isMatchInLegue(@Nullable Match match)
 	{
 		if (match == null)
 		{

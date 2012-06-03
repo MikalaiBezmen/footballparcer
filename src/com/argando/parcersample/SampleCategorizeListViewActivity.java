@@ -28,6 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SampleCategorizeListViewActivity extends Fragment
 {
@@ -36,6 +38,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 	public final static String		ITEM_CAPTION	= "caption";
 	public final static String		ITEM_LINK		= "link";
 	public final static String		SOPCAST_LINK	= "sopcast_link";
+	public final static String		IS_ONLINE	= "is";
 	ListView						list;
 	private Fragment				me;
 
@@ -50,12 +53,13 @@ public class SampleCategorizeListViewActivity extends Fragment
 		void startSopcast(String url);
 	}
 
+	@NotNull
 	public Map<String, ?> createItem(String title, String caption, String is, String link, String sopcast)
 	{
 		Map<String, String> item = new HashMap<String, String>();
 		item.put(ITEM_TITLE, title);
 		item.put(ITEM_CAPTION, caption);
-		item.put("IS", is);
+		item.put(IS_ONLINE, is);
 		item.put(ITEM_LINK, link);
 		item.put(SOPCAST_LINK, sopcast);
 		return item;
@@ -85,6 +89,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 
 	private class Downloader extends AsyncTask<String, Void, List<String>>
 	{
+		@Nullable
 		protected List<String> doInBackground(String... arg)
 		{
 			try
@@ -263,8 +268,9 @@ public class SampleCategorizeListViewActivity extends Fragment
 		toast = Toast.makeText(getActivity().getApplicationContext(), "file downloaded", Toast.LENGTH_LONG);
 	}
 
+	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
 	{
 		if (container == null)
 		{

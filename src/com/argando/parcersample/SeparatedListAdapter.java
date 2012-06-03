@@ -11,17 +11,20 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SeparatedListAdapter extends BaseAdapter
 {
 
 	public final Map<String, Adapter>	sections			= new LinkedHashMap<String, Adapter>();
+	@NotNull
 	public final ArrayAdapter<String>	headers;
 	public final static int				TYPE_SECTION_HEADER	= 0;
 
 	LayoutInflater						mInflater;
 
-	public SeparatedListAdapter(Context context)
+	public SeparatedListAdapter(@NotNull Context context)
 	{
 		headers = new ArrayAdapter<String>(context, R.layout.list_header);
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -33,6 +36,7 @@ public class SeparatedListAdapter extends BaseAdapter
 		this.sections.put(section, adapter);
 	}
 
+	@Nullable
 	public Object getItem(int position)
 	{
 		for (Object section : this.sections.keySet())
@@ -101,6 +105,7 @@ public class SeparatedListAdapter extends BaseAdapter
 		return (getItemViewType(position) != TYPE_SECTION_HEADER);
 	}
 
+	@Nullable
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 //		if (convertView != null) return convertView;

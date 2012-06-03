@@ -27,6 +27,8 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * An easy adapter to map static data to views defined in an XML file. You can specify the data backing the list as an ArrayList of Maps. Each entry
@@ -78,7 +80,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	 *            The views that should display column in the "from" parameter. These should all be TextViews. The first N views in this list are
 	 *            given the values of the first N columns in the from parameter.
 	 */
-	public SimpleAdapter(OnlineWebViewListener onlineWebViewListener, Context context, List<? extends Map<String, ?>> data, int resource,
+	public SimpleAdapter(OnlineWebViewListener onlineWebViewListener, @NotNull Context context, List<? extends Map<String, ?>> data, int resource,
 			String[] from, int[] to)
 	{
 		mOnlineWebViewListener = onlineWebViewListener;
@@ -116,12 +118,14 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	/**
 	 * @see android.widget.Adapter#getView(int, View, ViewGroup)
 	 */
+	@Nullable
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		return createViewFromResource(position, convertView, parent, mResource);
 	}
 
-	private View createViewFromResource(int position, View convertView, ViewGroup parent, int resource)
+	@Nullable
+	private View createViewFromResource(int position, @Nullable View convertView, ViewGroup parent, int resource)
 	{
 		View v;
 		if (convertView == null)
@@ -162,13 +166,14 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 		this.mDropDownResource = resource;
 	}
 
+	@Nullable
 	@Override
 	public View getDropDownView(int position, View convertView, ViewGroup parent)
 	{
 		return createViewFromResource(position, convertView, parent, mDropDownResource);
 	}
 
-	private void bindView(int position, View view)
+	private void bindView(int position, @NotNull View view)
 	{
 		final Map dataSet = mData.get(position);
 		if (dataSet == null)
@@ -218,7 +223,6 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 						Object check = mData.get(position).get("sopcast_link");
 						if (check != null && !check.toString().isEmpty() )
 						{
-							Log.w("AA", "check.toString()=" + check.toString() + "text = "  + text );
 							v.setVisibility(View.VISIBLE);
 							v.setOnClickListener(new OnClickListener()
 							{
@@ -249,11 +253,11 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 						// Note: keep the instanceof TextView check at the bottom of these
 						// ifs since a lot of views are TextViews (e.g. CheckBoxes).
 
-						if (mData.get(position).get("IS") == "0")
+						if (mData.get(position).get(SampleCategorizeListViewActivity.IS_ONLINE).equals("0"))
 						{
 							setViewTextGrey((TextView) v, text);
 						}
-						else if (mData.get(position).get("IS") == "2")
+						else if (mData.get(position).get(SampleCategorizeListViewActivity.IS_ONLINE).equals("2"))
 						{
 							setViewTextRed((TextView) v, text);
 						}
@@ -320,7 +324,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	 * 
 	 * @see #setViewImage(ImageView, String)
 	 */
-	public void setViewImage(ImageView v, int value)
+	public void setViewImage(@NotNull ImageView v, int value)
 	{
 		v.setImageResource(value);
 	}
@@ -341,7 +345,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	 * 
 	 * @see #setViewImage(ImageView, int)
 	 */
-	public void setViewImage(ImageView v, String value)
+	public void setViewImage(@NotNull ImageView v, String value)
 	{
 		try
 		{
@@ -362,27 +366,28 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	 * @param text
 	 *            the text to be set for the TextView
 	 */
-	public void setViewText(TextView v, String text)
+	public void setViewText(@NotNull TextView v, String text)
 	{
+		{
+			v.setTextColor(Color.GREEN);
+		}
 		v.setText(text);
 	}
 	
-	public void setViewTextRed(TextView v, String text)
+	public void setViewTextRed(@NotNull TextView v, String text)
 	{
-//		if (v.getId() == R.id.list_header_title)
 		{
 			v.setTextColor(Color.RED);
 		}
-		setViewText(v, text);
+		v.setText(text);
 	}
 	
-	public void setViewTextGrey(TextView v, String text)
+	public void setViewTextGrey(@NotNull TextView v, String text)
 	{
-//		if (v.getId() == R.id.list_header_title)
 		{
 			v.setTextColor(Color.GRAY);
 		}
-		setViewText(v, text);
+		v.setText(text);
 	}
 
 	public Filter getFilter()
@@ -434,8 +439,9 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	private class SimpleFilter extends Filter
 	{
 
+		@NotNull
 		@Override
-		protected FilterResults performFiltering(CharSequence prefix)
+		protected FilterResults performFiltering(@Nullable CharSequence prefix)
 		{
 			FilterResults results = new FilterResults();
 
@@ -496,7 +502,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 		}
 
 		@Override
-		protected void publishResults(CharSequence constraint, FilterResults results)
+		protected void publishResults(CharSequence constraint, @NotNull FilterResults results)
 		{
 			// noinspection unchecked
 			mData = (List<Map<String, ?>>) results.values;

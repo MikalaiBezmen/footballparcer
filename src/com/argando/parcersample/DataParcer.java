@@ -12,6 +12,7 @@ import org.htmlcleaner.TagNode;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import org.jetbrains.annotations.NotNull;
 
 public class DataParcer
 {
@@ -43,6 +44,7 @@ public class DataParcer
 		setUrl(mSiteFootballTable);
 	}
 
+	@NotNull
 	public List<League> parceScoreboard()
 	{
 		getRootElement();
@@ -53,7 +55,7 @@ public class DataParcer
 		return legues;
 	}
 
-	private void initLiveFootballMainPage(List<League> legues)
+	private void initLiveFootballMainPage(@NotNull List<League> legues)
 	{
 		setUrl(mSiteFootballSopcast);
 		getRootElement();
@@ -73,7 +75,7 @@ public class DataParcer
 		}
 	}
 
-	private String findMatchesForSopcast(String team1, String team2, TagNode[] sopElement)
+	private String findMatchesForSopcast(String team1, String team2, @NotNull TagNode[] sopElement)
 	{
 		TagNode[] element;
 		for (int i = 0; i < sopElement.length; i++)
@@ -128,13 +130,14 @@ public class DataParcer
 		return scoreTable[0];
 	}
 
-	private TagNode[] getLeagueData(TagNode scoreTable)
+	private TagNode[] getLeagueData(@NotNull TagNode scoreTable)
 	{
 		TagNode[] rootElementForLeague = scoreTable.getElementsByName(HtmlHelper.DIV, false);
 		return rootElementForLeague;
 	}
 
-	private List<League> getLeagues(TagNode[] leaguesData)
+	@NotNull
+	private List<League> getLeagues(@NotNull TagNode[] leaguesData)
 	{
 		List<League> leagues = new ArrayList<League>();
 		League newLeague = null;
@@ -183,7 +186,7 @@ public class DataParcer
 
 				TagNode[] scoreData = leaguesData[i].getElementsByAttValue(HtmlHelper.CLASS, HtmlHelper.TABLOC, true, false);
 
-				String scoreLink = " пусто";
+				String scoreLink = "no link";
 				if (scoreData[0] != null)
 				{
 					// Need refactoring
@@ -191,7 +194,6 @@ public class DataParcer
 
 					for (TagNode aTag : scoreData[0].getElementsByName("a", true))
 					{
-						scoreLink = " нашли а";
 						String link = aTag.getAttributeByName("href");
 						if (link != null && link.length() > 0)
 							scoreLink = link;
