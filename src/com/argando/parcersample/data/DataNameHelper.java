@@ -1,4 +1,4 @@
-package com.argando.parcersample;
+package com.argando.parcersample.data;
 
 //TODO replace to string res
 public final class DataNameHelper
@@ -30,4 +30,6 @@ public final class DataNameHelper
 	//Toasts
 	public static final String NO_INTERNET_CONNECTION = "There is no internet connection";
 	public static final int NO_INTERNER_CONNNECTION_TOAST_TIME = 20000;
+
+	public static  String EXTERNAL_CACHE_DIR = "/mnt/sdcard/Android/data/com.argando.parcersample/cache/";
 }

@@ -1,24 +1,29 @@
 package com.argando.parcersample;
 
 import android.util.Log;
+import com.argando.parcersample.data.League;
+import com.argando.parcersample.data.LeaguesHandler;
+import com.argando.parcersample.data.Match;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 //TODO remove hard string
 public enum Cache
 {
 	INSTANCE;
-
-	public void cacheResults(List<League> leagues, File file)
+	private static final String LOG_TAG = Cache.class.getSimpleName();
+	public void cacheResults(List<League> leagues, String cacheDir)
 	{
 		JSONObject jsMainObj = new JSONObject();
 		try
 		{
-			jsMainObj.put("current_time", "");
+			Calendar calendar = Calendar.getInstance();
+			jsMainObj.put("current_time", calendar.get(Calendar.DATE) + "." + calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.YEAR) +  " " + calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE));
 			JSONArray jsListLeagues = new JSONArray();
 			for (League aLeague : leagues)
 			{
@@ -33,7 +38,7 @@ public enum Cache
 					match.put("first_team", aMatch.getFirstTeam());
 					match.put("second_team", aMatch.getSecondTeam());
 					match.put("first_score", aMatch.getScore1());
-					match.put("second_score", aMatch.getScore1());
+					match.put("second_score", aMatch.getScore2());
 					match.put("online_status", aMatch.isOnlineStatus());
 					match.put("date", aMatch.getDate());
 					match.put("link_to_text_translation", aMatch.linkForOnline);
@@ -49,19 +54,20 @@ public enum Cache
 		{
 			e.printStackTrace();
 		}
-		writeToFile(jsMainObj, file);
+		writeToFile(jsMainObj, cacheDir);
 	}
 
-	private void writeToFile(JSONObject jsonObj, File file)
+	private void writeToFile(JSONObject jsonObj, String cacheDir)
 	{
 		try
 		{
-			File f = new File(file + "football.json");
+			File f = new File(cacheDir + "football.json");
+			Log.w(LOG_TAG, "write  to " + cacheDir + "football.json");
 			if (f.exists())
 			{
 				f.delete();
 			}
-			FileWriter writer = new FileWriter(file + "football.json");
+			FileWriter writer = new FileWriter(cacheDir + "/football.json");
 			writer.write(jsonObj.toString());
 			writer.flush();
 			writer.close();
@@ -76,7 +82,8 @@ public enum Cache
 	{
 		try
 		{
-			DataInputStream dataIn = new DataInputStream(new FileInputStream(file + "football.json"));
+			Log.w(LOG_TAG,"read from " + file + "football.json");
+			DataInputStream dataIn = new DataInputStream(new FileInputStream(file + "/football.json"));
 			Writer writer = new StringWriter();
 			char[] buffer = new char[1024];
 			try
@@ -95,8 +102,7 @@ public enum Cache
 			return getResultsFromString(jsonString);
 		} catch (IOException e)
 		{
-			//in Log
-			System.out.println("Problem finding file");
+			Log.e(LOG_TAG,"Problem finding file");
 		}
 		return new ArrayList<League>();
 	}
@@ -107,6 +113,7 @@ public enum Cache
 		try
 		{
 			JSONObject jObject = new JSONObject(jsonString);
+			LeaguesHandler.mTime = jObject.getString("current_time");
 			JSONArray jsLeagues = jObject.getJSONArray("leagues");
 			for (int i = 0; i < jsLeagues.length(); i++)
 			{

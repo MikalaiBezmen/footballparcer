@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
-
-    <Button
-        android:id="@+id/parse"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="refresh data"
-        android:visibility="visible">
-    </Button>
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/container"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
+            android:id="@+id/additional_function"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <Button
+                android:id="@+id/parse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="refresh data"
+                android:visibility="visible"
+                android:layout_weight="1">
+        </Button>
+
+        <TextView
+                android:id="@+id/last_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Update : "
+                android:visibility="visible"
+                android:layout_weight="1">
+        </TextView>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/containerForMach"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
+            android:id="@+id/container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/containerForMach"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
     </LinearLayout>
 
 </LinearLayout>

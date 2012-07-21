@@ -1,4 +1,4 @@
-package com.argando.parcersample;
+package com.argando.parcersample.scoretable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
+import com.argando.parcersample.CustomWebViewClient;
+import com.argando.parcersample.R;
+import com.argando.parcersample.data.LeaguesHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class ScoreFragment extends Fragment

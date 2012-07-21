@@ -1,4 +1,4 @@
-package com.argando.parcersample;
+package com.argando.parcersample.data;
 
 import org.jetbrains.annotations.NotNull;
 

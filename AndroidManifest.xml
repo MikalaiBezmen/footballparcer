@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -18,6 +19,7 @@
         <activity
                 android:name=".ParcerSampleActivity"
                 android:configChanges="keyboardHidden|orientation"
+                android:theme="@android:style/Theme.Black.NoTitleBar"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -25,6 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <service android:name=".backgroundupdate.ParceService" android:enabled="true"/>
+        <receiver android:name=".backgroundupdate.UpdateReceiver" android:process=":remote"/>
+        <receiver android:name=".backgroundupdate.OnBootReceiver" android:enabled="true" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

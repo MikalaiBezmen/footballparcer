@@ -1,4 +1,4 @@
-package com.argando.parcersample;
+package com.argando.parcersample.scoretable;
 
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
@@ -17,6 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.argando.parcersample.R;
+import com.argando.parcersample.data.League;
+import com.argando.parcersample.data.LeaguesHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -196,7 +199,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 			}
 		};
 
-		List<League> leagues = LeaguesHandler.listLeauges;
+		List<League> leagues = LeaguesHandler.mListLeauges;
 
 		if (leagues == null) onDestroy();
 

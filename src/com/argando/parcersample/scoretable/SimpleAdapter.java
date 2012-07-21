@@ -1,4 +1,4 @@
-package com.argando.parcersample;
+package com.argando.parcersample.scoretable;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,7 +8,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.*;
-import com.argando.parcersample.SampleCategorizeListViewActivity.OnlineWebViewListener;
+import com.argando.parcersample.scoretable.SampleCategorizeListViewActivity;
+import com.argando.parcersample.scoretable.SampleCategorizeListViewActivity.OnlineWebViewListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

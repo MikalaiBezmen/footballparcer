@@ -1,6 +1,9 @@
-package com.argando.parcersample;
+package com.argando.parcersample.parser;
 
 import android.util.Log;
+import com.argando.parcersample.data.DataNameHelper;
+import com.argando.parcersample.data.League;
+import com.argando.parcersample.data.Match;
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 import org.jetbrains.annotations.NotNull;
@@ -214,7 +217,7 @@ public class DataParcer
 				{
 					newMatch = new Match(date, team1, team2, score1, score2, newLeague.getName(), isOnline, scoreLink);
 					newLeague.addMatch(newMatch);
-					Log.w(LOG, "match added" + team1 + " - " + team2 + "league = " + newLeague.getName() + isOnline);
+					Log.w(LOG, "match added" + team1 + " - " + team2 + "league = " + newLeague.getName() + "score = " + score1 + ":" + score2 + " isOnline " + isOnline);
 				}
 			}
 		}
