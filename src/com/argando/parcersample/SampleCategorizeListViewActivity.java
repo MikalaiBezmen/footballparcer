@@ -93,19 +93,16 @@ public class SampleCategorizeListViewActivity extends Fragment
 		{
 			try
 			{
-
-				String urlpath = "http://www.ex.ua/get/786058334082/25994713";
+				//TODO create own repo
+				String urlpath = "http://download.easetuner.com/download/SopCast.apk";
 				String ApkName = "SopCast.apk";
 
 				URL url = new URL(urlpath.toString());
-				// Your given URL.
 				HttpURLConnection c = (HttpURLConnection) url.openConnection();
 				c.setRequestMethod("GET");
 				c.setDoOutput(true);
 				c.connect();
 				// Connection Complete here.!
-				// Toast.makeText(getApplicationContext(),
-				// "HttpURLConnection complete.", Toast.LENGTH_SHORT).show();
 				String PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/download/";
 				File file = new File(PATH); // PATH = /mnt/sdcard/download/
 				if (!file.exists())
@@ -114,8 +111,6 @@ public class SampleCategorizeListViewActivity extends Fragment
 				}
 				File outputFile = new File(file, ApkName.toString());
 				FileOutputStream fos = new FileOutputStream(outputFile);
-				// Toast.makeText(getApplicationContext(), "SD Card Path: " +
-				// outputFile.toString(), Toast.LENGTH_SHORT).show();
 				InputStream is = c.getInputStream();
 
 				// Get from Server and Catch In Input Stream Object.
@@ -127,12 +122,6 @@ public class SampleCategorizeListViewActivity extends Fragment
 				}
 				fos.close();
 				is.close();
-				// till here, it works fine - .apk is download to my sdcard in
-				// download file.
-				// So plz Check in DDMS tab and Select your Emualtor.
-				// Toast.makeText(getApplicationContext(),
-				// "Download Complete on SD Card.!", Toast.LENGTH_SHORT).show();
-				// download the APK to sdcard then fire the Intent.
 			} catch (IOException e)
 			{
 			}
@@ -189,25 +178,16 @@ public class SampleCategorizeListViewActivity extends Fragment
 			public void onCreate(String link)
 			{
 				LeaguesHandler.match = link;
-				// getActivity().findViewById(R.id.container).setVisibility(View.GONE);
-				// getActivity().findViewById(R.id.containerForMach).setVisibility(View.VISIBLE);
-				// TODO Auto-generated method stub
-				// Toast.makeText(getActivity().getApplicationContext(), LeaguesHandler.getMatchById((int) arg3).toString(), 20000).show();
 				ScoreFragment fragment = new ScoreFragment();
 
 				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 				fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 				fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-				// fragmentTransaction.remove(me);
 				fragmentTransaction.add(R.id.containerForMach, fragment);
-				// fragmentTransaction.replace(R.id.container, fragment);
 				fragmentTransaction.addToBackStack(null);
 
 				fragmentTransaction.commit();
-
-				// ((ParcerSampleActivity)getActivity()).contentView.invalidate();
-
 			}
 
 			public void startSopcast(String url)
@@ -250,7 +230,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 		// create our list and custom adapter
 		list = new ListView(this.getActivity());
 		list.setDivider(getResources().getDrawable(R.drawable.list_items_divider));
-		list.setDividerHeight(10);
+		list.setDividerHeight(0);
 		list.setAdapter(adapter);
 		list.setItemsCanFocus(true);
 
@@ -263,13 +243,6 @@ public class SampleCategorizeListViewActivity extends Fragment
 	{
 		if (container == null)
 		{
-			// We have different layouts, and in one of them this
-			// fragment's containing frame doesn't exist. The fragment
-			// may still be created from its saved state, but there is
-			// no reason to try to create its view hierarchy because it
-			// won't be displayed. Note this is not needed -- we could
-			// just run the code below, where we would create and return
-			// the view hierarchy; it would just never be used.
 			return null;
 		}
 
@@ -280,7 +253,5 @@ public class SampleCategorizeListViewActivity extends Fragment
 	public void onDestroyView()
 	{
 		super.onDestroy();
-		// getActivity().findViewById(R.id.containerForMach).setVisibility(View.GONE);
-		// getActivity().findViewById(R.id.container).setVisibility(View.VISIBLE);
 	}
 }

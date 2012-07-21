@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+//TODO remove hard string
 public enum Cache
 {
 	INSTANCE;
@@ -20,9 +20,9 @@ public enum Cache
 		{
 			jsMainObj.put("current_time", "");
 			JSONArray jsListLeagues = new JSONArray();
-			JSONObject jsLeague = new JSONObject();
 			for (League aLeague : leagues)
 			{
+				JSONObject jsLeague = new JSONObject();
 				jsLeague.put("league_name", aLeague.getName());
 
 				JSONArray listMatch = new JSONArray();
@@ -56,6 +56,11 @@ public enum Cache
 	{
 		try
 		{
+			File f = new File(file + "football.json");
+			if (f.exists())
+			{
+				f.delete();
+			}
 			FileWriter writer = new FileWriter(file + "football.json");
 			writer.write(jsonObj.toString());
 			writer.flush();
@@ -90,6 +95,7 @@ public enum Cache
 			return getResultsFromString(jsonString);
 		} catch (IOException e)
 		{
+			//in Log
 			System.out.println("Problem finding file");
 		}
 		return new ArrayList<League>();

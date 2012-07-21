@@ -1,5 +1,6 @@
 package com.argando.parcersample;
 
+//TODO replace to string res
 public final class DataNameHelper
 {
 	public static final String DIV = "div";

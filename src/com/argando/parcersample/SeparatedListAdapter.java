@@ -1,10 +1,6 @@
 package com.argando.parcersample;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class SeparatedListAdapter extends BaseAdapter
 {

@@ -48,6 +48,7 @@ public class DataParcer
 		TagNode scoreTable = getScoreTable();
 		TagNode[] leaguesData = getLeagueData(scoreTable);
 		List<League> leagues = getLeagues(leaguesData);
+		addEuro(leagues);
 		initLiveFootballMainPage(leagues);
 		return leagues;
 	}
@@ -224,5 +225,59 @@ public class DataParcer
 	public void getDataForMatch(int id)
 	{
 		TagNode[] scoreTable = mRootElement.getElementsByAttValue(DataNameHelper.CLASS, "wblock", true, false);
+	}
+
+
+	public void addEuro(List<League> leagues)
+	{
+		League euro2012 = new League("Евро 2012");
+		TagNode rootNode;
+		try
+		{
+			String date= "";
+			String firstTeam= "";
+			String secondTeam= "";
+			String result1="";
+			String result2= "";
+			rootNode = mHtmlHelper.clean(new URL("http://www.football.ua"));
+			TagNode[] match = rootNode.getElementsByName("div", true);
+			{
+				for (int i = 0; match != null && i < match.length; i++)
+					if ("ogame autblock".equals(match[i].getAttributeByName("class")))
+					{
+						TagNode subdiv[] = match[i].getElementsByName("div", true);
+						for (int j = 0; subdiv != null && j < subdiv.length; j++)
+						{
+							if ("mathcdt".equals(subdiv[j].getAttributeByName("class")))
+								date = subdiv[j].getText().toString().trim();
+							if ("omatch omatchleft".equals(subdiv[j].getAttributeByName("class")))
+								firstTeam = subdiv[j].getText().toString().trim();
+							if ("matchright".equals(subdiv[j].getAttributeByName("class")))
+								secondTeam = subdiv[j].getText().toString().trim();
+							if ("matchc".equals(subdiv[j].getAttributeByName("class")))
+							{
+								TagNode score[] = subdiv[j].getElementsByName("div", true);
+								result1 =  score[0].getText().toString().trim();
+								result2 = score[1].getText().toString().trim();
+							}
+						}
+						Match newMatch = new Match(date, firstTeam, secondTeam, result1, result2, euro2012.getName(), 1, "http://www.football.ua");
+						euro2012.addMatch(newMatch);
+					}
+			}
+		} catch (MalformedURLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+//			leagues.add(0,euro2012);
+			leagues.add(euro2012);
+		}
 	}
 }

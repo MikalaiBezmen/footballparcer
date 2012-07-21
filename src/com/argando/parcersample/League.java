@@ -1,11 +1,11 @@
 package com.argando.parcersample;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.htmlcleaner.TagNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // test
 

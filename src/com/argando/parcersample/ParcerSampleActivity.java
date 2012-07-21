@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -43,7 +44,7 @@ public class ParcerSampleActivity extends FragmentActivity
 		setContentView(R.layout.main);
 		Button button = (Button) findViewById(R.id.parse);
 		button.setOnClickListener(myListener);
-		internetConnectionToast = Toast.makeText(getBaseContext(), "There is no internet connection", 20000);
+		internetConnectionToast = Toast.makeText(getBaseContext(), DataNameHelper.NO_INTERNET_CONNECTION, DataNameHelper.NO_INTERNER_CONNNECTION_TOAST_TIME);
 		ViewGroup view = (ViewGroup) getWindow().getDecorView();
 		contentView = view.getChildAt(0);
 		FragmentManager fragmentManager = getSupportFragmentManager();
@@ -57,7 +58,7 @@ public class ParcerSampleActivity extends FragmentActivity
 	public void onResume()
 	{
 		super.onResume();
-//		startParce();
+		//		startParce();
 	}
 
 	private ProgressDialog	progresDialog;
@@ -73,7 +74,7 @@ public class ParcerSampleActivity extends FragmentActivity
 												}
 												else
 												{
-													LeaguesHandler.listLeauges = Cache.INSTANCE.readFromFile(mActivity.getCacheDir());
+													LeaguesHandler.listLeauges = Cache.INSTANCE.readFromFile(mActivity.getExternalCacheDir());
 													internetConnectionToast.show();
 													showResultsList();
 												}
@@ -99,7 +100,7 @@ public class ParcerSampleActivity extends FragmentActivity
 		else
 		{
 			internetConnectionToast.show();
-			LeaguesHandler.listLeauges = Cache.INSTANCE.readFromFile(mActivity.getCacheDir());
+			LeaguesHandler.listLeauges = Cache.INSTANCE.readFromFile(mActivity.getExternalCacheDir());
 			showResultsList();
 		}
 	}
@@ -112,7 +113,8 @@ public class ParcerSampleActivity extends FragmentActivity
 			DataParcer dataParcer = new DataParcer();
 			leagues = dataParcer.parceScoreboard();
 			LeaguesHandler.listLeauges = leagues;
-			Cache.INSTANCE.cacheResults(leagues, mActivity.getCacheDir());
+
+			Cache.INSTANCE.cacheResults(leagues, mActivity.getExternalCacheDir());
 			return null;
 		}
 
@@ -126,6 +128,14 @@ public class ParcerSampleActivity extends FragmentActivity
 	private void showResultsList()
 	{
 		FragmentManager fragmentManager = getSupportFragmentManager();
+
+		//TODO reimplement this code, do not remove old fragment, just update info for adapter
+		Fragment tempSolution = fragmentManager.findFragmentByTag(SampleCategorizeListViewActivity.class.getSimpleName());
+		if (tempSolution != null)
+		{
+			fragmentManager.beginTransaction().remove(tempSolution).commit();
+		}
+
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		SampleCategorizeListViewActivity fragment = new SampleCategorizeListViewActivity();
 		fragmentTransaction.add(R.id.container, fragment, SampleCategorizeListViewActivity.class.getSimpleName());
