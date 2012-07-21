@@ -3,6 +3,7 @@ package com.argando.parcersample;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -24,8 +25,6 @@ import java.util.List;
 
 public class ParcerSampleActivity extends FragmentActivity
 {
-	@NotNull
-	String			text	= "";
 
 	@NotNull
 	List<League>	leagues	= new ArrayList<League>();
@@ -35,6 +34,7 @@ public class ParcerSampleActivity extends FragmentActivity
 	public View		contentView;
 
 	private Activity mActivity;
+	Button button;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -42,7 +42,7 @@ public class ParcerSampleActivity extends FragmentActivity
 		super.onCreate(savedInstanceState);
 		mActivity = this;
 		setContentView(R.layout.main);
-		Button button = (Button) findViewById(R.id.parse);
+		button = (Button) findViewById(R.id.parse);
 		button.setOnClickListener(myListener);
 		internetConnectionToast = Toast.makeText(getBaseContext(), DataNameHelper.NO_INTERNET_CONNECTION, DataNameHelper.NO_INTERNER_CONNNECTION_TOAST_TIME);
 		ViewGroup view = (ViewGroup) getWindow().getDecorView();
@@ -71,6 +71,7 @@ public class ParcerSampleActivity extends FragmentActivity
 												if (isOnline())
 												{
 													startParce();
+
 												}
 												else
 												{
@@ -93,8 +94,14 @@ public class ParcerSampleActivity extends FragmentActivity
 	{
 		if (isOnline())
 		{
-			text = "";
-			progresDialog = ProgressDialog.show(ParcerSampleActivity.this, "Working...", "request to server", true, false);
+			button.setText("Please wait, parcing results ...");
+			button.setSelected(true);
+			button.setClickable(false);
+			Drawable uploadBar = getResources().getDrawable(R.drawable.update_bar);
+//			uploadBar.setBounds(1,10,10,10);
+//			button.setCompoundDrawables(uploadBar,uploadBar,uploadBar,uploadBar);
+//			button.setCompoundDrawablesWithIntrinsicBounds(uploadBar,null,null,null);
+			button.invalidate();
 			new ParseSite().execute("http://www.football.ua");
 		}
 		else
@@ -120,7 +127,10 @@ public class ParcerSampleActivity extends FragmentActivity
 
 		protected void onPostExecute(List<String> output)
 		{
-			progresDialog.dismiss();
+			button.setText("refresh data");
+			button.setSelected(false);
+			button.setClickable(true);
+//			button.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
 			showResultsList();
 		}
 	}
