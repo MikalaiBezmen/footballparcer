@@ -43,7 +43,6 @@ public class ParcerSampleActivity extends FragmentActivity
 		ViewGroup view = (ViewGroup) getWindow().getDecorView();
 		mContentView = view.getChildAt(0);
 		Log.w(LOG_TAG, " = " + mActivity.getExternalCacheDir().toString());
-		DataNameHelper.EXTERNAL_CACHE_DIR = mActivity.getExternalCacheDir().toString();
 		Intent parseService = new Intent(this, ParceService.class);
 		startService(parseService);
 		LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(mActivity.getExternalCacheDir());

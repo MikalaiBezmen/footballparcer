@@ -15,11 +15,16 @@ public class ParseThread implements Runnable
 	private static final String LOG_TAG = ParseThread.class.getSimpleName();
 	private boolean mRunning = false;
 	Thread mSimpleThread;
-	private final String mCacheDir;
+	private String mCacheDir;
 
 	public ParseThread(String cacheDir)
 	{
+	}
+
+	public void startParse(String cacheDir)
+	{
 		mCacheDir = cacheDir;
+		startParse();
 	}
 
 	public void startParse()
