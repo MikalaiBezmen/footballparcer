@@ -4,10 +4,10 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
-import com.argando.parcersample.data.DataNameHelper;
 
 /**
  * User: argando
@@ -17,9 +17,10 @@ import com.argando.parcersample.data.DataNameHelper;
 public class ParceService extends Service
 {
 	private static final String LOG_TAG = ParceService.class.getSimpleName();
-	private static final int INTERVAL = 1000 * 15; // 30 sec
-	private static final int FIRST_RUN = 5000; // 5 seconds
+	private static final int DEFAULT_INTERVAL = 1000 * 30;
+	private static final int FIRST_RUN = 1000 * 15;
 	private int REQUEST_CODE = 111223232;
+	private int mInterval;
 
 	private AlarmManager alarmManager;
 
@@ -27,8 +28,7 @@ public class ParceService extends Service
 	public void onCreate()
 	{
 		super.onCreate();
-
-		startService();
+		mInterval = DEFAULT_INTERVAL;
 		Log.v(LOG_TAG, "onCreate(..)");
 	}
 
@@ -37,6 +37,23 @@ public class ParceService extends Service
 	{
 		Log.v(LOG_TAG, "onBind(..)");
 		return null;
+	}
+
+	@Override
+	public void onStart(Intent intent, int startId)
+	{
+		super.onStart(intent, startId);
+		Log.v(LOG_TAG, "onStart(..)");
+		if (intent != null)
+		{
+			Bundle bundle = intent.getExtras();
+			if (bundle != null)
+			{
+				mInterval = bundle.getInt("time") * 1000;
+				Log.i(LOG_TAG, "reset time updated to " + mInterval);
+			}
+		}
+		startService();
 	}
 
 	@Override
@@ -55,8 +72,13 @@ public class ParceService extends Service
 		Intent intent = new Intent(this, UpdateReceiver.class);
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(this, REQUEST_CODE, intent, 0);
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + FIRST_RUN, INTERVAL, pendingIntent);
+		alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + FIRST_RUN, mInterval, pendingIntent);
 
-		Log.v(LOG_TAG, "AlarmManger started at " + new java.sql.Timestamp(System.currentTimeMillis()).toString());
+		Log.v(LOG_TAG, "AlarmManger started at " + new java.sql.Timestamp(System.currentTimeMillis()).toString() + " with interval = " + mInterval);
 	}
+
+	//	@Override
+	//	public int onStartCommand(Intent intent, int flags, int startId) {
+	//		return Service.START_STICKY;
+	//	}
 }
