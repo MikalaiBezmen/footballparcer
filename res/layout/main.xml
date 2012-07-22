@@ -9,11 +9,26 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+        <EditText
+                android:id="@+id/refresh_time"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:digits="01234567890."
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                android:hint="30"
+                android:text="30"
+                android:maxLength="3"
+                android:visibility="visible"
+                android:layout_weight="1"
+                android:focusableInTouchMode="true">
+        </EditText>
         <Button
                 android:id="@+id/parse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="refresh data"
+                android:text="set refresh time"
+                android:lines="2"
                 android:visibility="visible"
                 android:layout_weight="1">
         </Button>
