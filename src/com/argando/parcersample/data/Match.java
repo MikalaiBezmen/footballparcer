@@ -2,6 +2,9 @@ package com.argando.parcersample.data;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author argando
  * 
@@ -16,7 +19,7 @@ public class Match
 	private String	mLeague;			// Maybe league contains match
 	private int	mOnlineStatus = 0;		// 0 - wait, 1 - online , 2 - end
 	private int id;
-	public String linkToSopcast = "";
+	public List<String> linkToSopcast = new ArrayList<String>();
 	public String linkForOnline = "";
 
 	private int		matchValidation;
