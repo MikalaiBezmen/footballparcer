@@ -201,7 +201,11 @@ public class SampleCategorizeListViewActivity extends Fragment
 
 		List<League> leagues = LeaguesHandler.mListLeauges;
 
-		if (leagues == null) onDestroy();
+		if (leagues == null)
+        {
+            onDestroy();
+            return;
+        }
 
 		SeparatedListAdapter adapter = new SeparatedListAdapter(this.getActivity());
 
