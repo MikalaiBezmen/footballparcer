@@ -41,6 +41,16 @@ public enum Cache
 					match.put("second_score", aMatch.getScore2());
 					match.put("online_status", aMatch.isOnlineStatus());
 					match.put("date", aMatch.getDate());
+                    JSONArray listSopcastLinks = new JSONArray();
+                    int counter = 0;
+                    for (String aSopcastLink : aMatch.linkToSopcast)
+                    {
+                        JSONObject link = new JSONObject();
+                        link.put("link" + counter, aSopcastLink);
+                        listSopcastLinks.put(link);
+                        counter++;
+                    }
+                    match.put("sopcast_links", listSopcastLinks);
 					match.put("link_to_text_translation", aMatch.linkForOnline);
 					Log.w("ParserSample", aMatch.linkForOnline);
 					match.put("link_to_video_translation", aMatch.linkToSopcast);
@@ -132,10 +142,18 @@ public enum Cache
 					String score1 = match.getString("first_score");
 					String score2 = match.getString("second_score");
 					int onlineStatus = match.getInt("online_status");
+                    JSONArray listSopcastLinks = match.getJSONArray("sopcast_links");
+                    List<String> sopcastLinks = new ArrayList<String>();
+                    for (int k = 0; k < listSopcastLinks.length(); k++)
+                    {
+                        JSONObject link = (JSONObject) listSopcastLinks.get(k);
+                        sopcastLinks.add(link.getString("link" + 0));
+                    }
 					String linkForOnline = match.getString("link_to_text_translation");
 					String date = match.getString("date");
 					Match tempMatch = new Match(date, firstTeam, secondTeam, score1, score2, name, onlineStatus, linkForOnline);
 					tempMatch.setId(id);
+                    tempMatch.linkToSopcast = sopcastLinks;
 					tempLeague.addMatch(tempMatch);
 				}
 				leagues.add(tempLeague);
