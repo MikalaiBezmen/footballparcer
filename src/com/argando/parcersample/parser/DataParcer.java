@@ -60,6 +60,11 @@ public class DataParcer
 		setUrl(mSiteFootballSopcast);
 		getRootElement();
 		TagNode[] mainSop = mRootElement.getElementsByAttValue(DataNameHelper.ID, DataNameHelper.MAIN_SOP, true, false);
+        if (mainSop.length == 0)
+        {
+            Log.w(LOG,"football.ws doesn't sent answer");
+            return;
+        }
 		TagNode[] sopElement = mainSop[0].getElementsByAttValue(DataNameHelper.CLASS, "base custom", true, false);
 		for (int i = 0; i < leagues.size(); i++)
 		{
@@ -69,13 +74,13 @@ public class DataParcer
 				{
 					String team1 = leagues.get(i).getMatch(j).getFirstTeam();
 					String team2 = leagues.get(i).getMatch(j).getSecondTeam();
-					leagues.get(i).getMatch(j).linkToSopcast = findMatchesForSopcast(team1, team2, sopElement);
+                    findMatchesForSopcast(team1, team2, sopElement, leagues.get(i).getMatch(j).linkToSopcast);
 				}
 			}
 		}
 	}
 
-	private String findMatchesForSopcast(String team1, String team2, @NotNull TagNode[] sopElement)
+	private String findMatchesForSopcast(String team1, String team2, @NotNull TagNode[] sopElement, List<String> results)
 	{
 		TagNode[] element;
 		for (int i = 0; i < sopElement.length; i++)
@@ -84,30 +89,33 @@ public class DataParcer
 			String name = element[0].getText().toString().trim();
 			if (name.contains(team1) && name.contains(team2))
 			{
+                Log.i(LOG, "looking for sopcast link for match " + team1 + " " + team2);
 				for (TagNode aTag : sopElement[i].getElementsByName("a", true))
 				{
 					String link = aTag.getAttributeByName("href");
 					if (link != null && link.length() > 0)
-						return openSopcastLink(link);
+                    {
+						openSopcastLink(link, results);
+                    }
 				}
 			}
 		}
 		return "";
 	}
 
-	private String openSopcastLink(String link)
-	{
-		setUrl(link);
-		getRootElement();
+    private void openSopcastLink(String link, List<String> results) {
+        setUrl(link);
+        getRootElement();
 
-		for (TagNode aTag : mRootElement.getElementsByName("a", true))
-		{
-			String sopLink = aTag.getAttributeByName("href");
-			if (sopLink != null && sopLink.length() > 0 && sopLink.contains("sop://broker.sopcast.com:"))
-				return sopLink;
-		}
-		return "";
-	}
+        for (TagNode aTag : mRootElement.getElementsByName("a", true)) {
+            String sopLink = aTag.getAttributeByName("href");
+            if (sopLink != null && sopLink.length() > 0 && sopLink.contains("sop://broker.sopcast.com:"))
+            {
+                Log.i(LOG, "sopcast link detected " + sopLink);
+                results.add(sopLink);
+            }
+        }
+    }
 
 	private boolean getRootElement()
 	{
