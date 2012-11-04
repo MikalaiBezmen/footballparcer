@@ -57,9 +57,9 @@ public class SampleCategorizeListViewActivity extends Fragment
 	}
 
 	@NotNull
-	public Map<String, ?> createItem(String title, String caption, String is, String link, String sopcast)
+	public Map<String, ?> createItem(String title, String caption, String is, String link, List<String> sopcast)
 	{
-		Map<String, String> item = new HashMap<String, String>();
+		Map<String, Object> item = new HashMap<String, Object>();
 		item.put(ITEM_TITLE, title);
 		item.put(ITEM_CAPTION, caption);
 		item.put(IS_ONLINE, is);
@@ -222,11 +222,11 @@ public class SampleCategorizeListViewActivity extends Fragment
 					is = "2";
 				}
 				counterForMatchId++;
-				listItems.add(createItem(team, time, is, leagues.get(i).getMatch(j).linkForOnline, leagues.get(i).getMatch(j).linkToSopcast));
-				leagues.get(i).getMatch(j).setId(counterForMatchId);
-				Log.w("id", leagues.get(i).getMatch(j).getFirstTeam() + "  " + leagues.get(i).getMatch(j).getSecondTeam() + " id = " + leagues.get(i).getMatch(j).getId());
+                listItems.add(createItem(team, time, is, leagues.get(i).getMatch(j).linkForOnline, leagues.get(i).getMatch(j).linkToSopcast));
+                leagues.get(i).getMatch(j).setId(counterForMatchId);
+                Log.w("id", leagues.get(i).getMatch(j).getFirstTeam() + "  " + leagues.get(i).getMatch(j).getSecondTeam() + " id = " + leagues.get(i).getMatch(j).getId() + " SOPCAST LINKS COUNT = "  + leagues.get(i).getMatch(j).linkToSopcast.size());
 			}
-			adapter.addSection(leagues.get(i).getName(), new SimpleAdapter(mOnlineWebViewListener, this.getActivity(), listItems, R.layout.list_complex, new String[]{ITEM_TITLE, ITEM_CAPTION, ITEM_LINK, SOPCAST_LINK}, new int[]{R.id.list_complex_title, R.id.list_complex_caption, R.id.web_view, R.id.sop_cast}));
+			adapter.addSection(leagues.get(i).getName(), new SimpleAdapter(mOnlineWebViewListener, this.getActivity(), listItems, R.layout.list_complex, new String[]{ITEM_TITLE, ITEM_CAPTION, ITEM_LINK, SOPCAST_LINK, SOPCAST_LINK}, new int[]{R.id.list_complex_title, R.id.list_complex_caption, R.id.web_view, R.id.sop_cast, R.id.spinner}));
 			counterForMatchId++;
 		}
 
@@ -236,6 +236,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 		list.setDividerHeight(0);
 		list.setAdapter(adapter);
 		list.setItemsCanFocus(true);
+        list.setFastScrollEnabled(false);
 
 		toast = Toast.makeText(getActivity().getApplicationContext(), "file downloaded", Toast.LENGTH_LONG);
 	}

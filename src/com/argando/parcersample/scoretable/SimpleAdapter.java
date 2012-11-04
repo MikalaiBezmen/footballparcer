@@ -33,6 +33,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	private ArrayList<Map<String, ?>>		mUnfilteredData;
 
 	OnlineWebViewListener					mOnlineWebViewListener;
+    private Context mContext;
 
 	public SimpleAdapter(OnlineWebViewListener onlineWebViewListener, @NotNull Context context, List<? extends Map<String, ?>> data, int resource,
 			String[] from, int[] to)
@@ -42,6 +43,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 		mResource = mDropDownResource = resource;
 		mFrom = from;
 		mTo = to;
+        mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
@@ -151,19 +153,48 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 							throw new IllegalStateException(v.getClass().getName() + " should be bound to a Boolean, not a " + data.getClass());
 						}
 					}
+                    else if (v instanceof Spinner)
+                    {
+                        final Object check = data;
+
+                        if (check != null)
+                        {
+                            if (((List<String>)check).size() == 0)
+                            {
+                                v.setVisibility(View.GONE);
+                                return;
+                            }
+
+                            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(mContext, android.R.layout.simple_spinner_item, ((List)check));
+                            ((Spinner)v).setAdapter(adapter);
+
+                            v.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            v.setVisibility(View.GONE);
+                        }
+                    }
 					else if (v instanceof ImageButton)
 					{
-						Object check = mData.get(position).get("sopcast_link");
-						if (check != null && !check.toString().isEmpty() )
+						final Object check = data;
+
+						if (check != null)
 						{
-							v.setVisibility(View.VISIBLE);
-							v.setOnClickListener(new OnClickListener()
-							{
-								public void onClick(View v)
-								{
-									mOnlineWebViewListener.startSopcast(text);
-								}
-							});
+                            if (((List<String>)check).size() == 0)
+                            {
+                                v.setVisibility(View.GONE);
+                                return;
+                            }
+                            int k = 0;
+                            v.setVisibility(View.VISIBLE);
+                            v.setOnClickListener(new OnClickListener()
+                            {
+                                public void onClick(View v)
+                                {
+                                    mOnlineWebViewListener.startSopcast(((List<String>)check).get(0));
+                                }
+                            });
 						}
 						else
 						{
