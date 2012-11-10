@@ -46,7 +46,8 @@ public enum Cache
                     for (String aSopcastLink : aMatch.linkToSopcast)
                     {
                         JSONObject link = new JSONObject();
-                        link.put("link" + counter, aSopcastLink);
+                        Log.i(LOG_TAG, "sopcast link write to cache = " + counter + " " + aSopcastLink);
+                        link.put("sopcastlinks", aSopcastLink);
                         listSopcastLinks.put(link);
                         counter++;
                     }
@@ -72,7 +73,7 @@ public enum Cache
 		try
 		{
 			File f = new File(cacheDir + "football.json");
-			Log.w(LOG_TAG, "write  to " + cacheDir + "football.json");
+			Log.w(LOG_TAG, "write  to " + cacheDir + "/football.json");
 			if (f.exists())
 			{
 				f.delete();
@@ -92,7 +93,7 @@ public enum Cache
 	{
 		try
 		{
-			Log.w(LOG_TAG,"read from " + file + "football.json");
+			Log.w(LOG_TAG,"read from " + file + "/football.json");
 			DataInputStream dataIn = new DataInputStream(new FileInputStream(file + "/football.json"));
 			Writer writer = new StringWriter();
 			char[] buffer = new char[1024];
@@ -129,7 +130,7 @@ public enum Cache
 			{
 				JSONObject league = (JSONObject) jsLeagues.get(i);
 				String name = league.getString("league_name");
-				Log.w("ParserSample", name);
+				Log.i(LOG_TAG,"reading league " + name);
 				League tempLeague = new League(name);
 
 				JSONArray jsMatches = league.getJSONArray("matches");
@@ -137,20 +138,27 @@ public enum Cache
 				{
 					JSONObject match = (JSONObject) jsMatches.get(j);
 					int id = match.getInt("id");
+                    Log.i(LOG_TAG,"reading match id = " + id);
 					String firstTeam = match.getString("first_team");
 					String secondTeam = match.getString("second_team");
+                    Log.w(LOG_TAG,"reading match team  " + firstTeam + " " + secondTeam );
 					String score1 = match.getString("first_score");
 					String score2 = match.getString("second_score");
+                    Log.w(LOG_TAG,"reading match score  " + score1 + " " + score2 );
 					int onlineStatus = match.getInt("online_status");
+                    Log.w(LOG_TAG,"reading match status =  " + onlineStatus);
                     JSONArray listSopcastLinks = match.getJSONArray("sopcast_links");
                     List<String> sopcastLinks = new ArrayList<String>();
                     for (int k = 0; k < listSopcastLinks.length(); k++)
                     {
                         JSONObject link = (JSONObject) listSopcastLinks.get(k);
-                        sopcastLinks.add(link.getString("link" + 0));
+                        Log.w(LOG_TAG,"reading match sopcast link #" + k + " link = " + link);
+                        sopcastLinks.add(link.getString("sopcastlinks"));
                     }
 					String linkForOnline = match.getString("link_to_text_translation");
+                    Log.w(LOG_TAG,"reading match link_to_text_translation =  " + linkForOnline);
 					String date = match.getString("date");
+                    Log.w(LOG_TAG,"reading match date =  " + date);
 					Match tempMatch = new Match(date, firstTeam, secondTeam, score1, score2, name, onlineStatus, linkForOnline);
 					tempMatch.setId(id);
                     tempMatch.linkToSopcast = sopcastLinks;

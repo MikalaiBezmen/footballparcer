@@ -39,10 +39,14 @@ public class ScoreFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
 	{
-		if (container == null)
-		{
-			return null;
-		}
+        myWebView = new WebView(this.getActivity());
+        myWebView.setWebViewClient(new CustomWebViewClient());
+
+        final FrameLayout mContentView = (FrameLayout) getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
+        final View zoom = myWebView.getZoomControls();
+        mContentView.addView(zoom, ZOOM_PARAMS);
+        zoom.setVisibility(View.GONE);
+        myWebView.loadUrl(LeaguesHandler.match);
 
 		return myWebView;
 	}
@@ -51,19 +55,12 @@ public class ScoreFragment extends Fragment
 	public void onActivityCreated(Bundle savedInstanceState)
 	{
 		super.onActivityCreated(savedInstanceState);
-		if (getActivity().findViewById(R.id.container) != null)
-		{
-			getActivity().findViewById(R.id.container).setVisibility(View.GONE);
-			getActivity().findViewById(R.id.containerForMach).setVisibility(View.VISIBLE);
-		}
 	}
 
 	@Override
 	public void onDestroyView()
 	{
 		super.onDestroy();
-		getActivity().findViewById(R.id.containerForMach).setVisibility(View.GONE);
-		getActivity().findViewById(R.id.container).setVisibility(View.VISIBLE);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.argando.parcersample;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -21,8 +22,11 @@ import com.argando.parcersample.backgroundupdate.ParceService;
 import com.argando.parcersample.data.DataNameHelper;
 import com.argando.parcersample.data.LeaguesHandler;
 import com.argando.parcersample.network.NetworkChecker;
+import com.argando.parcersample.parser.DataParcer;
 import com.argando.parcersample.scoretable.SampleCategorizeListViewActivity;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
 
 public class ParcerSampleActivity extends FragmentActivity
 {
@@ -31,31 +35,33 @@ public class ParcerSampleActivity extends FragmentActivity
     private View mContentView;
 	private Activity mActivity;
 	private Button mRefreshButton;
+    private Button mRefreshNow;
 	private TextView mLastUpdate;
 	private EditText mUpdateTime;
+    private Handler mUIHandler;
+    SampleCategorizeListViewActivity fragment;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+        Log.i(LOG_TAG, "onCreate");
 		mActivity = this;
 		setContentView(R.layout.main);
 		mRefreshButton = (Button) findViewById(R.id.parse);
+        mRefreshNow = (Button) findViewById(R.id.parse_now);
 		mLastUpdate = (TextView) findViewById(R.id.last_update);
 		mUpdateTime = (EditText) findViewById(R.id.refresh_time);
 		mRefreshButton.setOnClickListener(myListener);
 		mInternetConnectionToast = Toast.makeText(getBaseContext(), DataNameHelper.NO_INTERNET_CONNECTION, DataNameHelper.NO_INTERNER_CONNNECTION_TOAST_TIME);
 		ViewGroup view = (ViewGroup) getWindow().getDecorView();
-		mContentView = view.getChildAt(0);
 		Log.w(LOG_TAG, " = " + mActivity.getExternalCacheDir().toString());
-		/*Intent parseService = new Intent(this, ParceService.class);
-		startService(parseService);*/
-		LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(mActivity.getExternalCacheDir());
+		LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(new File(DataNameHelper.EXTERNAL_CACHE_DIR));
 		showResultsList();
 		mLastUpdate.setText("Last Updated :  " + LeaguesHandler.mTime);
 
 		mUpdateTime.setInputType(InputType.TYPE_NULL);
-
+        mUIHandler = new Handler();
 		mUpdateTime.setOnTouchListener(new View.OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				mUpdateTime.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -63,6 +69,30 @@ public class ParcerSampleActivity extends FragmentActivity
 				return true; // consume touch even
 			}
 		});
+
+        mRefreshNow.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Runnable parce = new Runnable() {
+                    @Override
+                    public void run() {
+                        DataParcer dataParcer = new DataParcer();
+                        LeaguesHandler.mListLeauges = dataParcer.parceScoreboard();
+                        Cache.INSTANCE.cacheResults(LeaguesHandler.mListLeauges, DataNameHelper.EXTERNAL_CACHE_DIR);
+                        mUIHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                fragment.updateData();
+                                Toast.makeText(getApplicationContext(), "data updated", 3000);
+                            }
+                        });
+                    }
+                };
+                Thread thread = new Thread(parce);
+                thread.start();
+            }
+        });
 
 	}
 
@@ -100,19 +130,18 @@ public class ParcerSampleActivity extends FragmentActivity
 		parseService.putExtra("time", Integer.valueOf(mUpdateTime.getText().toString()));
 		startService(parseService);
 	}
+
 	private void showResultsList()
 	{
+        Log.i(LOG_TAG, "showResultsList");
 		FragmentManager fragmentManager = getSupportFragmentManager();
-
-		//TODO reimplement this code, do not remove old fragment, just update info for adapter
-		Fragment tempSolution = fragmentManager.findFragmentByTag(SampleCategorizeListViewActivity.class.getSimpleName());
-		if (tempSolution != null)
+		if (fragment != null)
 		{
-			fragmentManager.beginTransaction().remove(tempSolution).commit();
+            fragment.updateData();
 		}
 
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		SampleCategorizeListViewActivity fragment = new SampleCategorizeListViewActivity();
+		fragment = new SampleCategorizeListViewActivity();
 		fragmentTransaction.add(R.id.container, fragment, SampleCategorizeListViewActivity.class.getSimpleName());
 		fragmentTransaction.commit();
 	}
@@ -120,6 +149,7 @@ public class ParcerSampleActivity extends FragmentActivity
 	@Override
 	protected void onDestroy()
 	{
+        Log.i(LOG_TAG, "onDestroy");
 		super.onDestroy();
 	}
 }
