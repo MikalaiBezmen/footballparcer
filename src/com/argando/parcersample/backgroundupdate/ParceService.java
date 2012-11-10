@@ -17,7 +17,7 @@ import android.util.Log;
 public class ParceService extends Service
 {
 	private static final String LOG_TAG = ParceService.class.getSimpleName();
-	private static final int DEFAULT_INTERVAL = 1000 * 30;
+	private static final int DEFAULT_INTERVAL = 1000 * 300;
 	private static final int FIRST_RUN = 1000 * 15;
 	private int REQUEST_CODE = 111223232;
 	private int mInterval;
