@@ -168,7 +168,7 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
                             ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(mContext, android.R.layout.simple_spinner_item, ((List)check));
                             ((Spinner)v).setAdapter(adapter);
 
-                            v.setVisibility(View.VISIBLE);
+                            //v.setVisibility(View.VISIBLE);
                         }
                         else
                         {
