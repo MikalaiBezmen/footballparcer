@@ -29,7 +29,7 @@ public final class DataNameHelper
 
 	//Toasts
 	public static final String NO_INTERNET_CONNECTION = "There is no internet connection";
-	public static final int NO_INTERNER_CONNNECTION_TOAST_TIME = 20000;
+	public static final int NO_INTERNER_CONNNECTION_TOAST_TIME = 5000;
 
-	public static  String EXTERNAL_CACHE_DIR = "/mnt/sdcard/Android/data/com.argando.parcersample/cache/";
+	public static  String EXTERNAL_CACHE_DIR = "";
 }

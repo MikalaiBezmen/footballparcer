@@ -122,12 +122,13 @@ public class DataParcer
 		try
 		{
 			mRootElement = mHtmlHelper.clean(mSiteUrl);
+            return true;
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		}
-		return false;
+            return false;
+        }
 	}
 
 	private TagNode getScoreTable()

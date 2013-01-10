@@ -1,15 +1,7 @@
 package com.argando.parcersample.scoretable;
 
-import android.content.ActivityNotFoundException;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -18,20 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.argando.parcersample.Cache;
 import com.argando.parcersample.R;
+import com.argando.parcersample.data.DataNameHelper;
 import com.argando.parcersample.data.League;
 import com.argando.parcersample.data.LeaguesHandler;
+import com.argando.parcersample.data.Preferences;
+import com.argando.parcersample.network.NetworkChecker;
 import com.argando.parcersample.network.SopCastLauncher;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.ref.WeakReference;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,8 +42,9 @@ public class SampleCategorizeListViewActivity extends Fragment
 	private Toast toast;
 
 	private OnlineWebViewListener mOnlineWebViewListener;
+    private Toast mInternetConnectionToast;
 
-	interface OnlineWebViewListener
+    interface OnlineWebViewListener
 	{
 		void onCreate(String link);
 
@@ -75,40 +66,68 @@ public class SampleCategorizeListViewActivity extends Fragment
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);
-        Log.i(LOG_TAG, "onCreate");
-		me = this;
+        if (savedInstanceState == null) {
+            super.onCreate(savedInstanceState);
+            Log.i(LOG_TAG, "onCreate");
+            me = this;
+            mInternetConnectionToast = Toast.makeText(getActivity().getApplicationContext(), DataNameHelper.NO_INTERNET_CONNECTION, DataNameHelper.NO_INTERNER_CONNNECTION_TOAST_TIME);
 
-		mOnlineWebViewListener = new OnlineWebViewListener()
-		{
+            mOnlineWebViewListener = new OnlineWebViewListener() {
 
-			public void onCreate(String link)
-			{
-				LeaguesHandler.match = link;
-				ScoreFragment fragment = new ScoreFragment();
+                public void onCreate(String link) {
+                    if (!NetworkChecker.isConnected(getActivity().getApplicationContext())) {
+                        mInternetConnectionToast.show();
+                        return;
+                    } else
+                    {
 
-				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-				fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-				fragmentTransaction.replace(R.id.container, fragment, "browser");
-                fragmentTransaction.addToBackStack(null);
-				fragmentTransaction.commit();
-			}
+                        ScoreFragment fragment = new ScoreFragment();
 
-			public void startSopcast(String url)
-			{
-                final WeakReference<Fragment> fragmentActivityWeakReference = new WeakReference<Fragment>(me);
-				SopCastLauncher sopCastLauncher = new SopCastLauncher(fragmentActivityWeakReference);
-                sopCastLauncher.startApplication("sop", url);
-			}
-		};
+                        				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        				fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                        				fragmentTransaction.replace(R.id.container, fragment, "browser");
+                                        fragmentTransaction.addToBackStack(null);
+                        				fragmentTransaction.commit();
 
-		List<League> leagues = LeaguesHandler.mListLeauges;
 
-		if (leagues == null)
-        {
+                    }
+
+
+
+
+
+                    Log.i(LOG_TAG, "show browser");
+                    LeaguesHandler.match = link;
+                    ScoreFragment fragment = new ScoreFragment();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    if (fragment.isAdded()) {
+                        fragmentTransaction.show(fragment);
+                    } else {
+                        fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.container));
+                        fragmentTransaction.add(R.id.container, fragment, "browser");
+                        //fragment.setRetainInstance(true);
+                        fragmentTransaction.addToBackStack(null);
+                    }
+                    fragmentTransaction.commit();
+                }
+
+                public void startSopcast(String url) {
+                    final WeakReference<Fragment> fragmentActivityWeakReference = new WeakReference<Fragment>(me);
+                    SopCastLauncher sopCastLauncher = new SopCastLauncher(fragmentActivityWeakReference);
+                    sopCastLauncher.startApplication("sop", url);
+                }
+            };
+
+            List<League> leagues = LeaguesHandler.mListLeauges;
+
+            if (leagues == null)
+            {
             onDestroy();
             return;
+            }
         }
 	}
 
@@ -148,16 +167,17 @@ public class SampleCategorizeListViewActivity extends Fragment
                 leagues.get(i).getMatch(j).setId(counterForMatchId);
                 Log.w("id", leagues.get(i).getMatch(j).getFirstTeam() + "  " + leagues.get(i).getMatch(j).getSecondTeam() + " id = " + leagues.get(i).getMatch(j).getId() + " SOPCAST LINKS COUNT = "  + leagues.get(i).getMatch(j).linkToSopcast.size());
             }
-            adapter.addSection(leagues.get(i).getName(), new SimpleAdapter(mOnlineWebViewListener, this.getActivity(), listItems, R.layout.list_complex, new String[]{ITEM_TITLE, ITEM_CAPTION, ITEM_LINK, SOPCAST_LINK, SOPCAST_LINK}, new int[]{R.id.list_complex_title, R.id.list_complex_caption, R.id.web_view, R.id.sop_cast, R.id.spinner}));
+            adapter.addSection(leagues.get(i).getName(), new SimpleAdapter(mOnlineWebViewListener, this.getActivity(), listItems, Preferences.Black.getResultListLayout(), new String[]{ITEM_TITLE, ITEM_CAPTION, ITEM_LINK, SOPCAST_LINK, SOPCAST_LINK}, new int[]{R.id.list_complex_title, R.id.list_complex_caption, R.id.web_view, R.id.sop_cast, R.id.spinner}));
             counterForMatchId++;
         }
 
         // create our list and custom adapter
         list.setAdapter(adapter);
         list.setDivider(getResources().getDrawable(R.drawable.list_items_divider));
-        list.setDividerHeight(0);
+        list.setDividerHeight(4);
         list.setAdapter(adapter);
         list.setItemsCanFocus(true);
+        list.setSelector(android.R.color.transparent);
         list.setFastScrollEnabled(false);
     }
 

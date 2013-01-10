@@ -55,7 +55,8 @@ public class ParcerSampleActivity extends FragmentActivity
 		mRefreshButton.setOnClickListener(myListener);
 		mInternetConnectionToast = Toast.makeText(getBaseContext(), DataNameHelper.NO_INTERNET_CONNECTION, DataNameHelper.NO_INTERNER_CONNNECTION_TOAST_TIME);
 		ViewGroup view = (ViewGroup) getWindow().getDecorView();
-		Log.w(LOG_TAG, " = " + mActivity.getExternalCacheDir().toString());
+		Log.w(LOG_TAG, " = " + mActivity.getCacheDir().toString());
+        DataNameHelper.EXTERNAL_CACHE_DIR = mActivity.getCacheDir().toString();
 		LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(new File(DataNameHelper.EXTERNAL_CACHE_DIR));
 		showResultsList();
 		mLastUpdate.setText("Last Updated :  " + LeaguesHandler.mTime);
@@ -93,6 +94,7 @@ public class ParcerSampleActivity extends FragmentActivity
                 thread.start();
             }
         });
+        resetUpdateService();
 
 	}
 
@@ -100,6 +102,7 @@ public class ParcerSampleActivity extends FragmentActivity
 	public void onResume()
 	{
 		super.onResume();
+        showResultsList();
 	}
 
 	@NotNull

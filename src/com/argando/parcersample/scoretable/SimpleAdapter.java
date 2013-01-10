@@ -280,8 +280,8 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	public void setViewText(@NotNull TextView v, String text)
 	{
 		{
-			v.setTextColor(Color.WHITE);
-			v.setShadowLayer(1,1,1, Color.GREEN);
+			v.setTextColor(Color.argb(255,100,170,100));
+			//v.setShadowLayer(1,1,1, Color.GREEN);
 		}
 		v.setText(text);
 	}
@@ -289,8 +289,8 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 	public void setViewTextRed(@NotNull TextView v, String text)
 	{
 		{
-			v.setTextColor(Color.WHITE);
-			v.setShadowLayer(1,1,1, Color.RED);
+			v.setTextColor(Color.RED);
+			//v.setShadowLayer(1,1,1, Color.RED);
 		}
 		v.setText(text);
 	}

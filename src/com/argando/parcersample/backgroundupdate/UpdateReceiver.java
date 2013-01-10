@@ -26,7 +26,7 @@ public class UpdateReceiver extends BroadcastReceiver
 		Log.d(LOG_TAG, "onReceive " + context + intent.getAction());
 		if (NetworkChecker.isConnected(context))
 		{
-			parseThread.startParse(context.getExternalCacheDir().getAbsolutePath());
+			parseThread.startParse(context.getCacheDir().getAbsolutePath());
 		}
 	}
 }
