@@ -55,13 +55,14 @@ public class ParcerSampleActivity extends FragmentActivity {
         Log.i(LOG_TAG, "showResultsList");
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragment != null) {
+            fragment.onAttach(this);
             fragment.updateData();
+        } else {
+            fragment = new SampleCategorizeListViewActivity();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container, fragment);
+            fragmentTransaction.commit();
         }
-
-        fragment = new SampleCategorizeListViewActivity();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, fragment);
-        fragmentTransaction.commit();
     }
 
     @Override

@@ -63,9 +63,8 @@ public class SampleCategorizeListViewActivity extends Fragment
 		return item;
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             super.onCreate(savedInstanceState);
             Log.i(LOG_TAG, "onCreate");
@@ -78,24 +77,15 @@ public class SampleCategorizeListViewActivity extends Fragment
                     if (!NetworkChecker.isConnected(getActivity().getApplicationContext())) {
                         mInternetConnectionToast.show();
                         return;
-                    } else
-                    {
-
-                        ScoreFragment fragment = new ScoreFragment();
-
-                        				FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        				fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                        				fragmentTransaction.replace(R.id.container, fragment, "browser");
-                                        fragmentTransaction.addToBackStack(null);
-                        				fragmentTransaction.commit();
-
-
+                    } else {
+                        /*ScoreFragment fragment = new ScoreFragment();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                        fragmentTransaction.replace(R.id.container, fragment, "browser");
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();*/
                     }
-
-
-
-
 
                     Log.i(LOG_TAG, "show browser");
                     LeaguesHandler.match = link;
@@ -107,7 +97,7 @@ public class SampleCategorizeListViewActivity extends Fragment
                         fragmentTransaction.show(fragment);
                     } else {
                         fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.container));
-                        fragmentTransaction.add(R.id.container, fragment, "browser");
+                        fragmentTransaction.add(R.id.container2, fragment, "browser");
                         //fragment.setRetainInstance(true);
                         fragmentTransaction.addToBackStack(null);
                     }
@@ -123,13 +113,12 @@ public class SampleCategorizeListViewActivity extends Fragment
 
             List<League> leagues = LeaguesHandler.mListLeauges;
 
-            if (leagues == null)
-            {
-            onDestroy();
-            return;
+            if (leagues == null) {
+                onDestroy();
+                return;
             }
         }
-	}
+    }
 
     @Override
     public void onActivityCreated (Bundle savedInstanceState)

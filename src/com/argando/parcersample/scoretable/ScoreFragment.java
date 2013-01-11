@@ -46,6 +46,11 @@ public class ScoreFragment extends Fragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
 	{
+       /* if (myWebView == null) {
+            myWebView = new WebView(this.getActivity());
+        } else {
+            ((ViewGroup) myWebView.getParent()).removeView(myWebView);
+        }*/
 		return myWebView;
 	}
 
