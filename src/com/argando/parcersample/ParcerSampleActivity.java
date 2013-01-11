@@ -58,7 +58,6 @@ public class ParcerSampleActivity extends FragmentActivity
 		Log.w(LOG_TAG, " = " + mActivity.getCacheDir().toString());
         DataNameHelper.EXTERNAL_CACHE_DIR = mActivity.getCacheDir().toString();
 		LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(new File(DataNameHelper.EXTERNAL_CACHE_DIR));
-		showResultsList();
 		mLastUpdate.setText("Last Updated :  " + LeaguesHandler.mTime);
 
 		mUpdateTime.setInputType(InputType.TYPE_NULL);
@@ -95,7 +94,6 @@ public class ParcerSampleActivity extends FragmentActivity
             }
         });
         resetUpdateService();
-
 	}
 
 	@Override
@@ -143,9 +141,9 @@ public class ParcerSampleActivity extends FragmentActivity
             fragment.updateData();
 		}
 
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragment = new SampleCategorizeListViewActivity();
-		fragmentTransaction.add(R.id.container, fragment, SampleCategorizeListViewActivity.class.getSimpleName());
+        fragment = new SampleCategorizeListViewActivity();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.container, fragment);
 		fragmentTransaction.commit();
 	}
 
