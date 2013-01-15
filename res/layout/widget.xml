@@ -9,27 +9,30 @@
                   android:layout_width="fill_parent"
                   android:layout_height="wrap_content">
         <ImageButton android:id="@+id/btnUp"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@drawable/btn_up"/>
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:src="@drawable/btn_up"
+                     android:layout_weight="1"/>
 
         <ImageButton android:id="@+id/btnDown"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@drawable/btn_down"/>
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:src="@drawable/btn_down"
+                     android:layout_weight="1"/>
 
         <ImageButton android:id="@+id/btnRefresh"
                      android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:src="@drawable/btn_refresh"/>
+                     android:layout_height="match_parent"
+                     android:src="@drawable/btn_refresh"
+                     android:layout_weight="1"/>
     </LinearLayout>
 
-<!--
-    <ListView android:id="@+id/matches"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"/>
--->
-    <TextView android:id="@+id/matches"
+    <!--
+        <ListView android:id="@+id/matches"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"/>
+    -->
+    <TextView android:id="@+id/textView"
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:text="i want change this"/>
