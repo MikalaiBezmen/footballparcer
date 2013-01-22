@@ -38,10 +38,14 @@
         <receiver android:name=".widget.Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+
+                <action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_BUTTON_UP"/>
+                <action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_BUTTON_DOWN"/>
+                <!--<action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_BUTTON_REFRESH"/>-->
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget" />
         </receiver>
-        <service android:name=".widget.Widget$UpdateService"/>
+        <!--<service android:name=".widget.Widget$UpdateService"/>-->
 
     </application>
 
