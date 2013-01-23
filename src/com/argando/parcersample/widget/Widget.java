@@ -60,6 +60,8 @@ public class Widget extends AppWidgetProvider{
 
         remoteViews.setOnClickPendingIntent(R.id.btnDown, pendingIntent);
 
+        updateMatches(context);
+
         appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
     }
 
@@ -70,13 +72,13 @@ public class Widget extends AppWidgetProvider{
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
 
         if (intent.getAction().equals(ACTION_WIDGET_BUTTON_UP)){
-            offset++;
-            updateMatches();
+            offset--;
+            updateMatches(context);
 //            remoteViews.setTextViewText(R.id.textView, "Button up on click");
 //            Toast.makeText(context, "Button up on click!", Toast.LENGTH_LONG).show();
         } else if (intent.getAction().equals(ACTION_WIDGET_BUTTON_DOWN)) {
-            offset--;
-            updateMatches();
+            offset++;
+            updateMatches(context);
 //            remoteViews.setTextViewText(R.id.textView, "Button down on click");
 //            Toast.makeText(context, "Button down on click!", Toast.LENGTH_LONG).show();
         }
@@ -90,13 +92,31 @@ public class Widget extends AppWidgetProvider{
         super.onReceive(context, intent);
     }
 
-    private void updateMatches() {
-        if (offset < 0)
+    private void updateMatches(Context context) {
+        if (offset < 0) {
             offset = 0;
-
-        if (offset >= (mMathces.size() - 5)) {
-            offset = mMathces.size() - 5;
+            return;
         }
+
+        if (offset >= (mMathces.size() - 6)) {
+            offset = mMathces.size() - 6;
+            return;
+        }
+
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
+
+        remoteViews.setTextViewText(R.id.match1, mMathces.get(offset));
+        remoteViews.setTextViewText(R.id.match2, mMathces.get(offset + 1));
+        remoteViews.setTextViewText(R.id.match3, mMathces.get(offset + 2));
+        remoteViews.setTextViewText(R.id.match4, mMathces.get(offset + 3));
+        remoteViews.setTextViewText(R.id.match5, mMathces.get(offset + 4));
+        remoteViews.setTextViewText(R.id.match6, mMathces.get(offset + 5));
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName thisAppWidget = new ComponentName(context.getPackageName(), Widget.class.getName());
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
+
+        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
 
         Log.w(LOG_TAG, String.valueOf(offset));
         Log.w(LOG_TAG, String.valueOf(mMathces.size()));
