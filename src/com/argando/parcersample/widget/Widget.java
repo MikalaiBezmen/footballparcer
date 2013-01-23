@@ -1,23 +1,20 @@
 package com.argando.parcersample.widget;
 
 import android.app.PendingIntent;
-import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.IBinder;
-import android.provider.SyncStateContract;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 import com.argando.parcersample.R;
+import com.argando.parcersample.data.League;
+import com.argando.parcersample.data.LeaguesHandler;
+import com.argando.parcersample.data.Match;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Widget extends AppWidgetProvider{
     private static final String LOG_TAG = Widget.class.getSimpleName();
@@ -25,18 +22,43 @@ public class Widget extends AppWidgetProvider{
     public static final String ACTION_WIDGET_BUTTON_UP = "ButtonUpWidgetAction";
     public static final String ACTION_WIDGET_BUTTON_DOWN = "ButtonDownWdidgetAction";
 
+    private List<String> mMathces = new ArrayList<String>();
+    int offset = 0;
+
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         Log.w(LOG_TAG, "Widget::onUpdate");
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
 
-        Intent btnUpIntent = new Intent(context, Widget.class);
-        btnUpIntent.setAction(ACTION_WIDGET_BUTTON_UP);
+        String str = null;
 
-        PendingIntent btnUpPendgingIntent = PendingIntent.getBroadcast(context, 0, btnUpIntent, 0);
+        for (League league : LeaguesHandler.mListLeauges)
+        {
+            for (Match match : league.getMatches())
+            {
+                Log.w(LOG_TAG, match.getDate());
 
-        remoteViews.setOnClickPendingIntent(R.id.btnUp, btnUpPendgingIntent);
+//                Log.w(LOG_TAG, match.getFirstTeam() + "-" + match.getSecondTeam());
+                str = match.getFirstTeam() + '-' + match.getSecondTeam() + '\n';
+                mMathces.add(str);
+//                remoteViews.setTextViewText(R.id.textView, match.getFirstTeam() + "-" + match.getSecondTeam());
+            }
+        }
+
+        Intent intentBtnUp = new Intent(context, Widget.class);
+        intentBtnUp.setAction(ACTION_WIDGET_BUTTON_UP);
+
+        PendingIntent pendingIntentBtnUp = PendingIntent.getBroadcast(context, 0, intentBtnUp, 0);
+
+        remoteViews.setOnClickPendingIntent(R.id.btnUp, pendingIntentBtnUp);
+
+        Intent intent = new Intent(context, Widget.class);
+        intent.setAction(ACTION_WIDGET_BUTTON_DOWN);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        remoteViews.setOnClickPendingIntent(R.id.btnDown, pendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
     }
@@ -45,11 +67,22 @@ public class Widget extends AppWidgetProvider{
     public void onReceive(Context context, Intent intent) {
         Log.w(LOG_TAG, "Widget::onReceive");
 
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
+
         if (intent.getAction().equals(ACTION_WIDGET_BUTTON_UP)){
-            Toast.makeText(context, "Button up on click!", Toast.LENGTH_LONG).show();
+
+//            remoteViews.setTextViewText(R.id.textView, "Button up on click");
+//            Toast.makeText(context, "Button up on click!", Toast.LENGTH_LONG).show();
         } else if (intent.getAction().equals(ACTION_WIDGET_BUTTON_DOWN)) {
-            Toast.makeText(context, "Button down on click!", Toast.LENGTH_LONG).show();
+//            remoteViews.setTextViewText(R.id.textView, "Button down on click");
+//            Toast.makeText(context, "Button down on click!", Toast.LENGTH_LONG).show();
         }
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName thisAppWidget = new ComponentName(context.getPackageName(), Widget.class.getName());
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
+
+        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
 
         super.onReceive(context, intent);
     }
