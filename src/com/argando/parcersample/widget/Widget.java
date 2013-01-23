@@ -22,8 +22,8 @@ public class Widget extends AppWidgetProvider{
     public static final String ACTION_WIDGET_BUTTON_UP = "ButtonUpWidgetAction";
     public static final String ACTION_WIDGET_BUTTON_DOWN = "ButtonDownWdidgetAction";
 
-    private List<String> mMathces = new ArrayList<String>();
-    int offset = 0;
+    static private List<String> mMathces = new ArrayList<String>();
+    static private int offset = 0;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -37,14 +37,14 @@ public class Widget extends AppWidgetProvider{
         {
             for (Match match : league.getMatches())
             {
-                Log.w(LOG_TAG, match.getDate());
-
 //                Log.w(LOG_TAG, match.getFirstTeam() + "-" + match.getSecondTeam());
-                str = match.getFirstTeam() + '-' + match.getSecondTeam() + '\n';
+                str = match.getFirstTeam() + '-' + match.getSecondTeam();
                 mMathces.add(str);
 //                remoteViews.setTextViewText(R.id.textView, match.getFirstTeam() + "-" + match.getSecondTeam());
             }
         }
+
+        Log.w(LOG_TAG, String.valueOf(mMathces.size()));
 
         Intent intentBtnUp = new Intent(context, Widget.class);
         intentBtnUp.setAction(ACTION_WIDGET_BUTTON_UP);
@@ -70,10 +70,13 @@ public class Widget extends AppWidgetProvider{
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
 
         if (intent.getAction().equals(ACTION_WIDGET_BUTTON_UP)){
-
+            offset++;
+            updateMatches();
 //            remoteViews.setTextViewText(R.id.textView, "Button up on click");
 //            Toast.makeText(context, "Button up on click!", Toast.LENGTH_LONG).show();
         } else if (intent.getAction().equals(ACTION_WIDGET_BUTTON_DOWN)) {
+            offset--;
+            updateMatches();
 //            remoteViews.setTextViewText(R.id.textView, "Button down on click");
 //            Toast.makeText(context, "Button down on click!", Toast.LENGTH_LONG).show();
         }
@@ -85,6 +88,19 @@ public class Widget extends AppWidgetProvider{
         appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
 
         super.onReceive(context, intent);
+    }
+
+    private void updateMatches() {
+        if (offset < 0)
+            offset = 0;
+
+        if (offset >= (mMathces.size() - 5)) {
+            offset = mMathces.size() - 5;
+        }
+
+        Log.w(LOG_TAG, String.valueOf(offset));
+        Log.w(LOG_TAG, String.valueOf(mMathces.size()));
+//        Log.w(LOG_TAG, String.valueOf(offset - mMathces.size()));
     }
 
 

@@ -24,7 +24,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="061b6521-2033-450a-9a89-281544035d8d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/widget.xml" afterPath="$PROJECT_DIR$/res/layout/widget.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
     </list>
     <ignored path="footballparcer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +32,7 @@
     <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358955869940" ignored="false" />
     <file path="/fragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358868667679" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358867106290" ignored="false" />
-    <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358953159011" ignored="false" />
+    <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358956921222" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,10 +100,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="widget.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="widget.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="38" selection-start="2856" selection-end="2856" vertical-scroll-proportion="0.7598499">
+            <state line="68" column="53" selection-start="2856" selection-end="2856" vertical-scroll-proportion="-8.1">
               <folding />
             </state>
           </provider>
@@ -112,13 +112,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Widget.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Widget.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="14" selection-start="2663" selection-end="2663" vertical-scroll-proportion="0.0">
+            <state line="97" column="19" selection-start="3752" selection-end="3752" vertical-scroll-proportion="0.5780446">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#891#899#0" expanded="true" />
+                <element signature="e#898#906#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -189,8 +189,8 @@
       <list>
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/argando/parcersample/data/LeaguesHandler.java" />
-        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
         <option value="$PROJECT_DIR$/res/layout/widget.xml" />
+        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
       </list>
     </option>
   </component>
@@ -584,7 +584,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924226" sideWeight="0.6721854" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905984" sideWeight="0.6721854" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.6721854" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -598,7 +598,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17395945" sideWeight="0.6721854" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32781458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32781458" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -782,24 +782,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="14" selection-start="2663" selection-end="2663" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#891#899#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="38" selection-start="2856" selection-end="2856" vertical-scroll-proportion="0.7598499">
+        <state line="68" column="53" selection-start="2856" selection-end="2856" vertical-scroll-proportion="-8.1">
           <folding />
         </state>
       </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="97" column="19" selection-start="3752" selection-end="3752" vertical-scroll-proportion="0.5780446">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#898#906#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
