@@ -31,35 +31,41 @@
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_below="@id/btnUp"
+              android:gravity="center"
               android:text="Match 1"/>
 
     <TextView android:id="@+id/match2"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_below="@id/match1"
+              android:gravity="center"
               android:text="Match 2"/>
 
     <TextView android:id="@+id/match3"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_below="@id/match2"
+              android:gravity="center"
               android:text="Match 3"/>
 
     <TextView android:id="@+id/match4"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_below="@id/match3"
+              android:gravity="center"
               android:text="Match 4"/>
 
     <TextView android:id="@+id/match5"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_below="@id/match4"
+              android:gravity="center"
               android:text="Match 5"/>
 
     <TextView android:id="@+id/match6"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:layout_below="@id/match5"
+              android:gravity="center"
               android:text="Match 6"/>
 </RelativeLayout>

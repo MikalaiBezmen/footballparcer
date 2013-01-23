@@ -24,14 +24,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="061b6521-2033-450a-9a89-281544035d8d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/widget.xml" afterPath="$PROJECT_DIR$/res/layout/widget.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="footballparcer.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358932553183" ignored="false" />
-    <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358955551262" ignored="false" />
+    <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358955869940" ignored="false" />
     <file path="/fragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358868667679" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358867106290" ignored="false" />
     <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358953159011" ignored="false" />
@@ -105,7 +103,7 @@
       <file leaf-file-name="widget.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="80" selection-start="2434" selection-end="2434" vertical-scroll-proportion="0.6097561">
+            <state line="68" column="38" selection-start="2856" selection-end="2856" vertical-scroll-proportion="0.7598499">
               <folding />
             </state>
           </provider>
@@ -796,7 +794,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="80" selection-start="2434" selection-end="2434" vertical-scroll-proportion="0.6097561">
+        <state line="68" column="38" selection-start="2856" selection-end="2856" vertical-scroll-proportion="0.7598499">
           <folding />
         </state>
       </provider>
