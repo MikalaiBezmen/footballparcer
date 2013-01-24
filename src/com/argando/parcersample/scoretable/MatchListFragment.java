@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.argando.parcersample.Cache;
 import com.argando.parcersample.R;
 import com.argando.parcersample.data.DataNameHelper;
 import com.argando.parcersample.data.League;
@@ -27,7 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class SampleCategorizeListViewActivity extends Fragment
+public class MatchListFragment extends Fragment
 {
 
 	public final static String ITEM_TITLE = "title";
@@ -35,7 +35,7 @@ public class SampleCategorizeListViewActivity extends Fragment
 	public final static String ITEM_LINK = "link";
 	public final static String SOPCAST_LINK = "sopcast_link";
 	public final static String IS_ONLINE = "is";
-    private static final String LOG_TAG = SampleCategorizeListViewActivity.class.getSimpleName();
+    private static final String LOG_TAG = MatchListFragment.class.getSimpleName();
 	ListView list;
 	private Fragment me;
 
@@ -77,16 +77,7 @@ public class SampleCategorizeListViewActivity extends Fragment
                     if (!NetworkChecker.isConnected(getActivity().getApplicationContext())) {
                         mInternetConnectionToast.show();
                         return;
-                    } else {
-                        /*ScoreFragment fragment = new ScoreFragment();
-                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                        fragmentTransaction.replace(R.id.container, fragment, "browser");
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();*/
                     }
-
                     Log.i(LOG_TAG, "show browser");
                     LeaguesHandler.match = link;
                     ScoreFragment fragment = new ScoreFragment();
@@ -98,7 +89,6 @@ public class SampleCategorizeListViewActivity extends Fragment
                     } else {
                         fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.container));
                         fragmentTransaction.add(R.id.container2, fragment, "browser");
-                        //fragment.setRetainInstance(true);
                         fragmentTransaction.addToBackStack(null);
                     }
                     fragmentTransaction.commit();
@@ -164,15 +154,20 @@ public class SampleCategorizeListViewActivity extends Fragment
         list.setAdapter(adapter);
         list.setDivider(getResources().getDrawable(R.drawable.list_items_divider));
         list.setDividerHeight(4);
-        list.setAdapter(adapter);
         list.setItemsCanFocus(true);
         list.setSelector(android.R.color.transparent);
         list.setFastScrollEnabled(false);
+        list.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                Log.i(LOG_TAG, "OnTouchListView");
+                return getActivity().onTouchEvent(motionEvent);
+            }
+        });
     }
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
         Log.i(LOG_TAG, "onCreateView");
         list = new ListView(this.getActivity());

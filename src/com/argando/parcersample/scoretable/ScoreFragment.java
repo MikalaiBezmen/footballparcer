@@ -2,21 +2,12 @@ package com.argando.parcersample.scoretable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import com.argando.parcersample.CustomWebViewClient;
-import com.argando.parcersample.R;
 import com.argando.parcersample.data.LeaguesHandler;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.logging.LoggingPermission;
 
 public class ScoreFragment extends Fragment
 {
@@ -32,6 +23,7 @@ public class ScoreFragment extends Fragment
             super.onCreate(savedInstanceState);
             Log.i(LOG_TAG, "onCreate");
             myWebView = new WebView(this.getActivity());
+            myWebView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             myWebView.setWebViewClient(new CustomWebViewClient());
 
             final FrameLayout mContentView = (FrameLayout) getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
@@ -42,9 +34,8 @@ public class ScoreFragment extends Fragment
         }
 	}
 
-	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
        /* if (myWebView == null) {
             myWebView = new WebView(this.getActivity());
@@ -67,5 +58,4 @@ public class ScoreFragment extends Fragment
         Log.i(LOG_TAG, "onDestroyView");
 		super.onDestroy();
 	}
-
 }

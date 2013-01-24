@@ -3,11 +3,25 @@
 
     <string name="hello">Hello World, ParcerSampleActivity!</string>
     <string name="app_name">Fast Results</string>
-
-    
     <string name="web_view_button">web</string>
-    
-     <string name="sopcast_link">sopcast link</string>
+    <string name="sopcast_link">sopcast link</string>
+    <string name="choose_sopcast_link">available links</string>
 
-    <string name="choose_sopcast_link">Доступные ссылки</string>
+    <!-- Menu name -->
+    <string name="ukraine_championship">Ukraine</string>
+    <string name="england_championship">England</string>
+    <string name="argentina_championship">Argentina</string>
+    <string name="brazil_championship">Brazil</string>
+    <string name="germany_championship">Germany</string>
+    <string name="italy_championship">Italy</string>
+    <string name="spain_championship">Spain</string>
+    <string name="netherlands_championship">Netherlands</string>
+    <string name="portugal_championship">Portugal</string>
+    <string name="russia_championship">Russia</string>
+    <string name="north_america_championship">North America</string>
+    <string name="turkey_championship">Turkey</string>
+    <string name="france_championship">France</string>
+    <string name="champions_league">Champions league</string>
+    <string name="uefa_league">Europe League</string>
+    <!-- End Menu name -->
 </resources>

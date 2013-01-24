@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.*;
-import com.argando.parcersample.scoretable.SampleCategorizeListViewActivity;
-import com.argando.parcersample.scoretable.SampleCategorizeListViewActivity.OnlineWebViewListener;
+import com.argando.parcersample.scoretable.MatchListFragment.OnlineWebViewListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -217,11 +216,11 @@ public class SimpleAdapter extends BaseAdapter implements Filterable
 						// Note: keep the instanceof TextView check at the bottom of these
 						// ifs since a lot of views are TextViews (e.g. CheckBoxes).
 
-						if (mData.get(position).get(SampleCategorizeListViewActivity.IS_ONLINE).equals("0"))
+						if (mData.get(position).get(MatchListFragment.IS_ONLINE).equals("0"))
 						{
 							setViewTextGrey((TextView) v, text);
 						}
-						else if (mData.get(position).get(SampleCategorizeListViewActivity.IS_ONLINE).equals("2"))
+						else if (mData.get(position).get(MatchListFragment.IS_ONLINE).equals("2"))
 						{
 							setViewTextRed((TextView) v, text);
 						}

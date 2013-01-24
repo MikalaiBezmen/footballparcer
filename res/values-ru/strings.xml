@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ParcerSampleActivity!</string>
+    <string name="app_name">Fast Results</string>
+    <string name="web_view_button">web</string>
+    <string name="sopcast_link">sopcast link</string>
+    <string name="choose_sopcast_link">Доступные ссылки</string>
+
+
+    <!-- Menu name -->
+    <string name="ukraine_championship">Украина</string>
+    <string name="england_championship">Англия</string>
+    <string name="argentina_championship">Аргентина</string>
+    <string name="brazil_championship">Бразилия</string>
+    <string name="germany_championship">Германия</string>
+    <string name="italy_championship">Италия</string>
+    <string name="spain_championship">Испания</string>
+    <string name="netherlands_championship">Нидерланды</string>
+    <string name="portugal_championship">Португалия</string>
+    <string name="russia_championship">Россия</string>
+    <string name="north_america_championship">Северная Америка</string>
+    <string name="turkey_championship">Турция</string>
+    <string name="france_championship">Франция</string>
+    <string name="champions_league">Лига Чемпионов</string>
+    <string name="uefa_league">Лига Европы</string>
+    <!-- End Menu name -->
+</resources>
