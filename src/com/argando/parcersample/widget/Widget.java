@@ -22,8 +22,14 @@ public class Widget extends AppWidgetProvider{
     public static final String ACTION_WIDGET_BUTTON_UP = "ButtonUpWidgetAction";
     public static final String ACTION_WIDGET_BUTTON_DOWN = "ButtonDownWdidgetAction";
 
+    static private final int OFFSET = 3;       // not more than VISIBLE_ROWS:D
+    static private final int VISIBLE_ROWS = 6;
+
+    static private int mCurrPos = 0;
+
+    static private Integer mMatchesView[] = { R.id.match1, R.id.match2, R.id.match3, R.id.match4, R.id.match5, R.id.match6 };
+
     static private List<String> mMathces = new ArrayList<String>();
-    static private int offset = 0;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
@@ -33,6 +39,8 @@ public class Widget extends AppWidgetProvider{
 
         String str = null;
 
+        mMathces.clear();
+
         for (League league : LeaguesHandler.mListLeauges)
         {
             for (Match match : league.getMatches())
@@ -40,7 +48,6 @@ public class Widget extends AppWidgetProvider{
 //                Log.w(LOG_TAG, match.getFirstTeam() + "-" + match.getSecondTeam());
                 str = match.getFirstTeam() + '-' + match.getSecondTeam();
                 mMathces.add(str);
-//                remoteViews.setTextViewText(R.id.textView, match.getFirstTeam() + "-" + match.getSecondTeam());
             }
         }
 
@@ -72,12 +79,12 @@ public class Widget extends AppWidgetProvider{
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
 
         if (intent.getAction().equals(ACTION_WIDGET_BUTTON_UP)){
-            offset--;
+            mCurrPos -= OFFSET;
             updateMatches(context);
 //            remoteViews.setTextViewText(R.id.textView, "Button up on click");
 //            Toast.makeText(context, "Button up on click!", Toast.LENGTH_LONG).show();
         } else if (intent.getAction().equals(ACTION_WIDGET_BUTTON_DOWN)) {
-            offset++;
+            mCurrPos += OFFSET;
             updateMatches(context);
 //            remoteViews.setTextViewText(R.id.textView, "Button down on click");
 //            Toast.makeText(context, "Button down on click!", Toast.LENGTH_LONG).show();
@@ -93,34 +100,27 @@ public class Widget extends AppWidgetProvider{
     }
 
     private void updateMatches(Context context) {
-        if (offset < 0) {
-            offset = 0;
+        if (mCurrPos < 0) {
+            mCurrPos = 0;
             return;
         }
 
-        if (offset >= (mMathces.size() - 6)) {
-            offset = mMathces.size() - 6;
+        if (mCurrPos >= (mMathces.size() - VISIBLE_ROWS)) {
+            mCurrPos = mMathces.size() - VISIBLE_ROWS;
             return;
         }
 
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
 
-        remoteViews.setTextViewText(R.id.match1, mMathces.get(offset));
-        remoteViews.setTextViewText(R.id.match2, mMathces.get(offset + 1));
-        remoteViews.setTextViewText(R.id.match3, mMathces.get(offset + 2));
-        remoteViews.setTextViewText(R.id.match4, mMathces.get(offset + 3));
-        remoteViews.setTextViewText(R.id.match5, mMathces.get(offset + 4));
-        remoteViews.setTextViewText(R.id.match6, mMathces.get(offset + 5));
+        for (int i = 0; i < VISIBLE_ROWS; i++) {
+            remoteViews.setTextViewText(mMatchesView[i], mMathces.get(mCurrPos + i));
+        }
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         ComponentName thisAppWidget = new ComponentName(context.getPackageName(), Widget.class.getName());
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
 
         appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
-
-        Log.w(LOG_TAG, String.valueOf(offset));
-        Log.w(LOG_TAG, String.valueOf(mMathces.size()));
-//        Log.w(LOG_TAG, String.valueOf(offset - mMathces.size()));
     }
 
 

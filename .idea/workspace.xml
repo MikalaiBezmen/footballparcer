@@ -29,11 +29,11 @@
     </list>
     <ignored path="footballparcer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358970498093" ignored="false" />
+    <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359322488457" ignored="false" />
     <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358955869940" ignored="false" />
     <file path="/fragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358868667679" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358867106290" ignored="false" />
-    <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358972601329" ignored="false" />
+    <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359322645173" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +48,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -83,6 +82,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -104,7 +104,7 @@
       <file leaf-file-name="widget.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="26" selection-start="1328" selection-end="1328" vertical-scroll-proportion="-3.56">
+            <state line="29" column="26" selection-start="1328" selection-end="1328" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -116,7 +116,7 @@
       <file leaf-file-name="Widget.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="83" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.8544521">
+            <state line="118" column="130" selection-start="4443" selection-end="4443" vertical-scroll-proportion="0.5650685">
               <folding />
             </state>
           </provider>
@@ -580,14 +580,13 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.6732892" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33002207" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -595,9 +594,10 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17395945" sideWeight="0.6721854" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924226" sideWeight="0.6721854" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924226" sideWeight="0.6721854" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.6732892" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -729,16 +729,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/parser/DataParcer.java">
+    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/Match.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="111" selection-start="7420" selection-end="7420" vertical-scroll-proportion="0.0">
+        <state line="76" column="36" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/Match.java">
+    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/parser/DataParcer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="36" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.0">
+        <state line="230" column="111" selection-start="7420" selection-end="7420" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -766,7 +766,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="26" selection-start="1328" selection-end="1328" vertical-scroll-proportion="-3.56">
+        <state line="29" column="26" selection-start="1328" selection-end="1328" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -776,7 +776,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="83" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.8544521">
+        <state line="118" column="130" selection-start="4443" selection-end="4443" vertical-scroll-proportion="0.5650685">
           <folding />
         </state>
       </provider>
