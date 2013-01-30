@@ -13,21 +13,21 @@
             android:layout_height="fill_parent"
             >
 
-            <TextView
-                    android:id="@+id/list_complex_caption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="#9000ff00"
-                    android:textStyle="bold"
-                    android:shadowColor="#000000"
-                    android:shadowDx="2.0"
-                    android:shadowDy="2.0"
-                    android:shadowRadius="1"
-                    />
+        <TextView
+                android:id="@+id/list_complex_caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#9000ff00"
+                android:textStyle="bold"
+                android:shadowColor="#000000"
+                android:shadowDx="2.0"
+                android:shadowDy="2.0"
+                android:shadowRadius="1"
+                />
 
         <RelativeLayout
                 android:id="@+id/list_button"

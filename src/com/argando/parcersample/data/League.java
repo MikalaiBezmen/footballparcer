@@ -9,92 +9,76 @@ import java.util.List;
 
 // test
 
-public class League
-{
-	@NotNull
-	private List<Match>	mMatches	= new ArrayList<Match>();
-	private final String mName;
-	private TagNode mLegueHtmlCode;
-	
-	public League(String name)
-	{
-		mName = name;
-	} 
+public class League {
+    @NotNull
+    private List<Match> mMatches = new ArrayList<Match>();
+    private final String mName;
+    private TagNode mLegueHtmlCode;
 
-	public boolean addMatch(@Nullable Match match)
-	{
-		if (match == null || !match.isMatchValid())
-		{
-			return false;
-		}
-		return mMatches.add(match);
-	}
+    public League(String name) {
+        mName = name;
+    }
 
-	public boolean deleteMatch(@Nullable Match match)
-	{
-		if (match == null)
-		{
-			return false;
-		}
-		return mMatches.remove(match);
-	}
+    public boolean addMatch(@Nullable Match match) {
+        if (match == null || !match.isMatchValid()) {
+            return false;
+        }
+        return mMatches.add(match);
+    }
 
-	@Nullable
-	public Match getMatch(int i)
-	{
-		if (i >= 0 && i < mMatches.size())
-		{
-			return mMatches.get(i);
-		}
-		return null;
-	}
-	
-	@NotNull
-	public List<Match> getMatches()
-	{
-		return mMatches;
-	}
+    public boolean deleteMatch(@Nullable Match match) {
+        if (match == null) {
+            return false;
+        }
+        return mMatches.remove(match);
+    }
 
-	public boolean isMatchInLegue(@Nullable Match match)
-	{
-		if (match == null)
-		{
-			return false;
-		}
-		return mMatches.contains(match);
-	}
+    @Nullable
+    public Match getMatch(int i) {
+        if (i >= 0 && i < mMatches.size()) {
+            return mMatches.get(i);
+        }
+        return null;
+    }
 
-	public void cleanLeague()
-	{
-		mMatches.clear();
-	}
+    @NotNull
+    public List<Match> getMatches() {
+        return mMatches;
+    }
 
-	public int getSize()
-	{
-		return mMatches.size();
-	}
+    public boolean isMatchInLegue(@Nullable Match match) {
+        if (match == null) {
+            return false;
+        }
+        return mMatches.contains(match);
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName()
-	{
-		return mName;
-	}
+    public void cleanLeague() {
+        mMatches.clear();
+    }
 
-	/**
-	 * @return the legueHtmlCode
-	 */
-	public TagNode getLegueHtmlCode()
-	{
-		return mLegueHtmlCode;
-	}
+    public int getSize() {
+        return mMatches.size();
+    }
 
-	/**
-	 * @param legueHtmlCode the legueHtmlCode to set
-	 */
-	public void setLegueHtmlCode(TagNode legueHtmlCode)
-	{
-		this.mLegueHtmlCode = legueHtmlCode;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return mName;
+    }
+
+    /**
+     * @return the legueHtmlCode
+     */
+    public TagNode getLegueHtmlCode() {
+        return mLegueHtmlCode;
+    }
+
+    /**
+     * @param legueHtmlCode the legueHtmlCode to set
+     */
+    public void setLegueHtmlCode(TagNode legueHtmlCode) {
+        this.mLegueHtmlCode = legueHtmlCode;
+    }
 }

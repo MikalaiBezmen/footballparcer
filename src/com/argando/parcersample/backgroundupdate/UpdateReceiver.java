@@ -14,19 +14,17 @@ import com.argando.parcersample.network.NetworkChecker;
  */
 
 /**
- *Receiver receive alarm call backs to for updating parsing results
+ * Receiver receive alarm call backs to for updating parsing results
  */
-public class UpdateReceiver extends BroadcastReceiver
-{
-	private static final String LOG_TAG = UpdateReceiver.class.getSimpleName();
-	private static ParseThread parseThread = new ParseThread(DataNameHelper.EXTERNAL_CACHE_DIR);
-	@Override
-	public void onReceive(Context context, Intent intent)
-	{
-		Log.d(LOG_TAG, "onReceive " + context + intent.getAction());
-		if (NetworkChecker.isConnected(context))
-		{
-			parseThread.startParse(context.getCacheDir().getAbsolutePath());
-		}
-	}
+public class UpdateReceiver extends BroadcastReceiver {
+    private static final String LOG_TAG = UpdateReceiver.class.getSimpleName();
+    private static ParseThread parseThread = new ParseThread(DataNameHelper.EXTERNAL_CACHE_DIR);
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Log.d(LOG_TAG, "onReceive " + context + intent.getAction());
+        if (NetworkChecker.isConnected(context)) {
+            parseThread.startParse(context.getCacheDir().getAbsolutePath());
+        }
+    }
 }

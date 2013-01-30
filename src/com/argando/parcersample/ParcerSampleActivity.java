@@ -33,8 +33,7 @@ public class ParcerSampleActivity extends FragmentActivity {
         resetUpdateService(500);
     }
 
-    private void initUIComponents()
-    {
+    private void initUIComponents() {
         mInternetConnectionToast = Toast.makeText(getBaseContext(), DataNameHelper.NO_INTERNET_CONNECTION, DataNameHelper.NO_INTERNER_CONNNECTION_TOAST_TIME);
     }
 

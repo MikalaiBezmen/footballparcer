@@ -1,153 +1,50 @@
 package com.argando.parcersample.widget;
 
-import android.app.PendingIntent;
+
+import android.annotation.TargetApi;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.net.Uri;
 import android.widget.RemoteViews;
 import com.argando.parcersample.R;
-import com.argando.parcersample.data.League;
-import com.argando.parcersample.data.LeaguesHandler;
-import com.argando.parcersample.data.Match;
 
-import java.util.ArrayList;
-import java.util.List;
+@TargetApi(11)
+public class Widget extends AppWidgetProvider {
+    private final String LOG_TAG = Widget.class.getSimpleName();
 
-public class Widget extends AppWidgetProvider{
-    private static final String LOG_TAG = Widget.class.getSimpleName();
-
-    public static final String ACTION_WIDGET_BUTTON_UP = "ButtonUpWidgetAction";
-    public static final String ACTION_WIDGET_BUTTON_DOWN = "ButtonDownWdidgetAction";
-
-    static private final int OFFSET = 3;       // not more than VISIBLE_ROWS:D
-    static private final int VISIBLE_ROWS = 6;
-
-    static private int mCurrPos = 0;
-
-    static private Integer mMatchesView[] = { R.id.match1, R.id.match2, R.id.match3, R.id.match4, R.id.match5, R.id.match6 };
-
-    static private List<String> mMathces = new ArrayList<String>();
-
-    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        Log.w(LOG_TAG, "Widget::onUpdate");
+        // update each of the app widgets with the remote adapter
+        for (int i = 0; i < appWidgetIds.length; ++i) {
 
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
+            // Set up the intent that starts the StackViewService, which will
+            // provide the views for this collection.
+            Intent intent = new Intent(context, WidgetService.class);
+            // Add the app widget ID to the intent extras.
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
+            intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+            // Instantiate the RemoteViews object for the App Widget layout.
+            RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget);
+            // Set up the RemoteViews object to use a RemoteViews adapter.
+            // This adapter connects
+            // to a RemoteViewsService  through the specified intent.
+            // This is how you populate the data
+            rv.setRemoteAdapter(R.id.list_view, intent);
+//            rv.setRemoteAdapter(appWidgetIds[i], R.id.list_view, intent);
 
-        String str = null;
+            // The empty view is displayed when the collection has no items.
+            // It should be in the same layout used to instantiate the RemoteViews
+            // object above.
+            rv.setEmptyView(R.id.list_view, R.id.empty_view);
 
-        mMathces.clear();
+            //
+            // Do additional processing specific to this app widget...
+            //
 
-        for (League league : LeaguesHandler.mListLeauges)
-        {
-            for (Match match : league.getMatches())
-            {
-//                Log.w(LOG_TAG, match.getFirstTeam() + "-" + match.getSecondTeam());
-                str = match.getFirstTeam() + '-' + match.getSecondTeam();
-                mMathces.add(str);
-            }
+            appWidgetManager.updateAppWidget(appWidgetIds[i], rv);
         }
-
-        Log.w(LOG_TAG, String.valueOf(mMathces.size()));
-
-        Intent intentBtnUp = new Intent(context, Widget.class);
-        intentBtnUp.setAction(ACTION_WIDGET_BUTTON_UP);
-
-        PendingIntent pendingIntentBtnUp = PendingIntent.getBroadcast(context, 0, intentBtnUp, 0);
-
-        remoteViews.setOnClickPendingIntent(R.id.btnUp, pendingIntentBtnUp);
-
-        Intent intent = new Intent(context, Widget.class);
-        intent.setAction(ACTION_WIDGET_BUTTON_DOWN);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
-
-        remoteViews.setOnClickPendingIntent(R.id.btnDown, pendingIntent);
-
-        updateMatches(context);
-
-        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        Log.w(LOG_TAG, "Widget::onReceive");
-
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
-
-        if (intent.getAction().equals(ACTION_WIDGET_BUTTON_UP)){
-            mCurrPos -= OFFSET;
-            updateMatches(context);
-//            remoteViews.setTextViewText(R.id.textView, "Button up on click");
-//            Toast.makeText(context, "Button up on click!", Toast.LENGTH_LONG).show();
-        } else if (intent.getAction().equals(ACTION_WIDGET_BUTTON_DOWN)) {
-            mCurrPos += OFFSET;
-            updateMatches(context);
-//            remoteViews.setTextViewText(R.id.textView, "Button down on click");
-//            Toast.makeText(context, "Button down on click!", Toast.LENGTH_LONG).show();
-        }
-
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName thisAppWidget = new ComponentName(context.getPackageName(), Widget.class.getName());
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
-
-        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
-
-        super.onReceive(context, intent);
-    }
-
-    private void updateMatches(Context context) {
-        if (mCurrPos < 0) {
-            mCurrPos = 0;
-            return;
-        }
-
-        if (mCurrPos >= (mMathces.size() - VISIBLE_ROWS)) {
-            mCurrPos = mMathces.size() - VISIBLE_ROWS;
-            return;
-        }
-
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
-
-        for (int i = 0; i < VISIBLE_ROWS; i++) {
-            remoteViews.setTextViewText(mMatchesView[i], mMathces.get(mCurrPos + i));
-        }
-
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        ComponentName thisAppWidget = new ComponentName(context.getPackageName(), Widget.class.getName());
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
-
-        appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
-    }
-
-
-//    public static class UpdateService extends Service {
-//        private static final String LOG_TAG = UpdateService.class.getSimpleName();
-//
-//        @Override
-//        public void onStart(Intent intent, int startId) {
-//            RemoteViews updateViews = buildUpdate(this);
-//            AppWidgetManager.getInstance(this).updateAppWidget(new ComponentName(this, Widget.class), updateViews);
-//
-//            Log.w(LOG_TAG, "UpdateService::onStart");
-//        }
-//
-//        public RemoteViews buildUpdate(Context context) {
-//            RemoteViews remoteViews;
-//            DateFormat format = SimpleDateFormat.getTimeInstance(SimpleDateFormat.MEDIUM, Locale.getDefault());
-//
-//            remoteViews = new RemoteViews( context.getPackageName(), R.layout.widget );
-//            remoteViews.setTextViewText( R.id.textView, "Time = " + format.format( new Date()));
-//
-//            return remoteViews;
-//        }
-//
-//        @Override
-//        public IBinder onBind(Intent intent) {
-//            return null;
-//        }
-//    }
 }

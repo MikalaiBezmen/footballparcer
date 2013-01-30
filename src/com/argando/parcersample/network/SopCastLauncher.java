@@ -1,6 +1,5 @@
 package com.argando.parcersample.network;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Intent;

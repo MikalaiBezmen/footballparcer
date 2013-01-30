@@ -4,68 +4,85 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
 
-    <!--<LinearLayout android:orientation="horizontal"-->
-                  <!--android:layout_width="fill_parent"-->
-                  <!--android:layout_height="wrap_content">-->
-        <ImageButton android:id="@+id/btnUp"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@drawable/btn_up"/>
+    <!--&lt;!&ndash;<LinearLayout android:orientation="horizontal"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="fill_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content">&ndash;&gt;-->
+    <!--<ImageButton android:id="@+id/btnUp"-->
+                 <!--android:layout_width="wrap_content"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:src="@drawable/btn_up"/>-->
 
-        <ImageButton android:id="@+id/btnRefresh"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_toRightOf="@id/btnUp"
-                     android:src="@drawable/btn_refresh"
-                     android:layout_weight="1"/>
+    <!--<ImageButton android:id="@+id/btnRefresh"-->
+                 <!--android:layout_width="wrap_content"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:layout_toRightOf="@id/btnUp"-->
+                 <!--android:src="@drawable/btn_refresh"-->
+                 <!--android:layout_weight="1"/>-->
 
-        <ImageButton android:id="@+id/btnDown"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_toRightOf="@id/btnRefresh"
-                     android:src="@drawable/btn_down"
-                     android:layout_weight="1"/>
-    <!--</LinearLayout>-->
+    <!--<ImageButton android:id="@+id/btnDown"-->
+                 <!--android:layout_width="wrap_content"-->
+                 <!--android:layout_height="wrap_content"-->
+                 <!--android:layout_toRightOf="@id/btnRefresh"-->
+                 <!--android:src="@drawable/btn_down"-->
+                 <!--android:layout_weight="1"/>-->
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
 
-    <TextView android:id="@+id/match1"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_below="@id/btnUp"
+    <!--<TextView android:id="@+id/match1"-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:layout_below="@id/btnUp"-->
+              <!--android:gravity="center"-->
+              <!--android:text="Match 1"/>-->
+
+    <!--<TextView android:id="@+id/match2"-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:layout_below="@id/match1"-->
+              <!--android:gravity="center"-->
+              <!--android:text="Match 2"/>-->
+
+    <!--<TextView android:id="@+id/match3"-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:layout_below="@id/match2"-->
+              <!--android:gravity="center"-->
+              <!--android:text="Match 3"/>-->
+
+    <!--<TextView android:id="@+id/match4"-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:layout_below="@id/match3"-->
+              <!--android:gravity="center"-->
+              <!--android:text="Match 4"/>-->
+
+    <!--<TextView android:id="@+id/match5"-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:layout_below="@id/match4"-->
+              <!--android:gravity="center"-->
+              <!--android:text="Match 5"/>-->
+
+    <!--<TextView android:id="@+id/match6"-->
+              <!--android:layout_width="fill_parent"-->
+              <!--android:layout_height="wrap_content"-->
+              <!--android:layout_below="@id/match5"-->
+              <!--android:gravity="center"-->
+              <!--android:text="Match 6"/>-->
+
+    <ListView   xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    />
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/empty_view"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
               android:gravity="center"
-              android:text="Match 1"/>
+              android:textColor="#ffffff"
+              android:textStyle="bold"
+              android:text="empty view"
+              android:textSize="20sp" />
 
-    <TextView android:id="@+id/match2"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_below="@id/match1"
-              android:gravity="center"
-              android:text="Match 2"/>
-
-    <TextView android:id="@+id/match3"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_below="@id/match2"
-              android:gravity="center"
-              android:text="Match 3"/>
-
-    <TextView android:id="@+id/match4"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_below="@id/match3"
-              android:gravity="center"
-              android:text="Match 4"/>
-
-    <TextView android:id="@+id/match5"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_below="@id/match4"
-              android:gravity="center"
-              android:text="Match 5"/>
-
-    <TextView android:id="@+id/match6"
-              android:layout_width="fill_parent"
-              android:layout_height="wrap_content"
-              android:layout_below="@id/match5"
-              android:gravity="center"
-              android:text="Match 6"/>
 </RelativeLayout>

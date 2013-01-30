@@ -4,10 +4,10 @@
     <string name="hello">Hello World, ParcerSampleActivity!</string>
     <string name="app_name">Fast Results</string>
 
-    
+
     <string name="web_view_button">web</string>
-    
-     <string name="sopcast_link">sopcast link</string>
+
+    <string name="sopcast_link">sopcast link</string>
 
     <string name="choose_sopcast_link">Доступные ссылки</string>
 </resources>

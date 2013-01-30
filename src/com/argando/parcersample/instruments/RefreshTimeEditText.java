@@ -11,49 +11,40 @@ import android.widget.EditText;
  * Date: 22.07.12
  * Time: 14:01
  */
-public class RefreshTimeEditText extends EditText
-{
-	private final NumberTextWatcher mNumberTextWatcher = new NumberTextWatcher();
-	public RefreshTimeEditText(Context context)
-	{
-		super(context);
-	}
+public class RefreshTimeEditText extends EditText {
+    private final NumberTextWatcher mNumberTextWatcher = new NumberTextWatcher();
 
-	public RefreshTimeEditText(Context context, AttributeSet attrs)
-	{
-		super(context, attrs);
-	}
+    public RefreshTimeEditText(Context context) {
+        super(context);
+    }
 
-	public RefreshTimeEditText(Context context, AttributeSet attrs, int defStyle)
-	{
-		super(context, attrs, defStyle);
-	}
+    public RefreshTimeEditText(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	private void addTextWatcher()
-	{
-		 this.addTextChangedListener(mNumberTextWatcher);
-	}
+    public RefreshTimeEditText(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
-	private class NumberTextWatcher implements TextWatcher
-	{
-		@Override
-		public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
-		{
-		}
+    private void addTextWatcher() {
+        this.addTextChangedListener(mNumberTextWatcher);
+    }
 
-		@Override
-		public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
-		{
+    private class NumberTextWatcher implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
 
-		}
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-		@Override
-		public void afterTextChanged(Editable editable)
-		{
-			if (editable.length()>3)
-			{
+        }
 
-			}
-		}
-	}
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if (editable.length() > 3) {
+
+            }
+        }
+    }
 }

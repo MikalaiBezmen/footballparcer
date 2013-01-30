@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.*;
-import com.argando.parcersample.scoretable.SampleCategorizeListViewActivity;
 import com.argando.parcersample.scoretable.SampleCategorizeListViewActivity.OnlineWebViewListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,385 +16,301 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleAdapter extends BaseAdapter implements Filterable
-{
-	private int[]							mTo;
-	private String[]						mFrom;
-	private ViewBinder						mViewBinder;
+public class SimpleAdapter extends BaseAdapter implements Filterable {
+    private int[] mTo;
+    private String[] mFrom;
+    private ViewBinder mViewBinder;
 
-	private List<? extends Map<String, ?>>	mData;
+    private List<? extends Map<String, ?>> mData;
 
-	private int								mResource;
-	private int								mDropDownResource;
-	private LayoutInflater					mInflater;
+    private int mResource;
+    private int mDropDownResource;
+    private LayoutInflater mInflater;
 
-	private SimpleFilter					mFilter;
-	private ArrayList<Map<String, ?>>		mUnfilteredData;
+    private SimpleFilter mFilter;
+    private ArrayList<Map<String, ?>> mUnfilteredData;
 
-	OnlineWebViewListener					mOnlineWebViewListener;
+    OnlineWebViewListener mOnlineWebViewListener;
     private Context mContext;
 
-	public SimpleAdapter(OnlineWebViewListener onlineWebViewListener, @NotNull Context context, List<? extends Map<String, ?>> data, int resource,
-			String[] from, int[] to)
-	{
-		mOnlineWebViewListener = onlineWebViewListener;
-		mData = data;
-		mResource = mDropDownResource = resource;
-		mFrom = from;
-		mTo = to;
+    public SimpleAdapter(OnlineWebViewListener onlineWebViewListener, @NotNull Context context, List<? extends Map<String, ?>> data, int resource,
+                         String[] from, int[] to) {
+        mOnlineWebViewListener = onlineWebViewListener;
+        mData = data;
+        mResource = mDropDownResource = resource;
+        mFrom = from;
+        mTo = to;
         mContext = context;
-		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
+        mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
 
-	public int getCount()
-	{
-		return mData.size();
-	}
+    public int getCount() {
+        return mData.size();
+    }
 
-	public Object getItem(int position)
-	{
-		return mData.get(position);
-	}
+    public Object getItem(int position) {
+        return mData.get(position);
+    }
 
-	public long getItemId(int position)
-	{
-		return position;
-	}
+    public long getItemId(int position) {
+        return position;
+    }
 
-	@Nullable
-	public View getView(int position, View convertView, ViewGroup parent)
-	{
-		return createViewFromResource(position, convertView, parent, mResource);
-	}
+    @Nullable
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return createViewFromResource(position, convertView, parent, mResource);
+    }
 
-	@Nullable
-	private View createViewFromResource(int position, @Nullable View convertView, ViewGroup parent, int resource)
-	{
-		View v;
-		if (convertView == null)
-		{
-			v = mInflater.inflate(resource, parent, false);
+    @Nullable
+    private View createViewFromResource(int position, @Nullable View convertView, ViewGroup parent, int resource) {
+        View v;
+        if (convertView == null) {
+            v = mInflater.inflate(resource, parent, false);
 
-			final int[] to = mTo;
-			final int count = to.length;
-			final View[] holder = new View[count];
+            final int[] to = mTo;
+            final int count = to.length;
+            final View[] holder = new View[count];
 
-			for (int i = 0; i < count; i++)
-			{
-				holder[i] = v.findViewById(to[i]);
-			}
-			v.setTag(holder);
-		}
-		else
-		{
-			v = convertView;
-		}
+            for (int i = 0; i < count; i++) {
+                holder[i] = v.findViewById(to[i]);
+            }
+            v.setTag(holder);
+        } else {
+            v = convertView;
+        }
 
-		bindView(position, v);
+        bindView(position, v);
 
-		return v;
-	}
+        return v;
+    }
 
-	public void setDropDownViewResource(int resource)
-	{
-		this.mDropDownResource = resource;
-	}
+    public void setDropDownViewResource(int resource) {
+        this.mDropDownResource = resource;
+    }
 
-	@Nullable
-	@Override
-	public View getDropDownView(int position, View convertView, ViewGroup parent)
-	{
-		return createViewFromResource(position, convertView, parent, mDropDownResource);
-	}
+    @Nullable
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent) {
+        return createViewFromResource(position, convertView, parent, mDropDownResource);
+    }
 
-	private void bindView(int position, @NotNull View view)
-	{
-		final Map dataSet = mData.get(position);
-		if (dataSet == null)
-		{
-			return;
-		}
+    private void bindView(int position, @NotNull View view) {
+        final Map dataSet = mData.get(position);
+        if (dataSet == null) {
+            return;
+        }
 
-		final ViewBinder binder = mViewBinder;
-		final View[] holder = (View[]) view.getTag();
-		final String[] from = mFrom;
-		final int[] to = mTo;
-		final int count = to.length;
+        final ViewBinder binder = mViewBinder;
+        final View[] holder = (View[]) view.getTag();
+        final String[] from = mFrom;
+        final int[] to = mTo;
+        final int count = to.length;
 
-		for (int i = 0; i < count; i++)
-		{
-			final View v = holder[i];
-			if (v != null)
-			{
-				final Object data = dataSet.get(from[i]);
-				final String text = data == null ? "" : data.toString();
-				if (text == null)
-				{
-					// text = "";
-				}
+        for (int i = 0; i < count; i++) {
+            final View v = holder[i];
+            if (v != null) {
+                final Object data = dataSet.get(from[i]);
+                final String text = data == null ? "" : data.toString();
+                if (text == null) {
+                    // text = "";
+                }
 
-				boolean bound = false;
-				if (binder != null)
-				{
-					bound = binder.setViewValue(v, data, text);
-				}
+                boolean bound = false;
+                if (binder != null) {
+                    bound = binder.setViewValue(v, data, text);
+                }
 
-				if (!bound)
-				{
-					if (v instanceof Checkable)
-					{
-						if (data instanceof Boolean)
-						{
-							((Checkable) v).setChecked((Boolean) data);
-						}
-						else
-						{
-							throw new IllegalStateException(v.getClass().getName() + " should be bound to a Boolean, not a " + data.getClass());
-						}
-					}
-                    else if (v instanceof Spinner)
-                    {
+                if (!bound) {
+                    if (v instanceof Checkable) {
+                        if (data instanceof Boolean) {
+                            ((Checkable) v).setChecked((Boolean) data);
+                        } else {
+                            throw new IllegalStateException(v.getClass().getName() + " should be bound to a Boolean, not a " + data.getClass());
+                        }
+                    } else if (v instanceof Spinner) {
                         final Object check = data;
 
-                        if (check != null)
-                        {
-                            if (((List<String>)check).size() == 0)
-                            {
+                        if (check != null) {
+                            if (((List<String>) check).size() == 0) {
                                 v.setVisibility(View.GONE);
                                 return;
                             }
 
-                            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(mContext, android.R.layout.simple_spinner_item, ((List)check));
-                            ((Spinner)v).setAdapter(adapter);
+                            ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(mContext, android.R.layout.simple_spinner_item, ((List) check));
+                            ((Spinner) v).setAdapter(adapter);
 
                             //v.setVisibility(View.VISIBLE);
-                        }
-                        else
-                        {
+                        } else {
                             v.setVisibility(View.GONE);
                         }
-                    }
-					else if (v instanceof ImageButton)
-					{
-						final Object check = data;
+                    } else if (v instanceof ImageButton) {
+                        final Object check = data;
 
-						if (check != null)
-						{
-                            if (((List<String>)check).size() == 0)
-                            {
+                        if (check != null) {
+                            if (((List<String>) check).size() == 0) {
                                 v.setVisibility(View.GONE);
                                 return;
                             }
                             int k = 0;
                             v.setVisibility(View.VISIBLE);
-                            v.setOnClickListener(new OnClickListener()
-                            {
-                                public void onClick(View v)
-                                {
-                                    mOnlineWebViewListener.startSopcast(((List<String>)check).get(0));
+                            v.setOnClickListener(new OnClickListener() {
+                                public void onClick(View v) {
+                                    mOnlineWebViewListener.startSopcast(((List<String>) check).get(0));
                                 }
                             });
-						}
-						else
-						{
-							v.setVisibility(View.GONE);
-						}
-					}
-					else if (v instanceof Button)
-					{
-						((Button) v).setOnClickListener(new OnClickListener()
-						{
+                        } else {
+                            v.setVisibility(View.GONE);
+                        }
+                    } else if (v instanceof Button) {
+                        ((Button) v).setOnClickListener(new OnClickListener() {
 
-							public void onClick(View v)
-							{
-								mOnlineWebViewListener.onCreate(text);
-							}
-						});
-					}
-					else if (v instanceof TextView)
-					{
-						// Note: keep the instanceof TextView check at the bottom of these
-						// ifs since a lot of views are TextViews (e.g. CheckBoxes).
+                            public void onClick(View v) {
+                                mOnlineWebViewListener.onCreate(text);
+                            }
+                        });
+                    } else if (v instanceof TextView) {
+                        // Note: keep the instanceof TextView check at the bottom of these
+                        // ifs since a lot of views are TextViews (e.g. CheckBoxes).
 
-						if (mData.get(position).get(SampleCategorizeListViewActivity.IS_ONLINE).equals("0"))
-						{
-							setViewTextGrey((TextView) v, text);
-						}
-						else if (mData.get(position).get(SampleCategorizeListViewActivity.IS_ONLINE).equals("2"))
-						{
-							setViewTextRed((TextView) v, text);
-						}
-						else
-						{
-							setViewText((TextView) v, text);
-						}
-					}
-					else if (v instanceof ImageView)
-					{
-						if (data instanceof Integer)
-						{
-							setViewImage((ImageView) v, (Integer) data);
-						}
-						else
-						{
-							setViewImage((ImageView) v, text);
-						}
-					}
-					else
-					{
-						throw new IllegalStateException(v.getClass().getName() + " is not a " + " view that can be bounds by this SimpleAdapter");
-					}
-				}
-			}
-		}
-	}
+                        if (mData.get(position).get(SampleCategorizeListViewActivity.IS_ONLINE).equals("0")) {
+                            setViewTextGrey((TextView) v, text);
+                        } else if (mData.get(position).get(SampleCategorizeListViewActivity.IS_ONLINE).equals("2")) {
+                            setViewTextRed((TextView) v, text);
+                        } else {
+                            setViewText((TextView) v, text);
+                        }
+                    } else if (v instanceof ImageView) {
+                        if (data instanceof Integer) {
+                            setViewImage((ImageView) v, (Integer) data);
+                        } else {
+                            setViewImage((ImageView) v, text);
+                        }
+                    } else {
+                        throw new IllegalStateException(v.getClass().getName() + " is not a " + " view that can be bounds by this SimpleAdapter");
+                    }
+                }
+            }
+        }
+    }
 
-	public ViewBinder getViewBinder()
-	{
-		return mViewBinder;
-	}
+    public ViewBinder getViewBinder() {
+        return mViewBinder;
+    }
 
-	public void setViewBinder(ViewBinder viewBinder)
-	{
-		mViewBinder = viewBinder;
-	}
+    public void setViewBinder(ViewBinder viewBinder) {
+        mViewBinder = viewBinder;
+    }
 
-	public void setViewImage(@NotNull ImageView v, int value)
-	{
-		v.setImageResource(value);
-	}
+    public void setViewImage(@NotNull ImageView v, int value) {
+        v.setImageResource(value);
+    }
 
-	public void setViewImage(@NotNull ImageView v, String value)
-	{
-		try
-		{
-			v.setImageResource(Integer.parseInt(value));
-		}
-		catch (NumberFormatException nfe)
-		{
-			v.setImageURI(Uri.parse(value));
-		}
-	}
+    public void setViewImage(@NotNull ImageView v, String value) {
+        try {
+            v.setImageResource(Integer.parseInt(value));
+        } catch (NumberFormatException nfe) {
+            v.setImageURI(Uri.parse(value));
+        }
+    }
 
-	public void setViewText(@NotNull TextView v, String text)
-	{
-		{
-			v.setTextColor(Color.argb(255,100,170,100));
-			//v.setShadowLayer(1,1,1, Color.GREEN);
-		}
-		v.setText(text);
-	}
-	
-	public void setViewTextRed(@NotNull TextView v, String text)
-	{
-		{
-			v.setTextColor(Color.RED);
-			//v.setShadowLayer(1,1,1, Color.RED);
-		}
-		v.setText(text);
-	}
-	
-	public void setViewTextGrey(@NotNull TextView v, String text)
-	{
-		{
-			v.setTextColor(Color.WHITE);
-			v.setShadowLayer(1,1,1, Color.BLACK);
-		}
-		v.setText(text);
-	}
+    public void setViewText(@NotNull TextView v, String text) {
+        {
+            v.setTextColor(Color.argb(255, 100, 170, 100));
+            //v.setShadowLayer(1,1,1, Color.GREEN);
+        }
+        v.setText(text);
+    }
 
-	public Filter getFilter()
-	{
-		if (mFilter == null)
-		{
-			mFilter = new SimpleFilter();
-		}
-		return mFilter;
-	}
+    public void setViewTextRed(@NotNull TextView v, String text) {
+        {
+            v.setTextColor(Color.RED);
+            //v.setShadowLayer(1,1,1, Color.RED);
+        }
+        v.setText(text);
+    }
 
-	public static interface ViewBinder
-	{
-		boolean setViewValue(View view, Object data, String textRepresentation);
-	}
+    public void setViewTextGrey(@NotNull TextView v, String text) {
+        {
+            v.setTextColor(Color.WHITE);
+            v.setShadowLayer(1, 1, 1, Color.BLACK);
+        }
+        v.setText(text);
+    }
 
-	private class SimpleFilter extends Filter
-	{
+    public Filter getFilter() {
+        if (mFilter == null) {
+            mFilter = new SimpleFilter();
+        }
+        return mFilter;
+    }
 
-		@NotNull
-		@Override
-		protected FilterResults performFiltering(@Nullable CharSequence prefix)
-		{
-			FilterResults results = new FilterResults();
+    public static interface ViewBinder {
+        boolean setViewValue(View view, Object data, String textRepresentation);
+    }
 
-			if (mUnfilteredData == null)
-			{
-				mUnfilteredData = new ArrayList<Map<String, ?>>(mData);
-			}
+    private class SimpleFilter extends Filter {
 
-			if (prefix == null || prefix.length() == 0)
-			{
-				ArrayList<Map<String, ?>> list = mUnfilteredData;
-				results.values = list;
-				results.count = list.size();
-			}
-			else
-			{
-				String prefixString = prefix.toString().toLowerCase();
+        @NotNull
+        @Override
+        protected FilterResults performFiltering(@Nullable CharSequence prefix) {
+            FilterResults results = new FilterResults();
 
-				ArrayList<Map<String, ?>> unfilteredValues = mUnfilteredData;
-				int count = unfilteredValues.size();
+            if (mUnfilteredData == null) {
+                mUnfilteredData = new ArrayList<Map<String, ?>>(mData);
+            }
 
-				ArrayList<Map<String, ?>> newValues = new ArrayList<Map<String, ?>>(count);
+            if (prefix == null || prefix.length() == 0) {
+                ArrayList<Map<String, ?>> list = mUnfilteredData;
+                results.values = list;
+                results.count = list.size();
+            } else {
+                String prefixString = prefix.toString().toLowerCase();
 
-				for (int i = 0; i < count; i++)
-				{
-					Map<String, ?> h = unfilteredValues.get(i);
-					if (h != null)
-					{
+                ArrayList<Map<String, ?>> unfilteredValues = mUnfilteredData;
+                int count = unfilteredValues.size();
 
-						int len = mTo.length;
+                ArrayList<Map<String, ?>> newValues = new ArrayList<Map<String, ?>>(count);
 
-						for (int j = 0; j < len; j++)
-						{
-							String str = (String) h.get(mFrom[j]);
+                for (int i = 0; i < count; i++) {
+                    Map<String, ?> h = unfilteredValues.get(i);
+                    if (h != null) {
 
-							String[] words = str.split(" ");
-							int wordCount = words.length;
+                        int len = mTo.length;
 
-							for (int k = 0; k < wordCount; k++)
-							{
-								String word = words[k];
+                        for (int j = 0; j < len; j++) {
+                            String str = (String) h.get(mFrom[j]);
 
-								if (word.toLowerCase().startsWith(prefixString))
-								{
-									newValues.add(h);
-									break;
-								}
-							}
-						}
-					}
-				}
+                            String[] words = str.split(" ");
+                            int wordCount = words.length;
 
-				results.values = newValues;
-				results.count = newValues.size();
-			}
+                            for (int k = 0; k < wordCount; k++) {
+                                String word = words[k];
 
-			return results;
-		}
+                                if (word.toLowerCase().startsWith(prefixString)) {
+                                    newValues.add(h);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
 
-		@Override
-		protected void publishResults(CharSequence constraint, @NotNull FilterResults results)
-		{
-			// noinspection unchecked
-			mData = (List<Map<String, ?>>) results.values;
-			if (results.count > 0)
-			{
-				notifyDataSetChanged();
-			}
-			else
-			{
-				notifyDataSetInvalidated();
-			}
-		}
-	}
+                results.values = newValues;
+                results.count = newValues.size();
+            }
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, @NotNull FilterResults results) {
+            // noinspection unchecked
+            mData = (List<Map<String, ?>>) results.values;
+            if (results.count > 0) {
+                notifyDataSetChanged();
+            } else {
+                notifyDataSetInvalidated();
+            }
+        }
+    }
 }
