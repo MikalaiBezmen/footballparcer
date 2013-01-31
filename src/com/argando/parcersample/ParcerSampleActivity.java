@@ -44,6 +44,16 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         resetUpdateService(500);
         mGestureScanner = new GestureDetector(this, new GestureDetectorImpl(this));
         initUIComponents();
+
+        if(savedInstanceState == null)
+        {
+            showResultsList();
+        }
+        else
+        {
+            mMatchFragment = (MatchListFragment)getSupportFragmentManager().findFragmentByTag("MatchesFragment");
+        }
+
     }
 
     @Override
@@ -67,7 +77,6 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
     @Override
     public void onResume() {
         super.onResume();
-        showResultsList();
     }
 
     private void resetUpdateService(int time) {
@@ -81,14 +90,15 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         Log.i(LOG_TAG, "showResultsList");
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (mMatchFragment != null) {
-            mMatchFragment.onAttach(this);
+            //mMatchFragment.onAttach(this);
             if (mMatchFragment.isVisible()) {
                 return;
             }
             if (!mMatchFragment.isInLayout()) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                fragmentTransaction.replace(R.id.container, mMatchFragment);
+                fragmentTransaction.replace(R.id.container, mMatchFragment, "MatchesFragment");
+                mMatchFragment.setRetainInstance(true);
                 fragmentTransaction.commit();
                 mMatchFragment.updateData();
                 return;
@@ -96,7 +106,8 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         }
         mMatchFragment = new MatchListFragment();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container, mMatchFragment);
+        fragmentTransaction.replace(R.id.container, mMatchFragment, "MatchesFragment");
+        mMatchFragment.setRetainInstance(true);
         fragmentTransaction.commit();
     }
 
@@ -141,6 +152,7 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
             if (!mMenuFragment.isInLayout()) {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.container, mMenuFragment);
+                mMenuFragment.setRetainInstance(true);
                 fragmentTransaction.commit();
                 return;
             }
@@ -148,6 +160,7 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         mMenuFragment = new MenuFragment();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, mMenuFragment);
+        mMenuFragment.setRetainInstance(true);
         fragmentTransaction.commit();
     }
 }
