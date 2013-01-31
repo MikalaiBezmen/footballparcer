@@ -17,6 +17,12 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 import com.argando.parcersample.R;
+import com.argando.parcersample.data.League;
+import com.argando.parcersample.data.LeaguesHandler;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @TargetApi(11)
 /**
@@ -58,6 +64,8 @@ public class Widget extends AppWidgetProvider {
     private static Handler sWorkerQueue;
     private static WidgetDataProviderObserver sDataObserver;
 
+    private static int mCurrentLeague = -1;
+
     public Widget() {
         // Start the worker thread
         sWorkerThread = new HandlerThread("WidgetProvider-worker");
@@ -89,9 +97,33 @@ public class Widget extends AppWidgetProvider {
         Log.w(LOG_TAG, "Widget::onReceive()::"+action);
 
         if (action.equals(ACTION_WIDGET_BTN_LEFT)) {
-            Toast.makeText(ctx, "LEFT BUTTON PRESS", Toast.LENGTH_SHORT).show();
+            if (mCurrentLeague == 0) {
+                mCurrentLeague--;
+
+                RemoteViews rv = new RemoteViews(ctx.getPackageName(), R.layout.widget);
+                rv.setTextViewText(R.id.league, "Все лиги");
+
+                updateWidget(ctx, rv);
+            } else if (mCurrentLeague != -1) {
+                mCurrentLeague--;
+
+                RemoteViews rv = new RemoteViews(ctx.getPackageName(), R.layout.widget);
+                rv.setTextViewText(R.id.league, LeaguesHandler.mListLeauges.get(mCurrentLeague).getName());
+
+                updateWidget(ctx, rv);
+            }
+
+            Toast.makeText(ctx, "LEFT BUTTON PRESS " + String.valueOf(mCurrentLeague) , Toast.LENGTH_SHORT).show();
         } else if (action.equals(ACTION_WIDGET_BTN_RIGHT)) {
-            Toast.makeText(ctx, "RIGHT BUTTON PRESS", Toast.LENGTH_SHORT).show();
+            if (mCurrentLeague != (LeaguesHandler.mListLeauges.size() - 1)) {
+                mCurrentLeague++;
+
+                RemoteViews rv = new RemoteViews(ctx.getPackageName(), R.layout.widget);
+                rv.setTextViewText(R.id.league, LeaguesHandler.mListLeauges.get(mCurrentLeague).getName());
+
+                updateWidget(ctx, rv);
+            }
+            Toast.makeText(ctx, "RIGHT BUTTON PRESS " + String.valueOf(mCurrentLeague), Toast.LENGTH_SHORT).show();
         } else if (action.equals(ACTION_WIDGET_LIST_CLICK)) {
             Toast.makeText(ctx, "LIST CLICK", Toast.LENGTH_SHORT).show();
         }
@@ -187,6 +219,14 @@ public class Widget extends AppWidgetProvider {
         Log.w(LOG_TAG, "Widget::onUpdate()");
 
         super.onUpdate(context, appWidgetManager, appWidgetIds);
+    }
+
+    public void updateWidget(Context ctx, RemoteViews rv) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(ctx);
+        ComponentName thisAppWidget = new ComponentName(ctx.getPackageName(), Widget.class.getName());
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget);
+
+        appWidgetManager.updateAppWidget(appWidgetIds, rv);
     }
 
 }
