@@ -35,19 +35,24 @@
             </intent-filter>
         </receiver>
 
+        <!-- The widget provider -->
         <receiver android:name=".widget.Widget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
 
-                <action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_BUTTON_UP"/>
-                <action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_BUTTON_DOWN"/>
-                <!--<action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_BUTTON_REFRESH"/>-->
+                <action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_BTN_LEFT"/>
+                <action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_BTN_RIGHT"/>
+                <action android:name="com.argando.parcersample.widget.Widget.ACTION_WIDGET_LIST_CLICK"/>
             </intent-filter>
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget"/>
         </receiver>
+
+        <!-- The service serving the RemoteViews to the collection widget -->
         <service    android:name=".widget.WidgetService"
                     android:permission="android.permission.BIND_REMOTEVIEWS"/>
 
+        <!-- The content provider serving the data -->
+        <provider android:name=".widget.WidgetDataProvider"
+                  android:authorities="com.argando.parcersample.widget.WidgetDataProvider" />
     </application>
-
 </manifest>

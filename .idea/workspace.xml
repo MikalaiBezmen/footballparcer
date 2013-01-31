@@ -24,56 +24,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="061b6521-2033-450a-9a89-281544035d8d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetRemoteFactory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/widget_item.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/lib2.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/btn_left.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/btn_right.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/btn_down.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/btn_refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/res/drawable-hdpi/btn_up.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetRemoteFactory.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/Cache.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/Cache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/data/DataNameHelper.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/data/DataNameHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/parser/DataParcer.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/parser/DataParcer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/data/League.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/data/League.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/data/LeaguesHandler.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/data/LeaguesHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/data/Match.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/data/Match.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/network/NetworkChecker.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/network/NetworkChecker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/backgroundupdate/OnBootReceiver.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/backgroundupdate/OnBootReceiver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/backgroundupdate/ParceService.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/backgroundupdate/ParceService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/ParcerSampleActivity.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/ParcerSampleActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/backgroundupdate/ParseThread.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/backgroundupdate/ParseThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/data/Preferences.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/data/Preferences.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/instruments/RefreshTimeEditText.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/instruments/RefreshTimeEditText.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/SampleCategorizeListViewActivity.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/SampleCategorizeListViewActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/ScoreFragment.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/ScoreFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/SeparatedListAdapter.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/SeparatedListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/SimpleAdapter.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/SimpleAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/network/SopCastLauncher.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/network/SopCastLauncher.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/backgroundupdate/UpdateReceiver.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/backgroundupdate/UpdateReceiver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/footballparcer.iml" afterPath="$PROJECT_DIR$/footballparcer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_complex_green.xml" afterPath="$PROJECT_DIR$/res/layout/list_complex_green.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_header.xml" afterPath="$PROJECT_DIR$/res/layout/list_header.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/list_item.xml" afterPath="$PROJECT_DIR$/res/layout/list_item.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/list_items_divider.xml" afterPath="$PROJECT_DIR$/res/drawable-mdpi/list_items_divider.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/mach_online.xml" afterPath="$PROJECT_DIR$/res/layout/mach_online.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/main.xml" afterPath="$PROJECT_DIR$/res/layout/main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project.properties" afterPath="$PROJECT_DIR$/project.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/widget.xml" afterPath="$PROJECT_DIR$/res/layout/widget.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/xml/widget.xml" afterPath="$PROJECT_DIR$/res/xml/widget.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="footballparcer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359537248439" ignored="false" />
-    <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359537529435" ignored="false" />
-    <file path="/fragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1358868667679" ignored="false" />
-    <file path="/AndroidManifest.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359533699027" ignored="false" />
-    <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359550575997" ignored="false" />
-    <file path="/WidgetService.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359533189987" ignored="false" />
+    <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359647205181" ignored="false" />
+    <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359644467763" ignored="false" />
+    <file path="/fragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359621370863" ignored="false" />
+    <file path="/AndroidManifest.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359644150663" ignored="false" />
+    <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359647097314" ignored="false" />
+    <file path="/WidgetService.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359641314260" ignored="false" />
     <file path="/WidgetItem.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359452442999" ignored="false" />
     <file path="/ScoreFragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359455945212" ignored="false" />
-    <file path="/WidgetRemoteFactory.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359554280544" ignored="false" />
+    <file path="/WidgetRemoteFactory.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359619753439" ignored="false" />
     <file path="/widget_item.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359554470299" ignored="false" />
+    <file path="/WidgetDataProvider.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359643096471" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,19 +112,28 @@
       <file leaf-file-name="widget.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="39" selection-start="3375" selection-end="3375" vertical-scroll-proportion="-3.94">
+            <state line="23" column="46" selection-start="1034" selection-end="1034" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="widget.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/xml/widget.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="55" selection-start="317" selection-end="317" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="widget_item.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/widget_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="41" selection-start="919" selection-end="919" vertical-scroll-proportion="-8.0">
+            <state line="21" column="73" selection-start="749" selection-end="749" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -156,71 +142,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScoreFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/scoretable/ScoreFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="0" selection-start="1291" selection-end="1449" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Widget.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="53" selection-start="990" selection-end="990" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="WidgetService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="14" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WidgetRemoteFactory.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetRemoteFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="45" selection-start="2191" selection-end="2191" vertical-scroll-proportion="0.5753425">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#871#878#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataParcer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/parser/DataParcer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="200" column="111" selection-start="8767" selection-end="8767" vertical-scroll-proportion="0.0">
+            <state line="16" column="13" selection-start="467" selection-end="467" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LeaguesHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/LeaguesHandler.java">
+      <file leaf-file-name="WidgetDataProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="277" selection-end="494" vertical-scroll-proportion="0.0">
+            <state line="11" column="6" selection-start="275" selection-end="275" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="League.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/League.java">
+      <file leaf-file-name="Widget.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="166" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0">
+            <state line="147" column="126" selection-start="6966" selection-end="6966" vertical-scroll-proportion="0.15213676">
               <folding />
             </state>
           </provider>
@@ -229,7 +172,7 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="20" selection-start="2371" selection-end="2371" vertical-scroll-proportion="0.0">
+            <state line="44" column="77" selection-start="2199" selection-end="2199" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -256,12 +199,14 @@
         <option value="$PROJECT_DIR$/src/com/argando/parcersample/data/LeaguesHandler.java" />
         <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetItem.java" />
         <option value="$PROJECT_DIR$/src/com/argando/parcersample/scoretable/ScoreFragment.java" />
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java" />
-        <option value="$PROJECT_DIR$/res/layout/widget.xml" />
-        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
-        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetRemoteFactory.java" />
         <option value="$PROJECT_DIR$/res/layout/widget_item.xml" />
+        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetRemoteFactory.java" />
+        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java" />
+        <option value="$PROJECT_DIR$/res/xml/widget.xml" />
+        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java" />
+        <option value="$PROJECT_DIR$/res/layout/widget.xml" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
       </list>
     </option>
   </component>
@@ -354,27 +299,9 @@
               <option name="myItemId" value="widget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="footballparcer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="footballparcer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="parcersample" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scoretable" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+              <option name="myItemId" value="WidgetService.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -395,8 +322,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="parser" />
+              <option name="myItemId" value="widget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WidgetDataProvider.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -417,8 +348,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="data" />
+              <option name="myItemId" value="widget" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Widget.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -452,6 +387,10 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -471,10 +410,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="footballparcer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="footballparcer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -654,28 +607,28 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="-3" width="1926" height="1052" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.6732892" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39955848" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32781458" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17395945" sideWeight="0.6732892" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32671082" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17395945" sideWeight="0.67439294" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32560706" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924226" sideWeight="0.6721854" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924226" sideWeight="0.6721854" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.67439294" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -742,14 +695,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout/list_complex_green.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_header.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -774,51 +719,46 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/xml/widget.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="51" selection-start="320" selection-end="320" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/Match.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="36" selection-start="1736" selection-end="1736" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/parser/DataParcer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="111" selection-start="8767" selection-end="8767" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="200" column="111" selection-start="8767" selection-end="8767" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/scoretable/ScoreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="0" selection-start="1150" selection-end="1500" vertical-scroll-proportion="0.042735044" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/League.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="166" selection-start="622" selection-end="622" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="7" column="103" selection-start="208" selection-end="208" vertical-scroll-proportion="0.054700855" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/Match.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="20" selection-start="2371" selection-end="2371" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="10" column="13" selection-start="175" selection-end="175" vertical-scroll-proportion="0.191453" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/LeaguesHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="277" selection-end="494" vertical-scroll-proportion="0.0">
+        <state line="16" column="18" selection-start="277" selection-end="494" vertical-scroll-proportion="0.382906" />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/tools/adt-bundle-linux-x86_64/sdk/platforms/android-17/android.jar!/android/database/Cursor.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="163" selection-end="169" vertical-scroll-proportion="0.13675214" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/widget.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="55" selection-start="317" selection-end="317" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
+    <entry file="file://$PROJECT_DIR$/res/layout/widget_item.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="39" selection-start="3375" selection-end="3375" vertical-scroll-proportion="-3.94">
+        <state line="21" column="73" selection-start="749" selection-end="749" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -826,48 +766,41 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/scoretable/ScoreFragment.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="0" selection-start="1291" selection-end="1449" vertical-scroll-proportion="0.0">
+        <state line="23" column="46" selection-start="1034" selection-end="1034" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="6" selection-start="275" selection-end="275" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="14" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="16" column="13" selection-start="467" selection-end="467" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="77" selection-start="2199" selection-end="2199" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="53" selection-start="990" selection-end="990" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/widget_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="41" selection-start="919" selection-end="919" vertical-scroll-proportion="-8.0">
+        <state line="147" column="126" selection-start="6966" selection-end="6966" vertical-scroll-proportion="0.15213676">
           <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetRemoteFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="45" selection-start="2191" selection-end="2191" vertical-scroll-proportion="0.5753425">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#871#878#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
