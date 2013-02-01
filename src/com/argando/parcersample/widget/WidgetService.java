@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -60,22 +61,48 @@ class WidgetRemoteFactory implements RemoteViewsService.RemoteViewsFactory{
         String team1 = null;
         String team2 = null;
         String time = null;
+        String score = null;
+        int statusMatch = 0;
 
         if (mCursor.moveToPosition(i)) {
             final int team1ColIndex = mCursor.getColumnIndex(WidgetDataProvider.Columns.TEAM1);
             final int timeColIndex  = mCursor.getColumnIndex(WidgetDataProvider.Columns.TIME);
             final int team2ColIndex = mCursor.getColumnIndex(WidgetDataProvider.Columns.TEAM2);
+            final int scoreColIndex = mCursor.getColumnIndex(WidgetDataProvider.Columns.SCORE);
+            final int statusMatchColIndex = mCursor.getColumnIndex(WidgetDataProvider.Columns.MATCH_STATUS);
 
             team1   = mCursor.getString(team1ColIndex);
             time    = mCursor.getString(timeColIndex);
             team2   = mCursor.getString(team2ColIndex);
+            score   = mCursor.getString(scoreColIndex);
+            statusMatch = mCursor.getInt(statusMatchColIndex);
         }
 
         RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
 
         rv.setTextViewText(R.id.team1, team1);
-        rv.setTextViewText(R.id.time, time);
         rv.setTextViewText(R.id.team2, team2);
+
+        switch (statusMatch) {
+            case 0:
+                rv.setTextViewText(R.id.time, time);
+                rv.setTextViewText(R.id.matchStatus, "");
+                break;
+            case 1:
+                rv.setTextViewText(R.id.time, score);
+                rv.setTextColor(R.id.matchStatus, Color.GREEN);
+                rv.setTextViewText(R.id.matchStatus, "ON");
+                break;
+            case 2:
+                rv.setTextViewText(R.id.time, score);
+                rv.setTextColor(R.id.matchStatus, Color.RED);
+                rv.setTextViewText(R.id.matchStatus, "FT");
+                break;
+            default:
+                rv.setTextViewText(R.id.time, time);
+                rv.setTextViewText(R.id.matchStatus, "");
+                break;
+        }
 
         return rv;
     }

@@ -5,10 +5,7 @@ import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.Intent;
+import android.content.*;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
@@ -20,8 +17,6 @@ import com.argando.parcersample.R;
 import com.argando.parcersample.data.League;
 import com.argando.parcersample.data.LeaguesHandler;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @TargetApi(11)
@@ -64,7 +59,7 @@ public class Widget extends AppWidgetProvider {
     private static Handler sWorkerQueue;
     private static WidgetDataProviderObserver sDataObserver;
 
-    private static int mCurrentLeague = -1;
+    private static int mCurrentLeague = -1; // -1 means that need to show all matches of all league
 
     public Widget() {
         // Start the worker thread
@@ -90,6 +85,7 @@ public class Widget extends AppWidgetProvider {
         }
     }
 
+    //!!!!!!!!!!!!!!!!!!!!!!!! REFACTORING NEED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     @Override
     public void onReceive(Context ctx, Intent intent) {
         final String action = intent.getAction();
@@ -97,6 +93,7 @@ public class Widget extends AppWidgetProvider {
         Log.w(LOG_TAG, "Widget::onReceive()::"+action);
 
         if (action.equals(ACTION_WIDGET_BTN_LEFT)) {
+            // update name of the league
             if (mCurrentLeague == 0) {
                 mCurrentLeague--;
 
@@ -104,6 +101,45 @@ public class Widget extends AppWidgetProvider {
                 rv.setTextViewText(R.id.league, "Все лиги");
 
                 updateWidget(ctx, rv);
+
+                // update matches for selected league...
+                final Context context = ctx;
+                sWorkerQueue.removeMessages(0);
+                sWorkerQueue.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        final ContentResolver r = context.getContentResolver();
+                        final List<League> leagues = LeaguesHandler.mListLeauges;
+
+                        r.delete(WidgetDataProvider.CONTENT_URI, "", new String[]{""} );
+                        // We disable the data changed observer temporarily since each of the updates
+                        // will trigger an onChange() in our data observer.
+                        int k = 0;
+                        r.unregisterContentObserver(sDataObserver);
+                        for (int i = 0; i < leagues.size(); i++) {
+                            for (int j = 0; j < leagues.get(i).getSize(); j++) {
+                                final Uri uri = ContentUris.withAppendedId(WidgetDataProvider.CONTENT_URI, k);
+                                final ContentValues values = new ContentValues();
+
+                                values.put(WidgetDataProvider.Columns.TEAM1, leagues.get(i).getMatch(j).getFirstTeam());
+                                values.put(WidgetDataProvider.Columns.TIME, leagues.get(i).getMatch(j).getDate());
+                                values.put(WidgetDataProvider.Columns.TEAM2, leagues.get(i).getMatch(j).getSecondTeam());
+                                values.put(WidgetDataProvider.Columns.SCORE, leagues.get(i).getMatch(j).getScore1() + ':' + leagues.get(i).getMatch(j).getScore2());
+                                values.put(WidgetDataProvider.Columns.MATCH_STATUS, leagues.get(i).getMatch(j).isOnlineStatus());
+
+                                r.insert(uri, values);
+//                                r.update(uri, values, null, null);
+                                k++;
+                            }
+                        }
+                        r.registerContentObserver(WidgetDataProvider.CONTENT_URI, true, sDataObserver);
+
+                        final AppWidgetManager mgr = AppWidgetManager.getInstance(context);
+                        final ComponentName cn = new ComponentName(context, Widget.class);
+                        mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.matchesView);
+                    }
+                });
+
             } else if (mCurrentLeague != -1) {
                 mCurrentLeague--;
 
@@ -111,10 +147,78 @@ public class Widget extends AppWidgetProvider {
                 rv.setTextViewText(R.id.league, LeaguesHandler.mListLeauges.get(mCurrentLeague).getName());
 
                 updateWidget(ctx, rv);
-            }
 
-            Toast.makeText(ctx, "LEFT BUTTON PRESS " + String.valueOf(mCurrentLeague) , Toast.LENGTH_SHORT).show();
+                // update matches for selected league...
+                final Context context = ctx;
+                sWorkerQueue.removeMessages(0);
+                sWorkerQueue.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mCurrentLeague == -1) {
+                            final ContentResolver r = context.getContentResolver();
+                            final List<League> leagues = LeaguesHandler.mListLeauges;
+
+                            r.delete(WidgetDataProvider.CONTENT_URI, "", new String[]{""} );
+
+                            int k = 0;
+                            // We disable the data changed observer temporarily since each of the updates
+                            // will trigger an onChange() in our data observer.
+                            r.unregisterContentObserver(sDataObserver);
+                            for (int i = 0; i < leagues.size(); i++) {
+                                for (int j = 0; j < leagues.get(i).getSize(); j++) {
+                                    final Uri uri = ContentUris.withAppendedId(WidgetDataProvider.CONTENT_URI, k);
+                                    final ContentValues values = new ContentValues();
+
+                                    values.put(WidgetDataProvider.Columns.TEAM1, leagues.get(i).getMatch(j).getFirstTeam());
+                                    values.put(WidgetDataProvider.Columns.TIME, leagues.get(i).getMatch(j).getDate());
+                                    values.put(WidgetDataProvider.Columns.TEAM2, leagues.get(i).getMatch(j).getSecondTeam());
+                                    values.put(WidgetDataProvider.Columns.SCORE, leagues.get(i).getMatch(j).getScore1() + ':' + leagues.get(i).getMatch(j).getScore2());
+                                    values.put(WidgetDataProvider.Columns.MATCH_STATUS, leagues.get(i).getMatch(j).isOnlineStatus());
+
+                                    r.insert(uri, values);
+//                                    r.update(uri, values, null, null);
+                                    k++;
+                                }
+                            }
+                            r.registerContentObserver(WidgetDataProvider.CONTENT_URI, true, sDataObserver);
+
+                            final AppWidgetManager mgr = AppWidgetManager.getInstance(context);
+                            final ComponentName cn = new ComponentName(context, Widget.class);
+                            mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.matchesView);
+                        } else {
+                            final ContentResolver r = context.getContentResolver();
+                            final League league = LeaguesHandler.mListLeauges.get(mCurrentLeague);
+
+                            r.delete(WidgetDataProvider.CONTENT_URI, "", new String[]{""} );
+
+                            // We disable the data changed observer temporarily since each of the updates
+                            // will trigger an onChange() in our data observer.
+                            r.unregisterContentObserver(sDataObserver);
+                            for (int i = 0; i < league.getSize(); i++) {
+                                final Uri uri = ContentUris.withAppendedId(WidgetDataProvider.CONTENT_URI, i);
+                                final ContentValues values = new ContentValues();
+
+                                values.put(WidgetDataProvider.Columns.TEAM1, league.getMatch(i).getFirstTeam());
+                                values.put(WidgetDataProvider.Columns.TIME, league.getMatch(i).getDate());
+                                values.put(WidgetDataProvider.Columns.TEAM2, league.getMatch(i).getSecondTeam());
+                                values.put(WidgetDataProvider.Columns.SCORE, league.getMatch(i).getScore1() + ':' + league.getMatch(i).getScore2());
+                                values.put(WidgetDataProvider.Columns.MATCH_STATUS, league.getMatch(i).isOnlineStatus());
+
+                                r.insert(uri, values);
+//                                r.update(uri, values, null, null);
+                            }
+                            r.registerContentObserver(WidgetDataProvider.CONTENT_URI, true, sDataObserver);
+
+                            final AppWidgetManager mgr = AppWidgetManager.getInstance(context);
+                            final ComponentName cn = new ComponentName(context, Widget.class);
+                            mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.matchesView);
+                        }
+                    }
+                });
+            }
+//            Toast.makeText(ctx, "LEFT BUTTON PRESS " + String.valueOf(mCurrentLeague) , Toast.LENGTH_SHORT).show();
         } else if (action.equals(ACTION_WIDGET_BTN_RIGHT)) {
+            // update name of the league
             if (mCurrentLeague != (LeaguesHandler.mListLeauges.size() - 1)) {
                 mCurrentLeague++;
 
@@ -122,53 +226,46 @@ public class Widget extends AppWidgetProvider {
                 rv.setTextViewText(R.id.league, LeaguesHandler.mListLeauges.get(mCurrentLeague).getName());
 
                 updateWidget(ctx, rv);
+
+                // update matches for selected league...
+                final Context context = ctx;
+                sWorkerQueue.removeMessages(0);
+                sWorkerQueue.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        final ContentResolver r = context.getContentResolver();
+                        final League league = LeaguesHandler.mListLeauges.get(mCurrentLeague);
+
+                        r.delete(WidgetDataProvider.CONTENT_URI, "", new String[]{""} );
+
+                        // We disable the data changed observer temporarily since each of the updates
+                        // will trigger an onChange() in our data observer.
+                        r.unregisterContentObserver(sDataObserver);
+                        for (int i = 0; i < league.getSize(); i++) {
+                            final Uri uri = ContentUris.withAppendedId(WidgetDataProvider.CONTENT_URI, i);
+                            final ContentValues values = new ContentValues();
+
+                            values.put(WidgetDataProvider.Columns.TEAM1, league.getMatch(i).getFirstTeam());
+                            values.put(WidgetDataProvider.Columns.TIME, league.getMatch(i).getDate());
+                            values.put(WidgetDataProvider.Columns.TEAM2, league.getMatch(i).getSecondTeam());
+                            values.put(WidgetDataProvider.Columns.SCORE, league.getMatch(i).getScore1() + ':' + league.getMatch(i).getScore2());
+                            values.put(WidgetDataProvider.Columns.MATCH_STATUS, league.getMatch(i).isOnlineStatus());
+
+                            r.insert(uri, values);
+//                            r.update(uri, values, null, null);
+                        }
+                        r.registerContentObserver(WidgetDataProvider.CONTENT_URI, true, sDataObserver);
+
+                        final AppWidgetManager mgr = AppWidgetManager.getInstance(context);
+                        final ComponentName cn = new ComponentName(context, Widget.class);
+                        mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.matchesView);
+                    }
+                });
             }
-            Toast.makeText(ctx, "RIGHT BUTTON PRESS " + String.valueOf(mCurrentLeague), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(ctx, "RIGHT BUTTON PRESS " + String.valueOf(mCurrentLeague), Toast.LENGTH_SHORT).show();
         } else if (action.equals(ACTION_WIDGET_LIST_CLICK)) {
             Toast.makeText(ctx, "LIST CLICK", Toast.LENGTH_SHORT).show();
         }
-
-//        if (action.equals(REFRESH_ACTION)) {
-//            // BroadcastReceivers have a limited amount of time to do work, so for this sample, we
-//            // are triggering an update of the data on another thread.  In practice, this update
-//            // can be triggered from a background service, or perhaps as a result of user actions
-//            // inside the main application.
-//            final Context context = ctx;
-//            sWorkerQueue.removeMessages(0);
-//            sWorkerQueue.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    final ContentResolver r = context.getContentResolver();
-//                    final Cursor c = r.query(WeatherDataProvider.CONTENT_URI, null, null, null,
-//                            null);
-//                    final int count = c.getCount();
-//                    final int maxDegrees = 96;
-//
-//                    // We disable the data changed observer temporarily since each of the updates
-//                    // will trigger an onChange() in our data observer.
-//                    r.unregisterContentObserver(sDataObserver);
-//                    for (int i = 0; i < count; ++i) {
-//                        final Uri uri = ContentUris.withAppendedId(WeatherDataProvider.CONTENT_URI, i);
-//                        final ContentValues values = new ContentValues();
-//                        values.put(WeatherDataProvider.Columns.TEMPERATURE,
-//                                new Random().nextInt(maxDegrees));
-//                        r.update(uri, values, null, null);
-//                    }
-//                    r.registerContentObserver(WeatherDataProvider.CONTENT_URI, true, sDataObserver);
-//
-//                    final AppWidgetManager mgr = AppWidgetManager.getInstance(context);
-//                    final ComponentName cn = new ComponentName(context, WeatherWidgetProvider.class);
-//                    mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.weather_list);
-//                }
-//            });
-//        } else if (action.equals(CLICK_ACTION)) {
-//            // Show a toast
-//            final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-//                    AppWidgetManager.INVALID_APPWIDGET_ID);
-//            final String city = intent.getStringExtra(EXTRA_CITY_ID);
-//            final String formatStr = ctx.getResources().getString(R.string.toast_format_string);
-//            Toast.makeText(ctx, String.format(formatStr, city), Toast.LENGTH_SHORT).show();
-//        }
 
         super.onReceive(ctx, intent);
     }
