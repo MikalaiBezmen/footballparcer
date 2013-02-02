@@ -2,31 +2,43 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:background="@drawable/widget_background">
 
-    <LinearLayout   android:id="@+id/btnsLayout"
+    <RelativeLayout   android:id="@+id/btnsLayout"
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content">
-        <ImageButton android:id="@+id/btnLeft"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_weight="1"
+        <ImageView android:id="@+id/btnLeft"
+                     android:layout_width="55dp"
+                     android:layout_height="55dp"
+                     android:layout_alignParentLeft="true"
                      android:src="@drawable/btn_left"/>
 
-        <TextView android:id="@+id/league"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_weight="1"
-                  android:gravity="center"
-                  android:text="Все лиги"/>
+        <LinearLayout android:orientation="vertical"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_horizontal">
+            <TextView android:id="@+id/league"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:gravity="center_horizontal"
+                      android:paddingBottom="10dp"
+                      android:text="Все лиги"/>
+            <TextView android:id="@+id/date"
+                      android:layout_height="wrap_content"
+                      android:layout_width="wrap_content"
+                      android:gravity="center_horizontal"
+                      android:text="Дата."/>
+        </LinearLayout>
 
-        <ImageButton android:id="@+id/btnRight"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
+        <ImageView android:id="@+id/btnRight"
+                     android:layout_width="55dp"
+                     android:layout_height="55dp"
                      android:src="@drawable/btn_right"
-                     android:layout_weight="1"/>
-    </LinearLayout>
+                     android:layout_alignParentRight="true"/>
+    </RelativeLayout>
 
     <ListView   xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/matchesView"
@@ -45,5 +57,4 @@
               android:text="there is no information..."
               android:textSize="20sp"
               android:layout_below="@id/btnsLayout"/>
-
 </RelativeLayout>

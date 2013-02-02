@@ -24,25 +24,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="061b6521-2033-450a-9a89-281544035d8d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/btn_left.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/btn_left.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/btn_right.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/btn_right.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java" afterPath="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/widget.xml" afterPath="$PROJECT_DIR$/res/layout/widget.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/widget_item.xml" afterPath="$PROJECT_DIR$/res/layout/widget_item.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="footballparcer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359730406554" ignored="false" />
-    <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359731831262" ignored="false" />
+    <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359840628890" ignored="false" />
+    <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359842757051" ignored="false" />
     <file path="/fragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359621370863" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359644150663" ignored="false" />
-    <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359729992596" ignored="false" />
+    <file path="/Widget.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359812842229" ignored="false" />
     <file path="/WidgetService.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359732022278" ignored="false" />
     <file path="/WidgetItem.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359452442999" ignored="false" />
     <file path="/ScoreFragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359455945212" ignored="false" />
     <file path="/WidgetRemoteFactory.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359619753439" ignored="false" />
-    <file path="/widget_item.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359728113466" ignored="false" />
+    <file path="/widget_item.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359798072931" ignored="false" />
     <file path="/WidgetDataProvider.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359727303096" ignored="false" />
     <file path="/strings.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359666739847" ignored="false" />
     <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359666805130" ignored="false" />
@@ -97,8 +97,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -108,10 +108,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="widget.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="widget.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="40" selection-start="980" selection-end="980" vertical-scroll-proportion="-6.72">
+            <state line="28" column="10" selection-start="1391" selection-end="1391" vertical-scroll-proportion="0.7543582">
               <folding />
             </state>
           </provider>
@@ -123,7 +123,7 @@
       <file leaf-file-name="widget.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/xml/widget.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="55" selection-start="261" selection-end="261" vertical-scroll-proportion="-3.2">
+            <state line="6" column="44" selection-start="306" selection-end="306" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -132,7 +132,7 @@
       <file leaf-file-name="widget_item.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/widget_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="49" selection-start="1162" selection-end="1162" vertical-scroll-proportion="-9.6">
+            <state line="34" column="49" selection-start="1347" selection-end="1347" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -144,7 +144,7 @@
       <file leaf-file-name="WidgetService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="100" column="38" selection-start="3504" selection-end="3504" vertical-scroll-proportion="0.0">
+            <state line="127" column="38" selection-start="3986" selection-end="3986" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -153,22 +153,17 @@
       <file leaf-file-name="WidgetDataProvider.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="31" selection-start="3007" selection-end="3007" vertical-scroll-proportion="0.0">
+            <state line="12" column="6" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Widget.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Widget.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="148" column="71" selection-start="6847" selection-end="6847" vertical-scroll-proportion="-3.2057142">
-              <folding>
-                <element signature="e#4262#6525#0" expanded="true" />
-                <element signature="e#6506#6507#0" expanded="true" />
-                <element signature="e#7033#11478#0" expanded="true" />
-                <element signature="e#11459#11460#0" expanded="true" />
-              </folding>
+            <state line="321" column="28" selection-start="17945" selection-end="17945" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -220,10 +215,10 @@
         <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java" />
         <option value="$PROJECT_DIR$/res/layout/start_match.xml" />
         <option value="$PROJECT_DIR$/res/layout/end_match.xml" />
-        <option value="$PROJECT_DIR$/res/layout/widget.xml" />
-        <option value="$PROJECT_DIR$/res/layout/widget_item.xml" />
         <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java" />
+        <option value="$PROJECT_DIR$/res/layout/widget_item.xml" />
         <option value="$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java" />
+        <option value="$PROJECT_DIR$/res/layout/widget.xml" />
       </list>
     </option>
   </component>
@@ -259,6 +254,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -462,7 +458,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -482,8 +477,8 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Android Application.footballparcer">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -517,6 +512,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -542,19 +550,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -646,7 +641,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.8013245" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32905984" sideWeight="0.803532" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39955848" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -659,8 +654,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17395945" sideWeight="0.8013245" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1986755" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1741453" sideWeight="0.803532" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.196468" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924226" sideWeight="0.6721854" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924226" sideWeight="0.6721854" order="2" side_tool="false" content_ui="tabs" />
@@ -730,6 +725,20 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/League.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="20" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/Match.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="29" selection-start="2817" selection-end="2817" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$USER_HOME$/tools/adt-bundle-linux-x86_64/sdk/platforms/android-17/android.jar!/android/database/Cursor.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="17" selection-start="163" selection-end="169" vertical-scroll-proportion="0.13675214" />
@@ -778,33 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/xml/widget.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="55" selection-start="261" selection-end="261" vertical-scroll-proportion="-3.2">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="40" selection-start="980" selection-end="980" vertical-scroll-proportion="-6.72">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/widget_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="49" selection-start="1162" selection-end="1162" vertical-scroll-proportion="-9.6">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/data/Match.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="114" column="29" selection-start="2817" selection-end="2817" vertical-scroll-proportion="0.0">
@@ -814,28 +796,50 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="38" selection-start="3504" selection-end="3504" vertical-scroll-proportion="0.0">
+        <state line="127" column="38" selection-start="3986" selection-end="3986" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/WidgetDataProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="31" selection-start="3007" selection-end="3007" vertical-scroll-proportion="0.0">
+        <state line="12" column="6" selection-start="311" selection-end="311" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/argando/parcersample/widget/Widget.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="71" selection-start="6847" selection-end="6847" vertical-scroll-proportion="-3.2057142">
-          <folding>
-            <element signature="e#4262#6525#0" expanded="true" />
-            <element signature="e#6506#6507#0" expanded="true" />
-            <element signature="e#7033#11478#0" expanded="true" />
-            <element signature="e#11459#11460#0" expanded="true" />
-          </folding>
+        <state line="321" column="28" selection-start="17945" selection-end="17945" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/xml/widget.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="44" selection-start="306" selection-end="306" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/widget_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="49" selection-start="1347" selection-end="1347" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="10" selection-start="1391" selection-end="1391" vertical-scroll-proportion="0.7543582">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
   </component>

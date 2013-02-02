@@ -17,6 +17,8 @@ import com.argando.parcersample.R;
 import com.argando.parcersample.data.League;
 import com.argando.parcersample.data.LeaguesHandler;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @TargetApi(11)
@@ -284,6 +286,10 @@ public class Widget extends AppWidgetProvider {
             // Set the empty view to be displayed if the collection is empty.  It must be a sibling
             // view of the collection view.
             rv.setEmptyView(R.id.matchesView, R.id.empty_view);
+
+            // set current date
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+            rv.setTextViewText(R.id.date, sdf.format(new Date()));
 
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // DONT WORK WHY ???? - THINK ABOUT THIS                                      !!!!!!!!!!
