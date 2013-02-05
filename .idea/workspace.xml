@@ -25,12 +25,11 @@
   <component name="ChangeListManager">
     <list default="true" id="061b6521-2033-450a-9a89-281544035d8d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/widget_background.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/widget_background.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/widget.xml" afterPath="$PROJECT_DIR$/res/layout/widget.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="footballparcer.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359931722831" ignored="false" />
+    <file path="/Dummy.txt" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1360010373673" ignored="false" />
     <file path="/widget.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359922903825" ignored="false" />
     <file path="/fragment.java" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359621370863" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="061b6521-2033-450a-9a89-281544035d8d" time="1359644150663" ignored="false" />
@@ -60,8 +59,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -96,6 +93,8 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -107,20 +106,20 @@
     <leaf>
       <file leaf-file-name="widget.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="65" selection-start="1871" selection-end="1871" vertical-scroll-proportion="0.9773071">
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="51" selection-start="269" selection-end="269" vertical-scroll-proportion="0.12859304">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="widget.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/xml/widget.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="48" selection-start="310" selection-end="310" vertical-scroll-proportion="-4.08">
+            <state line="6" column="48" selection-start="310" selection-end="310" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,13 +127,13 @@
       </file>
       <file leaf-file-name="widget_item.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/widget_item.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="49" selection-start="1347" selection-end="1347" vertical-scroll-proportion="-11.56">
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="49" selection-start="1347" selection-end="1347" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -251,8 +250,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -455,6 +452,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -474,8 +473,8 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Android Application.footballparcer">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -509,6 +508,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -534,19 +546,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -742,13 +741,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_complex_green.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="56" column="45" selection-start="2446" selection-end="2458" vertical-scroll-proportion="0.5945419">
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
@@ -806,18 +805,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/widget_item.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="49" selection-start="1347" selection-end="1347" vertical-scroll-proportion="-11.56">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="49" selection-start="1347" selection-end="1347" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/xml/widget.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="48" selection-start="310" selection-end="310" vertical-scroll-proportion="-4.08">
+        <state line="6" column="48" selection-start="310" selection-end="310" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -828,13 +827,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/widget.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="65" selection-start="1871" selection-end="1871" vertical-scroll-proportion="0.9773071">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="51" selection-start="269" selection-end="269" vertical-scroll-proportion="0.12859304">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
