@@ -11,8 +11,8 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/line">
         <ImageView android:id="@+id/btnLeft"
-                     android:layout_width="55dp"
-                     android:layout_height="55dp"
+                     android:layout_width="40dp"
+                     android:layout_height="50dp"
                      android:layout_alignParentLeft="true"
                      android:src="@drawable/btn_left"/>
 
@@ -35,8 +35,8 @@
         </LinearLayout>
 
         <ImageView android:id="@+id/btnRight"
-                     android:layout_width="55dp"
-                     android:layout_height="55dp"
+                     android:layout_width="40dp"
+                     android:layout_height="50dp"
                      android:src="@drawable/btn_right"
                      android:layout_alignParentRight="true"/>
     </RelativeLayout>
