@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.argando.parcersample.backgroundupdate.ParceService;
 import com.argando.parcersample.data.DataNameHelper;
 import com.argando.parcersample.data.LeaguesHandler;
+import com.argando.parcersample.database.LeagueDataSource;
 import com.argando.parcersample.instruments.GestureDetectorImpl;
 import com.argando.parcersample.scoretable.MatchListFragment;
 import com.argando.parcersample.scoretable.MenuFragment;
@@ -31,6 +32,7 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
     private GestureDetector mGestureScanner;
     private MenuFragment mMenuFragment;
     private View gestureView;
+    private LeagueDataSource mLeagueDataSource;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,11 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         resetUpdateService(500);
         mGestureScanner = new GestureDetector(this, new GestureDetectorImpl(this));
         initUIComponents();
-
+        mLeagueDataSource = new LeagueDataSource(this);
+        mLeagueDataSource.open();
+        mLeagueDataSource.createData();
+        mLeagueDataSource.getAllComments();
+        mLeagueDataSource.close();
         if(savedInstanceState == null)
         {
             showResultsList();
