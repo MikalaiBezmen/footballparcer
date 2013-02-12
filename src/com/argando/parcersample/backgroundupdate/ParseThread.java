@@ -1,7 +1,13 @@
 package com.argando.parcersample.backgroundupdate;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.SystemClock;
 import android.util.Log;
 import com.argando.parcersample.Cache;
+import com.argando.parcersample.ParcerSampleActivity;
 import com.argando.parcersample.parser.DataParcer;
 import com.argando.parcersample.data.LeaguesHandler;
 
@@ -16,14 +22,12 @@ public class ParseThread implements Runnable
 	private boolean mRunning = false;
 	Thread mSimpleThread;
 	private String mCacheDir;
+    private Context mContext;
 
-	public ParseThread(String cacheDir)
-	{
-	}
-
-	public void startParse(String cacheDir)
+	public void startParse(String cacheDir, Context context)
 	{
 		mCacheDir = cacheDir;
+        mContext = context;
 		startParse();
 	}
 
@@ -45,6 +49,9 @@ public class ParseThread implements Runnable
 		DataParcer dataParcer = new DataParcer();
 		LeaguesHandler.mListLeauges = dataParcer.parceScoreboard();
 		Cache.INSTANCE.cacheResults(LeaguesHandler.mListLeauges, mCacheDir);
+        Intent updateData = new Intent();
+        updateData.setAction(ParcerSampleActivity.UPDATE_ACTION);
+        mContext.sendBroadcast(updateData);
 		mRunning = false;
 	}
 }

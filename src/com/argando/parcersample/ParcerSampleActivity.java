@@ -1,7 +1,10 @@
 package com.argando.parcersample;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -33,6 +36,8 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
     private MenuFragment mMenuFragment;
     private View gestureView;
     private LeagueDataSource mLeagueDataSource;
+    private ActivityNotifier mActivityNotifier;
+    public static final String UPDATE_ACTION = "com.argando.footballparcer.UPDATE_DATA";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +64,9 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         {
             mMatchFragment = (MatchListFragment)getSupportFragmentManager().findFragmentByTag("MatchesFragment");
         }
-
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(UPDATE_ACTION);
+        registerReceiver(mActivityNotifier = new ActivityNotifier(), filter);
     }
 
     @Override
@@ -120,6 +127,7 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
     @Override
     protected void onDestroy() {
         Log.i(LOG_TAG, "onDestroy");
+        unregisterReceiver(mActivityNotifier);
         super.onDestroy();
     }
 
@@ -168,5 +176,14 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         fragmentTransaction.replace(R.id.container, mMenuFragment);
         mMenuFragment.setRetainInstance(true);
         fragmentTransaction.commit();
+    }
+
+    public class ActivityNotifier extends BroadcastReceiver
+    {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(new File(DataNameHelper.EXTERNAL_CACHE_DIR));
+            ParcerSampleActivity.this.mMatchFragment.updateData();
+        }
     }
 }
