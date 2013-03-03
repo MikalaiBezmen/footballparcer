@@ -13,8 +13,6 @@ public class ScoreFragment extends Fragment
 {
     private static final String LOG_TAG = ScoreFragment.class.getSimpleName();
 	private WebView									myWebView;
-	private static final FrameLayout.LayoutParams	ZOOM_PARAMS	= new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
-																		ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.BOTTOM);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -25,11 +23,6 @@ public class ScoreFragment extends Fragment
             myWebView = new WebView(this.getActivity());
             myWebView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
             myWebView.setWebViewClient(new CustomWebViewClient());
-
-            final FrameLayout mContentView = (FrameLayout) getActivity().getWindow().getDecorView().findViewById(android.R.id.content);
-            final View zoom = myWebView.getZoomControls();
-            mContentView.addView(zoom, ZOOM_PARAMS);
-            zoom.setVisibility(View.GONE);
             myWebView.loadUrl(LeaguesHandler.match);
         }
 	}
