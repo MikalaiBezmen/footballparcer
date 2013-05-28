@@ -63,6 +63,23 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
+        <ProgressBar
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/updateProgressBar"
+                style="@android:style/Widget.Holo.ProgressBar"
+                android:clickable="false"
+                android:visibility="invisible" android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true" android:indeterminate="false"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text=""
+                android:id="@+id/lastUpdate" android:layout_alignParentLeft="true"
+                android:layout_alignBottom="@+id/updateProgressBar" android:layout_toLeftOf="@+id/updateProgressBar"
+                android:layout_alignTop="@+id/updateProgressBar" android:alpha="45"
+                android:background="@android:color/transparent" android:textColor="#ffffff"
+                android:textAlignment="center" android:autoText="false"/>
     </RelativeLayout>
 
 </RelativeLayout>

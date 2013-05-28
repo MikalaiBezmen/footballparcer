@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.argando.parcersample.backgroundupdate.ParceService;
 import com.argando.parcersample.data.DataNameHelper;
@@ -36,8 +38,11 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
     private MenuFragment mMenuFragment;
     private View gestureView;
     private LeagueDataSource mLeagueDataSource;
+    private ProgressBar mUpdatingBar;
+    private TextView mLastUpdateInfo;
     private ActivityNotifier mActivityNotifier;
-    public static final String UPDATE_ACTION = "com.argando.footballparcer.UPDATE_DATA";
+    public static final String UPDATE_END = "com.argando.footballparcer.UPDATE_DATA";
+    public static final String UPDATE_START = "com.argando.footballparcer.START_UPDATE_DATA";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,8 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         Log.i(LOG_TAG, "onCreate");
         mActivity = this;
         setContentView(R.layout.main);
+        mUpdatingBar = (ProgressBar) findViewById(R.id.updateProgressBar);
+        mLastUpdateInfo = (TextView) findViewById(R.id.lastUpdate);
         Log.w(LOG_TAG, " = " + mActivity.getCacheDir().toString());
         DataNameHelper.EXTERNAL_CACHE_DIR = mActivity.getCacheDir().toString();
         LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(new File(DataNameHelper.EXTERNAL_CACHE_DIR));
@@ -56,30 +63,21 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         mLeagueDataSource.createData();
         mLeagueDataSource.getAllComments();
         mLeagueDataSource.close();
-        if(savedInstanceState == null)
-        {
+        if (savedInstanceState == null) {
             showResultsList();
-        }
-        else
-        {
-            mMatchFragment = (MatchListFragment)getSupportFragmentManager().findFragmentByTag("MatchesFragment");
+        } else {
+            mMatchFragment = (MatchListFragment) getSupportFragmentManager().findFragmentByTag("MatchesFragment");
         }
         IntentFilter filter = new IntentFilter();
-        filter.addAction(UPDATE_ACTION);
+        filter.addAction(UPDATE_END);
+        filter.addAction(UPDATE_START);
         registerReceiver(mActivityNotifier = new ActivityNotifier(), filter);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.i(LOG_TAG, "onTouchEvent activity");
-         if(mGestureScanner.onTouchEvent(event))
-         {
-             return true;
-         }
-         else
-         {
-             return super.onTouchEvent(event);
-         }
+        return (mGestureScanner.onTouchEvent(event)) || super.onTouchEvent(event);
     }
 
 
@@ -178,12 +176,19 @@ public class ParcerSampleActivity extends FragmentActivity implements IFragmentT
         fragmentTransaction.commit();
     }
 
-    public class ActivityNotifier extends BroadcastReceiver
-    {
+    public class ActivityNotifier extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(new File(DataNameHelper.EXTERNAL_CACHE_DIR));
-            ParcerSampleActivity.this.mMatchFragment.updateData();
+            if (intent.getAction().equals(UPDATE_END)) {
+                LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(new File(DataNameHelper.EXTERNAL_CACHE_DIR));
+                ParcerSampleActivity.this.mMatchFragment.updateData();
+                mUpdatingBar.setVisibility(View.INVISIBLE);
+                Time today = new Time(Time.getCurrentTimezone());
+                today.setToNow();
+                mLastUpdateInfo.setText("Updated " + today.monthDay + "/" + today.month + "/" + today.year + "  " + today.format("%k:%M:%S"));
+            } else if (intent.getAction().equals(UPDATE_START)) {
+                mUpdatingBar.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
