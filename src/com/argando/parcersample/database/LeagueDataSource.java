@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import com.argando.parcersample.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,17 +45,19 @@ public class LeagueDataSource {
     }
 
     public void createData() {
+        ContentValues values = new ContentValues();
+        Cursor mCursor = database.rawQuery("SELECT * FROM " + SQLLiteHelper.LEAGUE_TABLE, null);
+        Boolean exists = false;
+        if (mCursor.moveToFirst()) exists = true;
         for (int i = 0; i < mLinks.length; i++) {
-            Log.i("i", " i");
-            ContentValues values = new ContentValues();
             values.put(SQLLiteHelper.LEAGUE_NAME, mLinks[i]);
-            long insertId = database.insert(SQLLiteHelper.LEAGUE_TABLE, null,
-                    values);
-//            Cursor cursor = database.query(SQLLiteHelper.LEAGUE_TABLE,
-//                    allColumns, SQLLiteHelper.LEAGUE_ID + " = " + insertId, null,
-//                    null, null, null);
-//            cursor.moveToFirst();
-//            cursor.close();
+            if (exists)
+            {
+                database.update(SQLLiteHelper.LEAGUE_TABLE, values, "_id =" + i, null);
+            }else
+            {
+                database.insert(SQLLiteHelper.LEAGUE_TABLE, null, values);
+            }
         }
     }
 

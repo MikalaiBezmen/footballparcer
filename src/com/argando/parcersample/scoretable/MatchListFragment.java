@@ -2,8 +2,6 @@ package com.argando.parcersample.scoretable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.argando.parcersample.ParcerSampleActivity;
 import com.argando.parcersample.R;
 import com.argando.parcersample.data.DataNameHelper;
 import com.argando.parcersample.data.League;
@@ -19,7 +18,6 @@ import com.argando.parcersample.data.Preferences;
 import com.argando.parcersample.network.NetworkChecker;
 import com.argando.parcersample.network.SopCastLauncher;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -80,18 +78,7 @@ public class MatchListFragment extends Fragment
                     }
                     Log.i(LOG_TAG, "show browser");
                     LeaguesHandler.match = link;
-                    ScoreFragment fragment = new ScoreFragment();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-                    if (fragment.isAdded()) {
-                        fragmentTransaction.show(fragment);
-                    } else {
-                        fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.container));
-                        fragmentTransaction.add(R.id.container2, fragment, "browser");
-                        fragmentTransaction.addToBackStack(null);
-                    }
-                    fragmentTransaction.commit();
+                    ((ParcerSampleActivity)getActivity()).updateScoreData();
                 }
 
                 public void startSopcast(String url) {
@@ -123,6 +110,7 @@ public class MatchListFragment extends Fragment
     {
         Log.i(LOG_TAG, "updateData");
         List<League> leagues = LeaguesHandler.mListLeauges;
+        if (this.getActivity() == null) return;
         SeparatedListAdapter adapter = new SeparatedListAdapter(this.getActivity());
 
         int counterForMatchId = 0;

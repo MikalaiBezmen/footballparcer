@@ -55,14 +55,21 @@
             android:id="@+id/container"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
     </RelativeLayout>
 
     <RelativeLayout
             android:id="@+id/container2"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="visible">
+        <android.support.v4.view.ViewPager
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         <ProgressBar
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -79,7 +86,13 @@
                 android:layout_alignBottom="@+id/updateProgressBar" android:layout_toLeftOf="@+id/updateProgressBar"
                 android:layout_alignTop="@+id/updateProgressBar" android:alpha="45"
                 android:background="@android:color/transparent" android:textColor="#ffffff"
-                android:textAlignment="center" android:autoText="false"/>
+                android:textAlignment="center" android:autoText="false"
+                android:visibility="invisible"/>
     </RelativeLayout>
+    <android.support.v4.view.ViewPager
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 </RelativeLayout>

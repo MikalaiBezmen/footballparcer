@@ -2,14 +2,15 @@ package com.argando.parcersample.scoretable;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import com.argando.parcersample.ParcerSampleActivity;
 import com.argando.parcersample.R;
 import com.argando.parcersample.data.LeaguesHandler;
 import com.argando.parcersample.database.LeagueDataSource;
@@ -94,18 +95,7 @@ public class MenuFragment extends Fragment {
 
 
     public void onSelectLeague() {
-        ScoreFragment fragment = new ScoreFragment();
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.slide_out_right);
-        if (fragment.isAdded()) {
-            fragmentTransaction.show(fragment);
-        } else {
-            fragmentTransaction.remove(fragmentManager.findFragmentById(R.id.container));
-            fragmentTransaction.add(R.id.container2, fragment, "browser");
-            fragmentTransaction.addToBackStack(null);
-        }
-        fragmentTransaction.commit();
+        ((ParcerSampleActivity)getActivity()).updateScoreData();
     }
 
     private static final String LOG_TAG = MenuFragment.class.getSimpleName();

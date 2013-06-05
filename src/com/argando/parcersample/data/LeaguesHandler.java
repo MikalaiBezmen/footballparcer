@@ -1,7 +1,5 @@
 package com.argando.parcersample.data;
 
-import com.argando.parcersample.data.League;
-import com.argando.parcersample.data.Match;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -27,5 +25,5 @@ public class LeaguesHandler
 		return null;
 	}
 	
-	public static String match ;
+	public static String match = "http://football.ua";
 }
