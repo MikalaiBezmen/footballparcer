@@ -105,6 +105,9 @@ public class ParcerSampleActivity extends FragmentActivity {
             if (intent.getAction().equals(UPDATE_END)) {
                 LeaguesHandler.mListLeauges = Cache.INSTANCE.readFromFile(new File(DataNameHelper.EXTERNAL_CACHE_DIR));
                 ParcerSampleActivity.this.mMatchFragment.updateData();
+                mLeagueDataSource.open();
+                mLeagueDataSource.updateMatches();
+                mLeagueDataSource.close();
                 mUpdatingBar.setVisibility(View.INVISIBLE);
                 Time today = new Time(Time.getCurrentTimezone());
                 today.setToNow();
