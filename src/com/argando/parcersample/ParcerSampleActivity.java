@@ -59,6 +59,7 @@ public class ParcerSampleActivity extends FragmentActivity {
         mLeagueDataSource = new LeagueDataSource(this);
         mLeagueDataSource.open();
         mLeagueDataSource.createData();
+        mLeagueDataSource.updateMatches();
         mLeagueDataSource.getAllComments();
         mLeagueDataSource.close();
         IntentFilter filter = new IntentFilter();

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import com.argando.parcersample.data.League;
+import com.argando.parcersample.data.LeaguesHandler;
+import com.argando.parcersample.data.Match;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,10 +56,43 @@ public class LeagueDataSource {
             values.put(SQLLiteHelper.LEAGUE_NAME, mLinks[i]);
             if (exists)
             {
-                database.update(SQLLiteHelper.LEAGUE_TABLE, values, "_id =" + i, null);
+                database.update(SQLLiteHelper.LEAGUE_TABLE, values, "_id =" + (i + 1), null);
             }else
             {
                 database.insert(SQLLiteHelper.LEAGUE_TABLE, null, values);
+            }
+        }
+    }
+
+    public void updateMatches()
+    {
+        ContentValues values = new ContentValues();
+        List<League> leagues = LeaguesHandler.mListLeauges;
+        Cursor mCursor = database.rawQuery("SELECT * FROM " + SQLLiteHelper.MATCH_TABLE, null);
+        Boolean exists = false;
+        if (mCursor.moveToFirst())
+            exists = true;
+        int i = 1;
+        for (League aLeague : leagues)
+        {
+            for (Match aMatch : aLeague.getMatches())
+            {
+                values.put(SQLLiteHelper.TEAM1_NAME, aMatch.getFirstTeam());
+                values.put(SQLLiteHelper.TEAM2_NAME, aMatch.getSecondTeam());
+                values.put(SQLLiteHelper.SCORE1, aMatch.getScore1());
+                values.put(SQLLiteHelper.SCORE2, aMatch.getScore2());
+                values.put(SQLLiteHelper.DATE, aMatch.getDate());
+                values.put(SQLLiteHelper.TEXT_LINK, aMatch.linkForOnline);
+                //values.put(SQLLiteHelper.TEAM1_NAME, aMatch.linkToSopcast);
+                if (exists)
+                {
+                    database.update(SQLLiteHelper.MATCH_TABLE, values, "_id =" + i, null);
+                }
+                else
+                {
+                    database.insert(SQLLiteHelper.MATCH_TABLE, null, values);
+                }
+                i++;
             }
         }
     }
